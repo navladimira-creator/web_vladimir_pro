@@ -1,0 +1,5 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+# Staré adresy z Miowebu (301) přibudou v milníku 2.
