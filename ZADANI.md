@@ -85,7 +85,7 @@ Stránka `/moduly` přebírá doslovně texty ze stránky `inspiracevladimir.cz/
 | Stránka | Adresa | Obsah |
 |---|---|---|
 | Nástěnka | `/clenska-sekce` | Přehled všech modulů: odemčené jsou klikací, zamčené mají zámek, cenu a tlačítko „Mám zájem" (zatím vede na `/moduly` nebo kontakt) |
-| Detail modulu | `/clenska-sekce/[modul]` | Videa (lekce) v pořadí + materiály ke stažení rozdělené do skupin: **Skripta · Manuály · Checklisty · Tabulky a kalkulačky · Ostatní** |
+| Detail modulu | `/clenska-sekce/[modul]` | Videa (lekce) v pořadí + materiály ke stažení rozdělené do skupin: **Skripta · Manuály · Checklisty · Tabulky a nástroje · Úkoly a testy · Dokumenty a vzory**. Přesný obsah modulů je v `texty/obsah-modulu.md`. |
 | Můj účet | `/clenska-sekce/ucet` | E-mail, jméno, odhlášení |
 
 U lekcí chci, aby si uživatel mohl označit „Hotovo" a na nástěnce viděl, kolik z modulu má za sebou.
@@ -94,7 +94,7 @@ U lekcí chci, aby si uživatel mohl označit „Hotovo" a na nástěnce viděl,
 `/admin` – jednoduché formuláře, žádná složitá rozhraní:
 - **Moduly:** přidat, upravit, seřadit, publikovat/skrýt, nastavit „zdarma ano/ne", cenu (jen zobrazení), krátký popis, obrázek.
 - **Lekce (videa):** přidat do modulu, název, popis, ID videa z Bunny, pořadí.
-- **Materiály:** nahrát soubor (PDF, DOCX, XLSX…) k modulu, zvolit typ (skripta, manuál, checklist, tabulka, ostatní), název, pořadí.
+- **Materiály:** nahrát soubor (PDF, DOCX, XLSX…) k modulu, zvolit typ (skripta, manuál, checklist, tabulka, úkoly/test, dokument/vzor), název, pořadí.
 - **Uživatelé:** seznam, vyhledávání podle e-mailu, **ručně přidělit nebo odebrat přístup k modulu**.
 - **Import zákazníků z CSV** (e-mail, jméno, moduly), abych mohl převést stávající zákazníky z Miowebu bez ručního klikání.
 
@@ -133,7 +133,7 @@ Ostatní texty ke konzultacím převezmi ze stránky `inspiracevladimir.cz/jedno
 - `profiles` – uživatel (id z Supabase Auth, jméno, e-mail, role `member` / `admin`, datum registrace, souhlas s marketingem + datum)
 - `modules` – id, slug, název, popis, obrázek, pořadí, zdarma (ano/ne), cena v Kč, publikováno
 - `lessons` – id, modul, název, popis, Bunny video ID, pořadí
-- `materials` – id, modul, typ (`skripta`, `manual`, `checklist`, `tabulka`, `ostatni`), název, cesta k souboru, pořadí
+- `materials` – id, modul, typ (`skripta`, `manual`, `checklist`, `tabulka`, `ukoly_test`, `dokument`), název, cesta k souboru, pořadí
 - `module_access` – uživatel, modul, zdroj (`free`, `manual`, `import`, později `stripe`), datum přidělení, případně datum vypršení
 - `lesson_progress` – uživatel, lekce, dokončeno kdy
 - `bundles` + `bundle_modules` – balíčky (All in One), připraveno pro Stripe
