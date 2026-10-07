@@ -6,7 +6,8 @@ Typy materiálů (skupiny v členské sekci): **Skripta · Manuály · Checklist
 
 ---
 
-## Modul 0 – Ochutnávka (zdarma)
+## Modul 0 – reSTART (zdarma)
+**Navíc:** celý text „Ukážu ti, jak na to“ (z původní stránky Jednotlivé moduly) – na stránce Moduly a ceny je useknutý a odkazuje sem.
 **Videa (1):** Úvodní video
 **Materiály:**
 - Checklist – [název]

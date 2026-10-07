@@ -8,7 +8,14 @@ Doslovný přepis současné stránky (stav k 1. 10. 2026). Používej tyto text
 - All in One obsahuje **všechny moduly 0–5** (nadpis „4 MODULY" už neplatí). Bonusový modul 5 jde koupit jen v balíčku All in One. Krátký popis modulu 5: „Jak si udržet zdravého ducha a neposrat se z toho.“
 - Dlouhý popis modulu 5 (po rozbalení): „Celý byznys obvykle stojí na pár lidech. Buď je to majitel, nebo manažer, nebo ředitel nebo šéf a jeho nejlepší zaměstnanec. Je to hodně křehké a je potřeba držet se v dobré mentální pozici. K tomu také vede pár základních kroků. Není to o tom, že musíš meditovat na úpatí hory každý den, objímat stromy nebo si vytloukat mozek z hlavy kamenama. Každý máme nějaký ten způsob úniku od reality. V tomto modulu ti ukážu, jak této realitě čelit a neposrat se z toho!“
 - Majitel je v oboru **18 let** (na současném webu je chybně 17 let).
-- Modul 0 (zdarma): ochutnávka z celého kurzu + úvodní data.
+- Modul 0 se jmenuje **reSTART** (zdarma): ochutnávka z celého kurzu + úvodní data. Je to „mikro modul“ oproti ostatním.
+- Hlavní nadpis stránky Moduly a ceny: **„Žádné kecy – know-how postavené na vlastní kůži.“**
+
+## FAQ – „Nikdo se sice neptal, ale mohl by třeba na toto“
+- **Jak dlouho mám k modulům přístup?** Jednotlivé moduly jsou na rok. Balíček All in One je navždy, a nebo do armagedonu.
+- **Jak probíhá platba?** Jednorázově přes platební bránu.
+- **Dostanu fakturu?** Jasná věc.
+- **Můžu začít jedním modulem a zbytek dokoupit později?** Ano, ale prodraží se to. Proto reSTART grátis. Je to sice mikro modul oproti těm ostatním, ale ať si to umíš představit.
 
 ---
 
