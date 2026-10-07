@@ -2,4 +2,28 @@
   command = "npm run build"
   publish = ".next"
 
-# Staré adresy z Miowebu (301) přibudou v milníku 2.
+# Staré adresy z Miowebu (301). Na Netlify platí s lomítkem i bez něj.
+# /kontakt a /prihlaseni mají stejnou adresu i na novém webu.
+[[redirects]]
+  from = "/jednotlive-moduly"
+  to = "/moduly"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/eshop"
+  to = "/moduly"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/nastenka"
+  to = "/clenska-sekce"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/rezervace-konzultace"
+  to = "/konzultace"
+  status = 301
+  force = true
