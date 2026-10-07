@@ -159,6 +159,8 @@ Přístup k obsahu se vždy kontroluje **na serveru i v databázi (RLS)**, ne je
 - `uvod.dc.html` – úvodní stránka (včetně rozbalovacích modulů a karuselu referencí)
 - `clenska-nastenka.dc.html` – nástěnka členské sekce
 - `clenska-detail-modulu.dc.html` – detail modulu (videa, postup, materiály)
+- `registrace-dekujeme.dc.html` – stránka hned po odeslání registračního formuláře („zkontroluj e-mail“, poslat znovu)
+- `registrace-vitej.dc.html` – první přihlášení po kliknutí na odkaz v e-mailu (animace zapadnutí dílku, Modul 0 odemčen, co dál)
 
 Jsou to HTML soubory návrhového nástroje: převezmi z nich rozložení, barvy, písma, texty, tvary (puzzle dílek je SVG cesta v souboru) i animace. Interaktivita je v bloku `class Component` na konci souboru. Složka `design/archiv-smer-A/` je stará verze – **nepoužívej ji**.
 
