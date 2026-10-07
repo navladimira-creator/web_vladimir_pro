@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<title>Členská sekce – detail modulu (směr C)</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#041A1C}
+*{box-sizing:border-box}
+a{color:#5EEAD4}a:hover{color:#FFFFFF}
+h1,h2,h3,p,figure{margin:0;text-wrap:pretty}
+.k-glass{background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.018));border:1px solid rgba(255,255,255,.11);border-radius:24px;box-shadow:inset 0 1px 0 rgba(255,255,255,.09),0 40px 70px -30px rgba(0,0,0,.7);transition:border-color .4s,box-shadow .4s,transform .45s cubic-bezier(.2,.7,.2,1)}
+.k-glass:hover{border-color:rgba(94,234,212,.45)}
+.k-lift:hover{transform:translateY(-4px);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 0 40px -8px rgba(45,226,203,.35),0 40px 70px -30px rgba(0,0,0,.7)}
+.k-btn{transition:transform .2s,box-shadow .2s}
+.k-btn:hover{transform:translateY(-2px);box-shadow:0 18px 40px -12px rgba(45,226,203,.7)}
+.k-pz{display:block;overflow:visible}
+.k-bar{height:8px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden}
+.k-bar>span{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#14B8A6,#5EEAD4);box-shadow:0 0 14px rgba(45,226,203,.7)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.k-layout{display:grid;grid-template-columns:minmax(0,1.75fr) minmax(0,1fr);gap:24px;align-items:start}
+.k-lesson{all:unset;box-sizing:border-box;width:100%;cursor:pointer;display:flex;align-items:flex-start;gap:14px;padding:14px 16px;border-radius:16px;border:1px solid transparent;min-height:56px;transition:background .25s,border-color .25s}
+.k-lesson:hover{background:rgba(255,255,255,.05)}
+.k-lesson:focus-visible{outline:2px solid #5EEAD4;outline-offset:2px}
+.k-play{transition:transform .3s,box-shadow .3s}
+.k-play:hover{transform:scale(1.06);box-shadow:0 0 0 14px rgba(45,226,203,.12),0 0 60px rgba(45,226,203,.6)}
+.k-file{display:flex;align-items:center;gap:14px;padding:16px;border-radius:18px;text-decoration:none;color:inherit}
+@media (max-width:900px){.k-layout{grid-template-columns:minmax(0,1fr)}}
+</style>
+</helmet>
+<div style="position: relative; font-family: Manrope, 'Segoe UI', sans-serif; color: #B7D6D3; background: radial-gradient(rgba(255,255,255,0.028) 1px, transparent 1px) 0 0 / 3px 3px, radial-gradient(1000px 600px at 90% -10%, rgba(45,226,203,0.16), transparent 60%), radial-gradient(800px 600px at -10% 60%, rgba(14,140,130,0.12), transparent 60%), #041A1C; min-height: 100vh; overflow: hidden">
+<svg aria-hidden="true" width="0" height="0" style="position: absolute; width: 0; height: 0"><defs><linearGradient id="kon" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7FF5E6"></stop><stop offset="0.55" stop-color="#2DE2CB"></stop><stop offset="1" stop-color="#0E8C82"></stop></linearGradient><linearGradient id="koff" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0.10"></stop><stop offset="1" stop-color="#FFFFFF" stop-opacity="0.02"></stop></linearGradient></defs></svg>
+<header style="position: sticky; top: 0; z-index: 20; padding: 16px 24px">
+<div style="max-width: 1200px; margin: 0 auto; padding: 8px 10px 8px 22px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; background: rgba(4,26,28,0.72); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.09); border-radius: 999px">
+<a href="clenska-nastenka.dc.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #FFFFFF; font-family: Sora, sans-serif; font-weight: 700; font-size: 18px"><span style="width: 10px; height: 10px; border-radius: 50%; background: #FF7A59; box-shadow: 0 0 16px #FF7A59"></span>Vladimír PRO</a>
+<nav aria-label="Členská sekce" style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap; font-size: 15px; font-weight: 600">
+<a href="clenska-nastenka.dc.html" style="text-decoration: none; color: #FFFFFF; background: rgba(45,226,203,0.14); border: 1px solid rgba(94,234,212,0.35); padding: 10px 16px; border-radius: 999px; min-height: 44px; display: inline-flex; align-items: center">Moje moduly</a>
+<a href="#" style="text-decoration: none; color: #B7D6D3; border: 1px solid transparent; padding: 10px 16px; border-radius: 999px; min-height: 44px; display: inline-flex; align-items: center">Můj účet</a>
+<a href="#" style="text-decoration: none; color: #B7D6D3; padding: 10px 16px; min-height: 44px; display: inline-flex; align-items: center">Odhlásit</a>
+<span aria-hidden="true" style="width: 40px; height: 40px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-family: Sora, sans-serif; font-weight: 700; color: #04201F; background: linear-gradient(145deg, #7FF5E6, #0E8C82)">J</span>
+</nav>
+</div>
+</header>
+<main style="max-width: 1200px; margin: 0 auto; padding: 24px 24px 96px; display: flex; flex-direction: column; gap: 32px">
+
+<nav aria-label="Drobečková navigace" style="font-size: 14px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap"><a href="clenska-nastenka.dc.html" style="color: #8FB9B5; text-decoration: none">Moje moduly</a><span aria-hidden="true">/</span><span style="color: #FFFFFF; font-weight: 600">Modul 1 – Produkt</span></nav>
+
+<div style="display: flex; align-items: center; gap: 28px; flex-wrap: wrap">
+<div style="flex: none; transform: rotate(-8deg)"><svg class="k-pz" width="120" height="120" viewBox="0 0 320 320" aria-hidden="true" style="filter: drop-shadow(0 0 14px rgba(45,226,203,0.45));"><path d="M64 44 L130 44 C138 44 142 34 134 26 C122 14 133 3 148 3 C163 3 174 14 162 26 C154 34 158 44 166 44 L256 44 A20 20 0 0 1 276 64 L276 156.9 C276 164.5 285.5 168.3 293.1 160.7 C304.5 149.3 314.9 159.8 314.9 174 C314.9 188.2 304.5 198.7 293.1 187.3 C285.5 179.7 276 183.5 276 191.1 L276 256 A20 20 0 0 1 256 276 L186.9 276 C178.5 276 174.3 265.5 182.7 257.1 C195.3 244.5 183.8 232.9 168 232.9 C152.2 232.9 140.7 244.5 153.3 257.1 C161.7 265.5 157.5 276 149.1 276 L64 276 A20 20 0 0 1 44 256 L44 154.2 C44 147 53 143.4 60.2 150.6 C71 161.4 80.9 151.5 80.9 138 C80.9 124.5 71 114.6 60.2 125.4 C53 132.6 44 129 44 121.8 L44 64 A20 20 0 0 1 64 44 Z" fill="url(#kon)" stroke="rgba(255,255,255,0.6)" stroke-width="4"></path><text x="160" y="186" text-anchor="middle" font-family="Sora, sans-serif" font-weight="800" font-size="104" fill="#04201F">1</text></svg></div>
+<div style="display: flex; flex-direction: column; gap: 10px; flex: 1 1 420px">
+<span style="font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #5EEAD4">Modul 1 · Odrazový můstek a základní stavební kámen pro všechny gastro podniky</span>
+<h1 style="font-family: Sora, sans-serif; font-weight: 800; font-size: clamp(44px, 6vw, 76px); line-height: 0.95; letter-spacing: -0.05em; color: #FFFFFF">Produkt</h1>
+<div style="display: flex; align-items: center; gap: 16px; max-width: 520px"><div class="k-bar" style="flex: 1"><span style="width: {{ pct }}"></span></div><span style="font-size: 15px; font-weight: 700; color: #FFFFFF; white-space: nowrap">{{ progressLabel }}</span></div>
+</div>
+</div>
+
+<div class="k-layout">
+<div style="display: flex; flex-direction: column; gap: 20px">
+<div class="k-glass" style="position: relative; aspect-ratio: 16 / 9; overflow: hidden; border-radius: 26px; background: radial-gradient(500px 280px at 50% 50%, rgba(45,226,203,0.18), transparent 70%), linear-gradient(160deg, #0F3D3C, #051F20); display: flex; align-items: center; justify-content: center">
+<span style="position: absolute; left: 20px; top: 18px; font-size: 13px; font-weight: 600; color: #6FA8A2">[Video z Bunny Stream]</span>
+<button type="button" class="k-play" aria-label="Přehrát video" style="width: 92px; height: 92px; border-radius: 50%; border: 0; cursor: pointer; background: #2DE2CB; color: #04201F; font-size: 30px; padding-left: 8px; box-shadow: 0 0 0 10px rgba(45,226,203,0.12), 0 0 40px rgba(45,226,203,0.45)">▶</button>
+<div style="position: absolute; left: 20px; right: 20px; bottom: 18px; display: flex; align-items: center; gap: 12px; font-size: 13px; color: #CFFAF3"><span>0:00</span><div class="k-bar" style="flex: 1; height: 5px"><span style="width: 0%"></span></div><span>[délka]</span></div>
+</div>
+
+<div class="k-glass" style="padding: clamp(22px, 3vw, 32px); display: flex; flex-direction: column; gap: 16px">
+<span style="font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #5EEAD4">{{ lessonNo }}</span>
+<h2 style="font-family: Sora, sans-serif; font-weight: 700; font-size: clamp(22px, 2.4vw, 30px); line-height: 1.2; letter-spacing: -0.02em; color: #FFFFFF">{{ lessonTitle }}</h2>
+<p style="font-size: 16px; line-height: 1.65">[Krátký popis videa – co se v něm naučíš a ke které části skript patří.]</p>
+<div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center; padding-top: 4px">
+<button type="button" onClick="{{ toggleDone }}" class="k-btn" aria-pressed="{{ donePressed }}" style="font: inherit; font-weight: 700; font-size: 16px; border-radius: 999px; padding: 14px 24px; min-height: 50px; cursor: pointer; border: 1px solid {{ doneBorder }}; background: {{ doneBg }}; color: {{ doneColor }}">{{ doneLabel }}</button>
+<div style="display: flex; gap: 8px; margin-left: auto">
+<button type="button" onClick="{{ prev }}" aria-label="Předchozí video" style="width: 50px; height: 50px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.04); color: #FFFFFF; font-size: 18px; cursor: pointer">←</button>
+<button type="button" onClick="{{ next }}" aria-label="Další lekce" style="height: 50px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.04); color: #FFFFFF; font: inherit; font-weight: 700; font-size: 15px; padding: 0 20px; cursor: pointer">Další video →</button>
+</div>
+</div>
+</div>
+</div>
+
+<aside class="k-glass" aria-label="Videa modulu" style="padding: 18px; display: flex; flex-direction: column; gap: 6px; position: sticky; top: 104px">
+<div style="display: flex; justify-content: space-between; align-items: baseline; padding: 6px 8px 10px"><h2 style="font-family: Sora, sans-serif; font-weight: 700; font-size: 18px; color: #FFFFFF">Videa</h2><span style="font-size: 14px">{{ progressLabel }}</span></div>
+<sc-for list="{{ lessons }}" as="l" hint-placeholder-count="6">
+<button type="button" class="k-lesson" onClick="{{ l.pick }}" aria-current="{{ l.current }}" style="background: {{ l.bg }}; border-color: {{ l.border }}">
+<span aria-hidden="true" style="flex: none; width: 30px; height: 30px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-family: Sora, sans-serif; font-weight: 700; font-size: 13px; background: {{ l.dotBg }}; color: {{ l.dotColor }}; box-shadow: {{ l.dotGlow }}">{{ l.mark }}</span>
+<span style="display: flex; flex-direction: column; gap: 2px; font-family: Manrope, sans-serif"><span style="font-size: 15px; line-height: 1.4; font-weight: 600; color: {{ l.color }}">{{ l.title }}</span><span style="font-size: 12px; color: #6FA8A2">{{ l.state }}</span></span>
+</button>
+</sc-for>
+</aside>
+</div>
+
+<section style="display: flex; flex-direction: column; gap: 20px">
+<h2 style="font-family: Sora, sans-serif; font-weight: 700; font-size: 28px; letter-spacing: -0.03em; color: #FFFFFF">Materiály ke stažení</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 12px"><h3 style="font-family: Sora, sans-serif; font-weight: 700; font-size: 17px; color: #FFFFFF; display: flex; align-items: center; gap: 10px">Skripta<span style="font-family: Manrope, sans-serif; font-size: 13px; font-weight: 700; color: #04201F; background: #5EEAD4; border-radius: 99px; padding: 2px 8px">1</span></h3><a href="#" class="k-file k-glass k-lift"><span style="flex: none; width: 48px; height: 56px; border-radius: 10px; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 8px; font-family: Sora, sans-serif; font-weight: 800; font-size: 11px; letter-spacing: 0.06em; color: #04201F; background: linear-gradient(160deg, #5EEAD4, #14B8A6); box-shadow: inset 0 -3px 0 rgba(0,0,0,0.15)">PDF</span><span style="display: flex; flex-direction: column; gap: 2px; min-width: 0"><span style="font-weight: 700; font-size: 15px; color: #FFFFFF">Skripta – Modul 1 Produkt</span><span style="font-size: 13px">PDF · [velikost]</span></span><span aria-hidden="true" style="margin-left: auto; flex: none; width: 40px; height: 40px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; background: rgba(45,226,203,0.14); color: #5EEAD4; font-size: 18px">↓</span><span class="k-sr" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Stáhnout</span></a></div>
+<div style="display: flex; flex-direction: column; gap: 12px"><h3 style="font-family: Sora, sans-serif; font-weight: 700; font-size: 17px; color: #FFFFFF; display: flex; align-items: center; gap: 10px">Checklisty<span style="font-family: Manrope, sans-serif; font-size: 13px; font-weight: 700; color: #04201F; background: #5EEAD4; border-radius: 99px; padding: 2px 8px">2</span></h3><a href="#" class="k-file k-glass k-lift"><span style="flex: none; width: 48px; height: 56px; border-radius: 10px; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 8px; font-family: Sora, sans-serif; font-weight: 800; font-size: 11px; letter-spacing: 0.06em; color: #04201F; background: linear-gradient(160deg, #B9FFF5, #14B8A6); box-shadow: inset 0 -3px 0 rgba(0,0,0,0.15)">PDF</span><span style="display: flex; flex-direction: column; gap: 2px; min-width: 0"><span style="font-weight: 700; font-size: 15px; color: #FFFFFF">Checklist na tvorbu nového menu</span><span style="font-size: 13px">PDF · [velikost]</span></span><span aria-hidden="true" style="margin-left: auto; flex: none; width: 40px; height: 40px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; background: rgba(45,226,203,0.14); color: #5EEAD4; font-size: 18px">↓</span><span class="k-sr" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Stáhnout</span></a><a href="#" class="k-file k-glass k-lift"><span style="flex: none; width: 48px; height: 56px; border-radius: 10px; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 8px; font-family: Sora, sans-serif; font-weight: 800; font-size: 11px; letter-spacing: 0.06em; color: #04201F; background: linear-gradient(160deg, #B9FFF5, #14B8A6); box-shadow: inset 0 -3px 0 rgba(0,0,0,0.15)">PDF</span><span style="display: flex; flex-direction: column; gap: 2px; min-width: 0"><span style="font-weight: 700; font-size: 15px; color: #FFFFFF">Checklist k přecenění menu</span><span style="font-size: 13px">PDF · [velikost]</span></span><span aria-hidden="true" style="margin-left: auto; flex: none; width: 40px; height: 40px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; background: rgba(45,226,203,0.14); color: #5EEAD4; font-size: 18px">↓</span><span class="k-sr" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Stáhnout</span></a></div>
+<div style="display: flex; flex-direction: column; gap: 12px"><h3 style="font-family: Sora, sans-serif; font-weight: 700; font-size: 17px; color: #FFFFFF; display: flex; align-items: center; gap: 10px">Tabulky a nástroje<span style="font-family: Manrope, sans-serif; font-size: 13px; font-weight: 700; color: #04201F; background: #5EEAD4; border-radius: 99px; padding: 2px 8px">2</span></h3><a href="#" class="k-file k-glass k-lift"><span style="flex: none; width: 48px; height: 56px; border-radius: 10px; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 8px; font-family: Sora, sans-serif; font-weight: 800; font-size: 11px; letter-spacing: 0.06em; color: #04201F; background: linear-gradient(160deg, #FFB59E, #14B8A6); box-shadow: inset 0 -3px 0 rgba(0,0,0,0.15)">XLSX</span><span style="display: flex; flex-direction: column; gap: 2px; min-width: 0"><span style="font-weight: 700; font-size: 15px; color: #FFFFFF">Tabulka menu engineering</span><span style="font-size: 13px">XLSX · [velikost]</span></span><span aria-hidden="true" style="margin-left: auto; flex: none; width: 40px; height: 40px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; background: rgba(45,226,203,0.14); color: #5EEAD4; font-size: 18px">↓</span><span class="k-sr" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Stáhnout</span></a><a href="#" class="k-file k-glass k-lift"><span style="flex: none; width: 48px; height: 56px; border-radius: 10px; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 8px; font-family: Sora, sans-serif; font-weight: 800; font-size: 11px; letter-spacing: 0.06em; color: #04201F; background: linear-gradient(160deg, #FFB59E, #14B8A6); box-shadow: inset 0 -3px 0 rgba(0,0,0,0.15)">XLSX</span><span style="display: flex; flex-direction: column; gap: 2px; min-width: 0"><span style="font-weight: 700; font-size: 15px; color: #FFFFFF">Tabulka na počítání food costu</span><span style="font-size: 13px">XLSX · [velikost]</span></span><span aria-hidden="true" style="margin-left: auto; flex: none; width: 40px; height: 40px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; background: rgba(45,226,203,0.14); color: #5EEAD4; font-size: 18px">↓</span><span class="k-sr" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Stáhnout</span></a></div>
+<div style="display: flex; flex-direction: column; gap: 12px"><h3 style="font-family: Sora, sans-serif; font-weight: 700; font-size: 17px; color: #FFFFFF; display: flex; align-items: center; gap: 10px">Dokumenty<span style="font-family: Manrope, sans-serif; font-size: 13px; font-weight: 700; color: #04201F; background: #5EEAD4; border-radius: 99px; padding: 2px 8px">1</span></h3><a href="#" class="k-file k-glass k-lift"><span style="flex: none; width: 48px; height: 56px; border-radius: 10px; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 8px; font-family: Sora, sans-serif; font-weight: 800; font-size: 11px; letter-spacing: 0.06em; color: #04201F; background: linear-gradient(160deg, #7FF0E2, #14B8A6); box-shadow: inset 0 -3px 0 rgba(0,0,0,0.15)">PDF</span><span style="display: flex; flex-direction: column; gap: 2px; min-width: 0"><span style="font-weight: 700; font-size: 15px; color: #FFFFFF">Dokument na tvorbu chytrého menu</span><span style="font-size: 13px">PDF · [velikost]</span></span><span aria-hidden="true" style="margin-left: auto; flex: none; width: 40px; height: 40px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; background: rgba(45,226,203,0.14); color: #5EEAD4; font-size: 18px">↓</span><span class="k-sr" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Stáhnout</span></a></div>
+</div>
+</section>
+
+<div class="k-glass" style="padding: clamp(22px, 3vw, 32px); display: flex; align-items: center; gap: 24px; flex-wrap: wrap; background: rgba(255,255,255,0.02)">
+<div style="flex: none; opacity: 0.9"><svg class="k-pz" width="84" height="84" viewBox="0 0 320 320" aria-hidden="true" style=""><path d="M64 44 L130 44 C138 44 142 34 134 26 C122 14 133 3 148 3 C163 3 174 14 162 26 C154 34 158 44 166 44 L256 44 A20 20 0 0 1 276 64 L276 156.9 C276 164.5 285.5 168.3 293.1 160.7 C304.5 149.3 314.9 159.8 314.9 174 C314.9 188.2 304.5 198.7 293.1 187.3 C285.5 179.7 276 183.5 276 191.1 L276 256 A20 20 0 0 1 256 276 L186.9 276 C178.5 276 174.3 265.5 182.7 257.1 C195.3 244.5 183.8 232.9 168 232.9 C152.2 232.9 140.7 244.5 153.3 257.1 C161.7 265.5 157.5 276 149.1 276 L64 276 A20 20 0 0 1 44 256 L44 154.2 C44 147 53 143.4 60.2 150.6 C71 161.4 80.9 151.5 80.9 138 C80.9 124.5 71 114.6 60.2 125.4 C53 132.6 44 129 44 121.8 L44 64 A20 20 0 0 1 64 44 Z" fill="url(#koff)" stroke="rgba(94,234,212,0.35)" stroke-width="4"></path><g transform="translate(136 128)" fill="none" stroke="rgba(207,250,243,0.7)" stroke-width="8" stroke-linecap="round"><rect x="0" y="26" width="48" height="40" rx="8"></rect><path d="M10 26 V16 a14 14 0 0 1 28 0 V26"></path></g></svg></div>
+<div style="display: flex; flex-direction: column; gap: 4px; flex: 1 1 280px"><span style="font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #8FB9B5">Další dílek</span><span style="font-family: Sora, sans-serif; font-weight: 700; font-size: 24px; color: #FFFFFF">Modul 2 – Provoz</span><span style="font-size: 15px">Po 1. modulu máš na čem stavět, teď je potřeba next level.</span></div>
+<a href="#" class="k-btn" style="background: #2DE2CB; color: #04201F; text-decoration: none; font-weight: 700; font-size: 16px; padding: 15px 26px; border-radius: 999px; min-height: 50px; display: inline-flex; align-items: center">Odemknout za 7 990 Kč</a>
+</div>
+
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2200}}'>
+class Component extends DCLogic {
+constructor(props) {
+super(props);
+this.state = { cur: 2, done: [true, true, false, false, false, false, false, false, false] };
+}
+renderVals() {
+const titles = [
+'Úvodní video k modulu',
+'Doprovodné video 1 – [název]',
+'Doprovodné video 2 – [název]',
+'Doprovodné video 3 – [název]',
+'Doprovodné video 4 – [název]',
+'Doprovodné video 5 – [název]',
+'Doprovodné video 6 – [název]',
+'Doprovodné video 7 – [název]',
+'Doprovodné video 8 – [název]'
+];
+const cur = this.state.cur;
+const done = this.state.done;
+const n = titles.length;
+const count = done.filter(Boolean).length;
+const isDone = done[cur];
+return {
+lessons: titles.map((t, i) => {
+const on = i === cur;
+const d = done[i];
+return {
+title: t,
+mark: d ? '✓' : String(i),
+state: d ? 'Hotovo' : (on ? 'Právě sleduješ' : (i === 0 ? 'Úvod' : 'Ke skriptům')),
+current: on ? 'true' : 'false',
+bg: on ? 'rgba(45,226,203,0.12)' : 'transparent',
+border: on ? 'rgba(94,234,212,0.4)' : 'transparent',
+color: on ? '#FFFFFF' : (d ? '#9FC9C4' : '#D5EFEC'),
+dotBg: d ? '#2DE2CB' : (on ? 'rgba(45,226,203,0.2)' : 'rgba(255,255,255,0.07)'),
+dotColor: d ? '#04201F' : (on ? '#5EEAD4' : '#8FB9B5'),
+dotGlow: d ? '0 0 12px rgba(45,226,203,0.6)' : 'none',
+pick: () => this.setState({ cur: i })
+};
+}),
+lessonNo: 'Video ' + (cur + 1) + ' z ' + n,
+lessonTitle: titles[cur],
+pct: Math.round(count / n * 100) + '%',
+progressLabel: 'Hotovo ' + count + ' z ' + n,
+doneLabel: isDone ? '✓ Hotovo' : 'Označit jako hotové',
+donePressed: isDone ? 'true' : 'false',
+doneBg: isDone ? 'rgba(45,226,203,0.14)' : '#2DE2CB',
+doneColor: isDone ? '#5EEAD4' : '#04201F',
+doneBorder: isDone ? 'rgba(94,234,212,0.5)' : '#2DE2CB',
+toggleDone: () => { const nd = done.slice(); nd[cur] = !nd[cur]; this.setState({ done: nd }); },
+prev: () => this.setState({ cur: (cur + n - 1) % n }),
+next: () => this.setState({ cur: (cur + 1) % n })
+};
+}
+}
+</script>
+</body>
+</html>

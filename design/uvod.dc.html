@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<title>Vladimír PRO – směr C, Hloubka</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#041A1C}
+*{box-sizing:border-box}
+a{color:#5EEAD4}a:hover{color:#FFFFFF}
+h1,h2,h3,p,blockquote,figure{margin:0;text-wrap:pretty}
+.c-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@property --cn{syntax:'<integer>';inherits:false;initial-value:0}
+@keyframes ccount{from{--cn:0}to{--cn:var(--to)}}
+.c-count{counter-reset:cn var(--cn);animation:ccount 2.4s cubic-bezier(.16,.8,.2,1) .4s both}
+.c-count::before{content:counter(cn)}
+@keyframes cfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes cspin{from{transform:rotateX(64deg) rotateZ(0deg)}to{transform:rotateX(64deg) rotateZ(360deg)}}
+@keyframes cglint{0%,100%{opacity:.55}50%{opacity:1}}
+.c-stage{perspective:1700px;display:flex;align-items:center;justify-content:center;min-height:1040px;padding-top:400px;position:relative}
+.c-floatwrap{animation:cfloat 7s ease-in-out infinite;transform-style:preserve-3d}
+.c-stack{position:relative;width:320px;height:320px;transform-style:preserve-3d;transform:rotateX(var(--rx,58deg)) rotateZ(var(--rz,-36deg));transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+.c-slab{position:absolute;inset:0}
+.c-pz{position:absolute;inset:0;width:100%;height:100%;overflow:visible;filter:drop-shadow(0 22px 26px rgba(0,0,0,.45))}
+.c-num{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family:Sora,sans-serif;font-weight:800;font-size:96px;line-height:1;color:rgba(255,255,255,.14)}
+.c-lab{position:absolute;left:276px;top:276px;transform-origin:0 0;transform:rotateZ(calc(var(--rz,-36deg) * -1)) rotateX(calc(var(--rx,58deg) * -1)) translate(18px,-50%);transition:transform .7s cubic-bezier(.2,.7,.2,1);display:flex;flex-direction:column;gap:2px;white-space:nowrap;padding:9px 16px 10px;border-radius:16px;background:rgba(3,20,21,.88);border:1px solid rgba(94,234,212,.5);box-shadow:0 12px 30px -8px rgba(0,0,0,.7),0 0 20px -4px rgba(45,226,203,.55);font-family:Sora,sans-serif}
+.c-lab b{font-weight:800;font-size:18px;color:#FFFFFF;letter-spacing:-.01em}
+.c-lab small{font-family:Manrope,sans-serif;font-weight:700;font-size:14px;color:#7FF0E2}
+.c-stack .c-slab{transform:translateZ(var(--z1));transform-style:preserve-3d}
+.c-slabt{display:flex;flex-direction:column;gap:3px;line-height:1.1}
+.c-slabt small{font-family:Manrope,sans-serif;font-size:14px;font-weight:600;color:#A6EDE3}
+.c-ring{position:absolute;width:540px;height:540px;border-radius:50%;border:1px solid rgba(94,234,212,.22);animation:cspin 40s linear infinite}
+.c-ring2{position:absolute;width:420px;height:420px;border-radius:50%;border:1px dashed rgba(94,234,212,.14);animation:cspin 60s linear infinite reverse}
+.c-glass{background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.018));border:1px solid rgba(255,255,255,.11);border-radius:24px;box-shadow:inset 0 1px 0 rgba(255,255,255,.09),0 40px 70px -30px rgba(0,0,0,.7);transition:border-color .4s,box-shadow .4s}
+.c-glass:hover{border-color:rgba(94,234,212,.5);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 0 0 1px rgba(94,234,212,.18),0 0 40px -6px rgba(45,226,203,.35),0 40px 70px -30px rgba(0,0,0,.7)}
+.c-tilt{transition:transform .45s cubic-bezier(.2,.7,.2,1),box-shadow .45s,border-color .45s}
+.c-tilt:hover{transform:perspective(900px) rotateX(5deg) rotateY(-7deg) translateY(-6px)}
+.c-btn{transition:transform .2s,box-shadow .2s}
+.c-btn:hover{transform:translateY(-2px);box-shadow:0 18px 40px -12px rgba(45,226,203,.7)}
+.c-cursor{position:absolute;left:0;top:0;width:640px;height:640px;margin:-320px 0 0 -320px;border-radius:50%;transform:translate(var(--mx,-999px),var(--my,-999px));background:radial-gradient(circle,rgba(45,226,203,.11),transparent 62%);pointer-events:none;transition:transform .18s linear;z-index:0}
+.c-photo{position:relative;overflow:hidden;background:linear-gradient(160deg,#0F3D3C,#072626);display:flex;align-items:center;justify-content:center;text-align:center;color:#8CC9C2;font-size:15px;font-weight:600;padding:24px}
+.c-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(45,226,203,.10),rgba(4,26,28,.55));mix-blend-mode:screen;pointer-events:none}
+.c-deck{display:none}
+.c-node{position:absolute;left:-96px;top:22px;width:72px;height:72px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:Sora,sans-serif;font-weight:800;font-size:26px;color:#04201F;background:radial-gradient(circle at 35% 30%,#B9FFF5,#2DE2CB 55%,#0E8C82);box-shadow:0 0 0 6px #041A1C,0 0 0 7px rgba(94,234,212,.35),0 0 30px rgba(45,226,203,.55)}
+.c-path{position:relative;display:flex;flex-direction:column;gap:18px;padding-left:96px}
+.c-line{position:absolute;left:35px;top:40px;bottom:40px;width:2px;background:rgba(255,255,255,.08);border-radius:2px}
+.c-linefill{position:absolute;inset:0;border-radius:2px;background:linear-gradient(180deg,#5EEAD4,#2DE2CB);box-shadow:0 0 18px #2DE2CB;transform-origin:top}
+.c-modbtn{all:unset;box-sizing:border-box;width:100%;cursor:pointer;padding:26px 30px;display:flex;flex-wrap:wrap;align-items:center;gap:12px 28px;color:#B7D6D3;font-family:Manrope,sans-serif}
+.c-modbtn:focus-visible{outline:2px solid #5EEAD4;outline-offset:-4px;border-radius:24px}
+.c-modbtn:hover .c-chev{background:rgba(45,226,203,.22)}
+.c-chev{width:44px;height:44px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:22px;line-height:1;color:#FFFFFF;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);transition:transform .35s,background .3s;padding-bottom:6px}
+.c-moddetail{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:28px;padding:28px 30px 30px;border-top:1px solid rgba(255,255,255,.08);animation:cmod .45s cubic-bezier(.2,.7,.2,1)}
+@keyframes cmod{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:none}}
+.c-tq{display:-webkit-box;-webkit-box-orient:vertical;overflow:hidden}
+.c-tgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:40px;align-items:center}
+@supports (animation-timeline: view()){
+@media (prefers-reduced-motion:no-preference){
+@keyframes creveal{from{opacity:0;transform:translateY(56px) scale(.98)}to{opacity:1;transform:none}}
+@keyframes cfill{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes cshrink{to{padding:6px 8px 6px 18px;max-width:980px;background:rgba(3,18,19,.88)}}
+.c-reveal{animation:creveal linear both;animation-timeline:view();animation-range:entry 0% entry 70%}
+.c-linefill{animation:cfill linear both;animation-timeline:view();animation-range:cover 15% cover 75%}
+.c-nav{animation:cshrink linear both;animation-timeline:scroll(root);animation-range:0 260px}
+@keyframes cexplode{from{transform:translateZ(var(--z0))}to{transform:translateZ(var(--z1))}}
+@keyframes cname{from{opacity:0}to{opacity:1}}
+.c-stack .c-slab{animation:cexplode linear both;animation-timeline:scroll(root);animation-range:0 240px}
+.c-stack .c-labf{animation:cname linear both;animation-timeline:scroll(root);animation-range:80px 240px}
+}}
+@media (hover:none){.c-cursor{display:none}}
+@media (max-width:760px){
+.c-stage{display:none}
+.c-deck{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:20px 24px 36px;margin:0 -24px;perspective:900px;-webkit-overflow-scrolling:touch}
+.c-deck>div{flex:none;width:72%;aspect-ratio:1/1;scroll-snap-align:center;transform:rotateY(-10deg) rotateX(6deg)}
+.c-tgrid{grid-template-columns:minmax(0,1fr)}
+.c-moddetail{grid-template-columns:minmax(0,1fr);padding:22px 20px 24px}.c-modbtn{padding:22px 20px}
+.c-path{padding-left:66px}.c-line{left:25px}.c-node{left:-66px;width:52px;height:52px;font-size:15px}
+}
+@media (prefers-reduced-motion:reduce){.c-floatwrap,.c-ring,.c-ring2{animation:none}.c-count{animation:none;--cn:var(--to)}.c-cursor{display:none}}
+</style>
+</helmet>
+<div onMouseMove="{{ onMove }}" onMouseLeave="{{ onLeave }}" style="position: relative; font-family: Manrope, 'Segoe UI', sans-serif; color: #B7D6D3; background: radial-gradient(rgba(255,255,255,0.028) 1px, transparent 1px) 0 0 / 3px 3px, radial-gradient(rgba(0,0,0,0.16) 1px, transparent 1px) 1px 2px / 5px 5px, radial-gradient(1100px 700px at 85% -5%, rgba(45,226,203,0.20), transparent 60%), radial-gradient(900px 700px at -10% 45%, rgba(14,140,130,0.16), transparent 60%), #041A1C; min-height: 100vh; overflow: hidden">
+<div class="c-cursor" aria-hidden="true"></div>
+
+<header style="position: sticky; top: 0; z-index: 20; padding: 16px 24px">
+<div class="c-nav" style="max-width: 1200px; margin: 0 auto; padding: 12px 14px 12px 22px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; background: rgba(4,26,28,0.62); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.09); border-radius: 999px">
+<a href="#" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #FFFFFF; font-family: Sora, sans-serif; font-weight: 700; font-size: 18px">
+<span style="width: 10px; height: 10px; border-radius: 50%; background: {{accent2}}; box-shadow: 0 0 16px {{accent2}}"></span>Vladimír PRO</a>
+<nav aria-label="Hlavní menu" style="display: flex; align-items: center; gap: 26px; flex-wrap: wrap; font-size: 15px; font-weight: 500">
+<a href="#" style="text-decoration: none; color: #B7D6D3">Moduly a ceny</a>
+<a href="#" style="text-decoration: none; color: #B7D6D3">Konzultace</a>
+<a href="#" style="text-decoration: none; color: #B7D6D3">O mně</a>
+<a href="#" style="text-decoration: none; color: #B7D6D3">Kontakt</a>
+<a href="#" class="c-btn" style="text-decoration: none; color: #04201F; background: {{accent}}; border-radius: 999px; padding: 11px 20px; min-height: 44px; display: inline-flex; align-items: center; font-weight: 700">Přihlásit</a>
+</nav>
+</div>
+</header>
+
+<section style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 72px 24px 64px">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(480px, 100%), 1fr)); gap: 40px; align-items: center">
+<div style="display: flex; flex-direction: column; gap: 26px">
+<span style="align-self: flex-start; display: inline-flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #CFFAF3; padding: 8px 14px; border-radius: 999px; border: 1px solid rgba(94,234,212,0.3); background: rgba(45,226,203,0.08)"><span style="width: 6px; height: 6px; border-radius: 50%; background: {{accent}}; box-shadow: 0 0 10px {{accent}}"></span>Systém Vladimír PRO</span>
+<h1 style="font-family: Sora, sans-serif; font-weight: 800; font-size: clamp(64px, 9.5vw, 136px); line-height: 0.9; letter-spacing: -0.055em; color: #FFFFFF">Pokus <span style="color: {{accent}}">–</span><br><span style="background: linear-gradient(180deg, #FFFFFF 10%, {{accent}} 120%); -webkit-background-clip: text; background-clip: text; color: transparent">omyl</span></h1>
+<p style="font-family: Sora, sans-serif; font-weight: 600; font-size: 24px; line-height: 1.25; color: #E6FFFB">Nejčastější způsob vedení a budování podniku</p>
+<p style="font-size: 18px; line-height: 1.65; max-width: 44ch">Nemusíš ztrácet čas, utrácet hromady peněz a učit se ze svých chyb. Můžeš tomu předejít, vybrat si jednodušší cestu a svůj potenciál věnovat důležitým věcem.</p>
+<div style="display: flex; gap: 14px; flex-wrap: wrap; align-items: center">
+<a href="#zdarma-c" class="c-btn" style="background: {{accent}}; color: #04201F; text-decoration: none; font-weight: 700; font-size: 17px; padding: 18px 30px; border-radius: 999px; min-height: 52px; display: inline-flex; align-items: center; gap: 10px">Vyzkoušet systém Vladimír PRO <span aria-hidden="true">→</span></a>
+</div>
+</div>
+<svg aria-hidden="true" width="0" height="0" style="position: absolute; width: 0; height: 0"><defs><linearGradient id="cpzfill" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2DE2CB" stop-opacity="0.32"></stop><stop offset="1" stop-color="#06282A" stop-opacity="0.88"></stop></linearGradient><linearGradient id="cpztop" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5EEAD4" stop-opacity="0.7"></stop><stop offset="1" stop-color="#0A5A56" stop-opacity="0.92"></stop></linearGradient><radialGradient id="cpzglint" cx="0.8" cy="0.2" r="0.45"><stop offset="0" stop-color="#FF7A59" stop-opacity="0.45"></stop><stop offset="1" stop-color="#FF7A59" stop-opacity="0"></stop></radialGradient></defs></svg>
+<div class="c-stage" aria-hidden="true">
+<div class="c-ring"></div>
+<div class="c-ring2"></div>
+<div class="c-floatwrap">
+<div class="c-stack">
+<div class="c-slab" style="--z0: 0px; --z1: 0px"><div style="position: absolute; inset: 0; opacity: 0.6"><svg class="c-pz" viewBox="0 0 320 320" aria-hidden="true"><path d="M64 44 L130 44 C138 44 142 34 134 26 C122 14 133 3 148 3 C163 3 174 14 162 26 C154 34 158 44 166 44 L256 44 A20 20 0 0 1 276 64 L276 156.9 C276 164.5 285.5 168.3 293.1 160.7 C304.5 149.3 314.9 159.8 314.9 174 C314.9 188.2 304.5 198.7 293.1 187.3 C285.5 179.7 276 183.5 276 191.1 L276 256 A20 20 0 0 1 256 276 L186.9 276 C178.5 276 174.3 265.5 182.7 257.1 C195.3 244.5 183.8 232.9 168 232.9 C152.2 232.9 140.7 244.5 153.3 257.1 C161.7 265.5 157.5 276 149.1 276 L64 276 A20 20 0 0 1 44 256 L44 154.2 C44 147 53 143.4 60.2 150.6 C71 161.4 80.9 151.5 80.9 138 C80.9 124.5 71 114.6 60.2 125.4 C53 132.6 44 129 44 121.8 L44 64 A20 20 0 0 1 64 44 Z" fill="url(#cpzfill)" stroke="rgba(94,234,212,0.6)" stroke-width="1.5"></path></svg><span class="c-num">5</span></div><span class="c-lab c-labf"><b>Modul 5</b><small>Bonusový modul</small></span></div>
+<div class="c-slab" style="--z0: 34px; --z1: 104px"><div style="position: absolute; inset: 0; opacity: 0.68"><svg class="c-pz" viewBox="0 0 320 320" aria-hidden="true"><path d="M64 44 L130 44 C138 44 142 34 134 26 C122 14 133 3 148 3 C163 3 174 14 162 26 C154 34 158 44 166 44 L256 44 A20 20 0 0 1 276 64 L276 156.9 C276 164.5 285.5 168.3 293.1 160.7 C304.5 149.3 314.9 159.8 314.9 174 C314.9 188.2 304.5 198.7 293.1 187.3 C285.5 179.7 276 183.5 276 191.1 L276 256 A20 20 0 0 1 256 276 L186.9 276 C178.5 276 174.3 265.5 182.7 257.1 C195.3 244.5 183.8 232.9 168 232.9 C152.2 232.9 140.7 244.5 153.3 257.1 C161.7 265.5 157.5 276 149.1 276 L64 276 A20 20 0 0 1 44 256 L44 154.2 C44 147 53 143.4 60.2 150.6 C71 161.4 80.9 151.5 80.9 138 C80.9 124.5 71 114.6 60.2 125.4 C53 132.6 44 129 44 121.8 L44 64 A20 20 0 0 1 64 44 Z" fill="url(#cpzfill)" stroke="rgba(94,234,212,0.6)" stroke-width="1.5"></path></svg><span class="c-num">4</span></div><span class="c-lab c-labf"><b>Modul 4</b><small>Identita a brand</small></span></div>
+<div class="c-slab" style="--z0: 68px; --z1: 208px"><div style="position: absolute; inset: 0; opacity: 0.76"><svg class="c-pz" viewBox="0 0 320 320" aria-hidden="true"><path d="M64 44 L130 44 C138 44 142 34 134 26 C122 14 133 3 148 3 C163 3 174 14 162 26 C154 34 158 44 166 44 L256 44 A20 20 0 0 1 276 64 L276 156.9 C276 164.5 285.5 168.3 293.1 160.7 C304.5 149.3 314.9 159.8 314.9 174 C314.9 188.2 304.5 198.7 293.1 187.3 C285.5 179.7 276 183.5 276 191.1 L276 256 A20 20 0 0 1 256 276 L186.9 276 C178.5 276 174.3 265.5 182.7 257.1 C195.3 244.5 183.8 232.9 168 232.9 C152.2 232.9 140.7 244.5 153.3 257.1 C161.7 265.5 157.5 276 149.1 276 L64 276 A20 20 0 0 1 44 256 L44 154.2 C44 147 53 143.4 60.2 150.6 C71 161.4 80.9 151.5 80.9 138 C80.9 124.5 71 114.6 60.2 125.4 C53 132.6 44 129 44 121.8 L44 64 A20 20 0 0 1 64 44 Z" fill="url(#cpzfill)" stroke="rgba(94,234,212,0.6)" stroke-width="1.5"></path></svg><span class="c-num">3</span></div><span class="c-lab c-labf"><b>Modul 3</b><small>Lidé</small></span></div>
+<div class="c-slab" style="--z0: 102px; --z1: 312px"><div style="position: absolute; inset: 0; opacity: 0.84"><svg class="c-pz" viewBox="0 0 320 320" aria-hidden="true"><path d="M64 44 L130 44 C138 44 142 34 134 26 C122 14 133 3 148 3 C163 3 174 14 162 26 C154 34 158 44 166 44 L256 44 A20 20 0 0 1 276 64 L276 156.9 C276 164.5 285.5 168.3 293.1 160.7 C304.5 149.3 314.9 159.8 314.9 174 C314.9 188.2 304.5 198.7 293.1 187.3 C285.5 179.7 276 183.5 276 191.1 L276 256 A20 20 0 0 1 256 276 L186.9 276 C178.5 276 174.3 265.5 182.7 257.1 C195.3 244.5 183.8 232.9 168 232.9 C152.2 232.9 140.7 244.5 153.3 257.1 C161.7 265.5 157.5 276 149.1 276 L64 276 A20 20 0 0 1 44 256 L44 154.2 C44 147 53 143.4 60.2 150.6 C71 161.4 80.9 151.5 80.9 138 C80.9 124.5 71 114.6 60.2 125.4 C53 132.6 44 129 44 121.8 L44 64 A20 20 0 0 1 64 44 Z" fill="url(#cpzfill)" stroke="rgba(94,234,212,0.6)" stroke-width="1.5"></path></svg><span class="c-num">2</span></div><span class="c-lab c-labf"><b>Modul 2</b><small>Provoz</small></span></div>
+<div class="c-slab" style="--z0: 136px; --z1: 416px"><div style="position: absolute; inset: 0; opacity: 0.92"><svg class="c-pz" viewBox="0 0 320 320" aria-hidden="true"><path d="M64 44 L130 44 C138 44 142 34 134 26 C122 14 133 3 148 3 C163 3 174 14 162 26 C154 34 158 44 166 44 L256 44 A20 20 0 0 1 276 64 L276 156.9 C276 164.5 285.5 168.3 293.1 160.7 C304.5 149.3 314.9 159.8 314.9 174 C314.9 188.2 304.5 198.7 293.1 187.3 C285.5 179.7 276 183.5 276 191.1 L276 256 A20 20 0 0 1 256 276 L186.9 276 C178.5 276 174.3 265.5 182.7 257.1 C195.3 244.5 183.8 232.9 168 232.9 C152.2 232.9 140.7 244.5 153.3 257.1 C161.7 265.5 157.5 276 149.1 276 L64 276 A20 20 0 0 1 44 256 L44 154.2 C44 147 53 143.4 60.2 150.6 C71 161.4 80.9 151.5 80.9 138 C80.9 124.5 71 114.6 60.2 125.4 C53 132.6 44 129 44 121.8 L44 64 A20 20 0 0 1 64 44 Z" fill="url(#cpzfill)" stroke="rgba(94,234,212,0.6)" stroke-width="1.5"></path></svg><span class="c-num">1</span></div><span class="c-lab c-labf"><b>Modul 1</b><small>Produkt</small></span></div>
+<div class="c-slab" style="--z0: 176px; --z1: 540px"><svg class="c-pz" viewBox="0 0 320 320" aria-hidden="true"><path d="M64 44 L130 44 C138 44 142 34 134 26 C122 14 133 3 148 3 C163 3 174 14 162 26 C154 34 158 44 166 44 L256 44 A20 20 0 0 1 276 64 L276 156.9 C276 164.5 285.5 168.3 293.1 160.7 C304.5 149.3 314.9 159.8 314.9 174 C314.9 188.2 304.5 198.7 293.1 187.3 C285.5 179.7 276 183.5 276 191.1 L276 256 A20 20 0 0 1 256 276 L186.9 276 C178.5 276 174.3 265.5 182.7 257.1 C195.3 244.5 183.8 232.9 168 232.9 C152.2 232.9 140.7 244.5 153.3 257.1 C161.7 265.5 157.5 276 149.1 276 L64 276 A20 20 0 0 1 44 256 L44 154.2 C44 147 53 143.4 60.2 150.6 C71 161.4 80.9 151.5 80.9 138 C80.9 124.5 71 114.6 60.2 125.4 C53 132.6 44 129 44 121.8 L44 64 A20 20 0 0 1 64 44 Z" fill="url(#cpztop)" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"></path><path d="M64 44 L130 44 C138 44 142 34 134 26 C122 14 133 3 148 3 C163 3 174 14 162 26 C154 34 158 44 166 44 L256 44 A20 20 0 0 1 276 64 L276 156.9 C276 164.5 285.5 168.3 293.1 160.7 C304.5 149.3 314.9 159.8 314.9 174 C314.9 188.2 304.5 198.7 293.1 187.3 C285.5 179.7 276 183.5 276 191.1 L276 256 A20 20 0 0 1 256 276 L186.9 276 C178.5 276 174.3 265.5 182.7 257.1 C195.3 244.5 183.8 232.9 168 232.9 C152.2 232.9 140.7 244.5 153.3 257.1 C161.7 265.5 157.5 276 149.1 276 L64 276 A20 20 0 0 1 44 256 L44 154.2 C44 147 53 143.4 60.2 150.6 C71 161.4 80.9 151.5 80.9 138 C80.9 124.5 71 114.6 60.2 125.4 C53 132.6 44 129 44 121.8 L44 64 A20 20 0 0 1 64 44 Z" fill="url(#cpzglint)"></path></svg><span class="c-num" style="color: rgba(255,255,255,0.32)">0</span><span style="position: absolute; left: 236px; top: 72px; width: 14px; height: 14px; border-radius: 50%; background: {{accent2}}; box-shadow: 0 0 22px 6px {{accent2}}; animation: cglint 3s ease-in-out infinite"></span><span class="c-lab" style="border-color: rgba(255,255,255,0.6)"><b>Modul 0</b><small>Ochutnávka</small><span style="align-self: flex-start; margin-top: 6px; font-family: Manrope, sans-serif; font-size: 12px; font-weight: 800; letter-spacing: 0.1em; color: #2A0D06; background: {{accent2}}; padding: 5px 10px; border-radius: 999px">ZDARMA</span></span></div>
+</div>
+</div>
+</div>
+</div>
+<div class="c-deck" aria-hidden="true">
+<div class="c-slab" style="position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-align: center"><svg class="c-pz" viewBox="0 0 320 320" aria-hidden="true"><path d="M64 44 L130 44 C138 44 142 34 134 26 C122 14 133 3 148 3 C163 3 174 14 162 26 C154 34 158 44 166 44 L256 44 A20 20 0 0 1 276 64 L276 156.9 C276 164.5 285.5 168.3 293.1 160.7 C304.5 149.3 314.9 159.8 314.9 174 C314.9 188.2 304.5 198.7 293.1 187.3 C285.5 179.7 276 183.5 276 191.1 L276 256 A20 20 0 0 1 256 276 L186.9 276 C178.5 276 174.3 265.5 182.7 257.1 C195.3 244.5 183.8 232.9 168 232.9 C152.2 232.9 140.7 244.5 153.3 257.1 C161.7 265.5 157.5 276 149.1 276 L64 276 A20 20 0 0 1 44 256 L44 154.2 C44 147 53 143.4 60.2 150.6 C71 161.4 80.9 151.5 80.9 138 C80.9 124.5 71 114.6 60.2 125.4 C53 132.6 44 129 44 121.8 L44 64 A20 20 0 0 1 64 44 Z" fill="url(#cpztop)" stroke="rgba(94,234,212,0.6)" stroke-width="1.5"></path><path d="M64 44 L130 44 C138 44 142 34 134 26 C122 14 133 3 148 3 C163 3 174 14 162 26 C154 34 158 44 166 44 L256 44 A20 20 0 0 1 276 64 L276 156.9 C276 164.5 285.5 168.3 293.1 160.7 C304.5 149.3 314.9 159.8 314.9 174 C314.9 188.2 304.5 198.7 293.1 187.3 C285.5 179.7 276 183.5 276 191.1 L276 256 A20 20 0 0 1 256 276 L186.9 276 C178.5 276 174.3 265.5 182.7 257.1 C195.3 244.5 183.8 232.9 168 232.9 C152.2 232.9 140.7 244.5 153.3 257.1 C161.7 265.5 157.5 276 149.1 276 L64 276 A20 20 0 0 1 44 256 L44 154.2 C44 147 53 143.4 60.2 150.6 C71 161.4 80.9 151.5 80.9 138 C80.9 124.5 71 114.6 60.2 125.4 C53 132.6 44 129 44 121.8 L44 64 A20 20 0 0 1 64 44 Z" fill="url(#cpzglint)"></path></svg><b style="position: relative; font-family: Sora, sans-serif; font-weight: 800; font-size: 26px; color: #FFFFFF">Modul 0</b><small style="position: relative; font-weight: 700; font-size: 15px; color: #E6FFFB">Ochutnávka</small><span style="position: relative; margin-top: 6px; font-size: 12px; font-weight: 800; letter-spacing: 0.1em; color: #2A0D06; background: {{accent2}}; padding: 5px 10px; border-radius: 999px">ZDARMA</span></div>
+<div class="c-slab" style="position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-align: center"><svg class="c-pz" viewBox="0 0 320 320" aria-hidden="true"><path d="M64 44 L130 44 C138 44 142 34 134 26 C122 14 133 3 148 3 C163 3 174 14 162 26 C154 34 158 44 166 44 L256 44 A20 20 0 0 1 276 64 L276 156.9 C276 164.5 285.5 168.3 293.1 160.7 C304.5 149.3 314.9 159.8 314.9 174 C314.9 188.2 304.5 198.7 293.1 187.3 C285.5 179.7 276 183.5 276 191.1 L276 256 A20 20 0 0 1 256 276 L186.9 276 C178.5 276 174.3 265.5 182.7 257.1 C195.3 244.5 183.8 232.9 168 232.9 C152.2 232.9 140.7 244.5 153.3 257.1 C161.7 265.5 157.5 276 149.1 276 L64 276 A20 20 0 0 1 44 256 L44 154.2 C44 147 53 143.4 60.2 150.6 C71 161.4 80.9 151.5 80.9 138 C80.9 124.5 71 114.6 60.2 125.4 C53 132.6 44 129 44 121.8 L44 64 A20 20 0 0 1 64 44 Z" fill="url(#cpzfill)" stroke="rgba(94,234,212,0.6)" stroke-width="1.5"></path></svg><b style="position: relative; font-family: Sora, sans-serif; font-weight: 800; font-size: 26px; color: #FFFFFF">Modul 1</b><small style="position: relative; font-weight: 700; font-size: 15px; color: #7FF0E2">Produkt</small></div>
+<div class="c-slab" style="position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-align: center"><svg class="c-pz" viewBox="0 0 320 320" aria-hidden="true"><path d="M64 44 L130 44 C138 44 142 34 134 26 C122 14 133 3 148 3 C163 3 174 14 162 26 C154 34 158 44 166 44 L256 44 A20 20 0 0 1 276 64 L276 156.9 C276 164.5 285.5 168.3 293.1 160.7 C304.5 149.3 314.9 159.8 314.9 174 C314.9 188.2 304.5 198.7 293.1 187.3 C285.5 179.7 276 183.5 276 191.1 L276 256 A20 20 0 0 1 256 276 L186.9 276 C178.5 276 174.3 265.5 182.7 257.1 C195.3 244.5 183.8 232.9 168 232.9 C152.2 232.9 140.7 244.5 153.3 257.1 C161.7 265.5 157.5 276 149.1 276 L64 276 A20 20 0 0 1 44 256 L44 154.2 C44 147 53 143.4 60.2 150.6 C71 161.4 80.9 151.5 80.9 138 C80.9 124.5 71 114.6 60.2 125.4 C53 132.6 44 129 44 121.8 L44 64 A20 20 0 0 1 64 44 Z" fill="url(#cpzfill)" stroke="rgba(94,234,212,0.6)" stroke-width="1.5"></path></svg><b style="position: relative; font-family: Sora, sans-serif; font-weight: 800; font-size: 26px; color: #FFFFFF">Modul 2</b><small style="position: relative; font-weight: 700; font-size: 15px; color: #7FF0E2">Provoz</small></div>
+<div class="c-slab" style="position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-align: center"><svg class="c-pz" viewBox="0 0 320 320" aria-hidden="true"><path d="M64 44 L130 44 C138 44 142 34 134 26 C122 14 133 3 148 3 C163 3 174 14 162 26 C154 34 158 44 166 44 L256 44 A20 20 0 0 1 276 64 L276 156.9 C276 164.5 285.5 168.3 293.1 160.7 C304.5 149.3 314.9 159.8 314.9 174 C314.9 188.2 304.5 198.7 293.1 187.3 C285.5 179.7 276 183.5 276 191.1 L276 256 A20 20 0 0 1 256 276 L186.9 276 C178.5 276 174.3 265.5 182.7 257.1 C195.3 244.5 183.8 232.9 168 232.9 C152.2 232.9 140.7 244.5 153.3 257.1 C161.7 265.5 157.5 276 149.1 276 L64 276 A20 20 0 0 1 44 256 L44 154.2 C44 147 53 143.4 60.2 150.6 C71 161.4 80.9 151.5 80.9 138 C80.9 124.5 71 114.6 60.2 125.4 C53 132.6 44 129 44 121.8 L44 64 A20 20 0 0 1 64 44 Z" fill="url(#cpzfill)" stroke="rgba(94,234,212,0.6)" stroke-width="1.5"></path></svg><b style="position: relative; font-family: Sora, sans-serif; font-weight: 800; font-size: 26px; color: #FFFFFF">Modul 3</b><small style="position: relative; font-weight: 700; font-size: 15px; color: #7FF0E2">Lidé</small></div>
+<div class="c-slab" style="position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-align: center"><svg class="c-pz" viewBox="0 0 320 320" aria-hidden="true"><path d="M64 44 L130 44 C138 44 142 34 134 26 C122 14 133 3 148 3 C163 3 174 14 162 26 C154 34 158 44 166 44 L256 44 A20 20 0 0 1 276 64 L276 156.9 C276 164.5 285.5 168.3 293.1 160.7 C304.5 149.3 314.9 159.8 314.9 174 C314.9 188.2 304.5 198.7 293.1 187.3 C285.5 179.7 276 183.5 276 191.1 L276 256 A20 20 0 0 1 256 276 L186.9 276 C178.5 276 174.3 265.5 182.7 257.1 C195.3 244.5 183.8 232.9 168 232.9 C152.2 232.9 140.7 244.5 153.3 257.1 C161.7 265.5 157.5 276 149.1 276 L64 276 A20 20 0 0 1 44 256 L44 154.2 C44 147 53 143.4 60.2 150.6 C71 161.4 80.9 151.5 80.9 138 C80.9 124.5 71 114.6 60.2 125.4 C53 132.6 44 129 44 121.8 L44 64 A20 20 0 0 1 64 44 Z" fill="url(#cpzfill)" stroke="rgba(94,234,212,0.6)" stroke-width="1.5"></path></svg><b style="position: relative; font-family: Sora, sans-serif; font-weight: 800; font-size: 26px; color: #FFFFFF">Modul 4</b><small style="position: relative; font-weight: 700; font-size: 15px; color: #7FF0E2">Identita a brand</small></div>
+<div class="c-slab" style="position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-align: center"><svg class="c-pz" viewBox="0 0 320 320" aria-hidden="true"><path d="M64 44 L130 44 C138 44 142 34 134 26 C122 14 133 3 148 3 C163 3 174 14 162 26 C154 34 158 44 166 44 L256 44 A20 20 0 0 1 276 64 L276 156.9 C276 164.5 285.5 168.3 293.1 160.7 C304.5 149.3 314.9 159.8 314.9 174 C314.9 188.2 304.5 198.7 293.1 187.3 C285.5 179.7 276 183.5 276 191.1 L276 256 A20 20 0 0 1 256 276 L186.9 276 C178.5 276 174.3 265.5 182.7 257.1 C195.3 244.5 183.8 232.9 168 232.9 C152.2 232.9 140.7 244.5 153.3 257.1 C161.7 265.5 157.5 276 149.1 276 L64 276 A20 20 0 0 1 44 256 L44 154.2 C44 147 53 143.4 60.2 150.6 C71 161.4 80.9 151.5 80.9 138 C80.9 124.5 71 114.6 60.2 125.4 C53 132.6 44 129 44 121.8 L44 64 A20 20 0 0 1 64 44 Z" fill="url(#cpzfill)" stroke="rgba(94,234,212,0.6)" stroke-width="1.5"></path></svg><b style="position: relative; font-family: Sora, sans-serif; font-weight: 800; font-size: 26px; color: #FFFFFF">Modul 5</b><small style="position: relative; font-weight: 700; font-size: 15px; color: #7FF0E2">Bonusový modul</small></div>
+</div>
+
+<div class="c-reveal" style="margin-top: 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); gap: 14px">
+<div class="c-glass" style="padding: 22px 24px; display: flex; flex-direction: column; gap: 6px"><span style="font-family: Sora, sans-serif; font-weight: 800; font-size: 40px; color: #FFFFFF; letter-spacing: -0.03em"><span class="c-count" aria-hidden="true" style="--to: 18"></span><span class="c-sr">18</span> let</span><span style="font-size: 15px">v oboru</span></div>
+<div class="c-glass" style="padding: 22px 24px; display: flex; flex-direction: column; gap: 6px"><span style="font-family: Sora, sans-serif; font-weight: 800; font-size: 40px; color: #FFFFFF; letter-spacing: -0.03em"><span class="c-count" aria-hidden="true" style="--to: 12"></span><span class="c-sr">12</span> let</span><span style="font-size: 15px">budování brandu</span></div>
+<div class="c-glass" style="padding: 22px 24px; display: flex; flex-direction: column; gap: 6px"><span style="font-family: Sora, sans-serif; font-weight: 800; font-size: 40px; color: #FFFFFF; letter-spacing: -0.03em"><span class="c-count" aria-hidden="true" style="--to: 3"></span><span class="c-sr">3</span></span><span style="font-size: 15px">kavárny s vlastní pražírnou</span></div>
+<div class="c-glass" style="padding: 22px 24px; display: flex; flex-direction: column; gap: 6px"><span style="font-family: Sora, sans-serif; font-weight: 800; font-size: 40px; color: #FFFFFF; letter-spacing: -0.03em"><span class="c-count" aria-hidden="true" style="--to: 1"></span><span class="c-sr">1</span></span><span style="font-size: 15px">pekařská a cukrářská výroba</span></div>
+<div class="c-glass" style="padding: 22px 24px; display: flex; flex-direction: column; gap: 6px"><span style="font-family: Sora, sans-serif; font-weight: 800; font-size: 40px; color: #FFFFFF; letter-spacing: -0.03em"><span class="c-count" aria-hidden="true" style="--to: 30"></span><span class="c-sr">30</span>+</span><span style="font-size: 15px">zaměstnanců</span></div>
+</div>
+</section>
+
+<section id="zdarma-c" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 72px 24px">
+<div class="c-glass c-reveal" style="padding: clamp(28px, 5vw, 64px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 48px; align-items: center; background: linear-gradient(135deg, rgba(45,226,203,0.16), rgba(255,255,255,0.02) 60%)">
+<div style="display: flex; flex-direction: column; gap: 18px">
+<span style="font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: {{accent}}">Přidej se k systému, který je založený na praxi a zkušenostech</span>
+<h2 style="font-family: Sora, sans-serif; font-weight: 700; font-size: clamp(34px, 4.6vw, 56px); line-height: 1.02; letter-spacing: -0.035em; color: #FFFFFF">Video manuál, check-list a nový pohled na věc</h2>
+<p style="font-size: 18px; line-height: 1.6; max-width: 42ch">Vyzkoušej ochutnávku zdarma a zjisti, jestli ti to může něco dát a v něčem pomoct.</p>
+</div>
+<form style="display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<label for="c-jmeno" style="font-size: 14px; font-weight: 600; color: #E6FFFB">Jméno</label>
+<input id="c-jmeno" type="text" style="font: inherit; font-size: 17px; padding: 15px 18px; border-radius: 14px; border: 1px solid rgba(255,255,255,0.16); background: rgba(2,14,15,0.6); color: #FFFFFF; min-height: 52px">
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<label for="c-email" style="font-size: 14px; font-weight: 600; color: #E6FFFB">E-mail</label>
+<input id="c-email" type="email" style="font: inherit; font-size: 17px; padding: 15px 18px; border-radius: 14px; border: 1px solid rgba(255,255,255,0.16); background: rgba(2,14,15,0.6); color: #FFFFFF; min-height: 52px">
+</div>
+<div style="display: flex; gap: 10px; align-items: flex-start">
+<input id="c-souhlas" type="checkbox" style="width: 20px; height: 20px; margin: 2px 0 0; accent-color: #2DE2CB">
+<label for="c-souhlas" style="font-size: 14px; line-height: 1.5">Souhlasím se zpracováním osobních údajů.</label>
+</div>
+<button type="button" class="c-btn" style="font: inherit; font-weight: 700; font-size: 17px; background: {{accent}}; color: #04201F; border: 0; border-radius: 999px; padding: 18px 24px; min-height: 54px; cursor: pointer">Odeslat</button>
+</form>
+</div>
+</section>
+
+<section style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 72px 24px 120px">
+<div class="c-reveal" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 40px; align-items: end; margin-bottom: 44px">
+<h2 style="font-family: Sora, sans-serif; font-weight: 700; font-size: clamp(36px, 5vw, 60px); line-height: 1; letter-spacing: -0.04em; color: #FFFFFF">Je to pro mě vhodné?</h2>
+<p style="font-size: 18px; line-height: 1.65"><strong style="color: #FFFFFF">Jednoznačně!</strong> Říká se, že chybovat je lidské, ale to jsou kecy – chyby stojí hodně peněz, a pokud je nějaká šance, jak se jim vyhnout, tak sem s tím. Život je změna a v gastru to platí dvojnásob. To, co platilo včera, už dnes nemusí, a je fajn být o krok napřed.</p>
+</div>
+<div class="c-reveal" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 18px">
+<div class="c-glass c-tilt" style="padding: 32px; display: flex; flex-direction: column; gap: 16px">
+<span style="width: 52px; height: 52px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-family: Sora, sans-serif; font-weight: 700; color: #04201F; background: linear-gradient(145deg, #7FF5E6, #13A99A); box-shadow: inset 0 -4px 0 rgba(0,0,0,0.18), 0 12px 24px -8px rgba(45,226,203,0.6)">01</span>
+<h3 style="font-family: Sora, sans-serif; font-weight: 700; font-size: 24px; line-height: 1.15; color: #FFFFFF">Vytvoříš stabilní kotevní body</h3>
+<p style="font-size: 16px; line-height: 1.65">Je důležité stát pevně a ještě důležitější je vědět, co mi stabilitu přináší. Není to jen o tom, že ustojím víc než všichni kolem, a proto jsem stabilní – to je jen půl pravdy.</p>
+<a href="#zdarma-c" style="font-weight: 600; font-size: 15px; margin-top: auto">Začít teď →</a>
+</div>
+<div class="c-glass c-tilt" style="padding: 32px; display: flex; flex-direction: column; gap: 16px">
+<span style="width: 52px; height: 52px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-family: Sora, sans-serif; font-weight: 700; color: #04201F; background: linear-gradient(145deg, #7FF5E6, #13A99A); box-shadow: inset 0 -4px 0 rgba(0,0,0,0.18), 0 12px 24px -8px rgba(45,226,203,0.6)">02</span>
+<h3 style="font-family: Sora, sans-serif; font-weight: 700; font-size: 24px; line-height: 1.15; color: #FFFFFF">Nastavíš správný kurz</h3>
+<p style="font-size: 16px; line-height: 1.65">Buď tvůj byznys roste, nebo upadá. Nic mezi tím není. Tohle je svatá pravda. Chvíli to může být stejné, ale každá stagnace je budoucí pád. Neudělej tu chybu co ostatní a pojď si to udržet.</p>
+<a href="#zdarma-c" style="font-weight: 600; font-size: 15px; margin-top: auto">Začít teď →</a>
+</div>
+<div class="c-glass c-tilt" style="padding: 32px; display: flex; flex-direction: column; gap: 16px">
+<span style="width: 52px; height: 52px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-family: Sora, sans-serif; font-weight: 700; color: #04201F; background: linear-gradient(145deg, #7FF5E6, #13A99A); box-shadow: inset 0 -4px 0 rgba(0,0,0,0.18), 0 12px 24px -8px rgba(45,226,203,0.6)">03</span>
+<h3 style="font-family: Sora, sans-serif; font-weight: 700; font-size: 24px; line-height: 1.15; color: #FFFFFF">Odemkneš nový potenciál</h3>
+<p style="font-size: 16px; line-height: 1.65">Občas je těžké se na věci podívat s odstupem a nadhledem. Ukážu ti, jak si ten nadhled nejen získat, ale i udržet. Ukážu ti jiný způsob vnímání toho, co jsi vybudoval, a toho, co teprve vybuduješ.</p>
+<a href="#zdarma-c" style="font-weight: 600; font-size: 15px; margin-top: auto">Začít teď →</a>
+</div>
+</div>
+</section>
+
+<section class="c-photo" style="z-index: 1; min-height: 680px; padding: 120px 24px; background: radial-gradient(800px 420px at 50% 50%, rgba(45,226,203,0.22), transparent 70%), linear-gradient(180deg, #041A1C 0%, #0B3433 22%, #0B3433 78%, #041A1C 100%)">
+<span style="position: absolute; left: 24px; top: 24px; font-size: 13px; font-weight: 600; color: #6FA8A2; z-index: 2">[Foto přes celou šířku: atmosféra kavárny, dobarvená do tyrkysové]</span>
+<div class="c-reveal" style="position: relative; z-index: 2; max-width: 1080px; display: flex; flex-direction: column; align-items: center; gap: 26px">
+<span style="font-size: 14px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: {{accent}}">A věřte mi, když říkám:</span>
+<p style="font-family: Sora, sans-serif; font-weight: 800; font-size: clamp(36px, 6vw, 84px); line-height: 1.02; letter-spacing: -0.045em; color: #FFFFFF">„Kavárna není v první řadě o kafi a ani o 16ti hodinové otevírací době!“</p>
+<span style="width: 64px; height: 2px; background: {{accent}}; box-shadow: 0 0 14px {{accent}}"></span>
+</div>
+</section>
+
+<section style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 120px 24px 72px">
+<div class="c-reveal" style="display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; margin-bottom: 48px">
+<div style="display: flex; flex-direction: column; gap: 14px; max-width: 760px">
+<span style="font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: {{accent}}">Systém z praxe</span>
+<h2 style="font-family: Sora, sans-serif; font-weight: 700; font-size: clamp(32px, 4.2vw, 50px); line-height: 1.05; letter-spacing: -0.035em; color: #FFFFFF">Žádné nesmysly ani kecy – know-how vybudované a otestované na vlastních provozech.</h2>
+</div>
+<a href="#" style="font-size: 16px; font-weight: 600">Všechny moduly a ceny →</a>
+</div>
+
+<div class="c-path">
+<div class="c-line" aria-hidden="true"><div class="c-linefill"></div></div>
+
+<div class="c-reveal" style="position: relative">
+<span class="c-node" aria-hidden="true">0</span>
+<div class="c-glass" style="overflow: hidden; border-color: rgba(94,234,212,0.4);">
+<h3 style="margin: 0"><button type="button" class="c-modbtn" onClick="{{ tg0 }}" aria-expanded="{{ ex0 }}"><span style="display: flex; flex-direction: column; gap: 6px; min-width: 200px"><span style="font-size: 13px; font-weight: 600; letter-spacing: 0.04em; color: {{accent}}">Modul 0</span><span style="font-family: Sora, sans-serif; font-weight: 700; font-size: 24px; color: #FFFFFF">Ochutnávka</span></span><span style="flex: 1 1 260px; font-size: 15px; line-height: 1.6; font-weight: 400">Ochutnávka z celého kurzu + úvodní data.</span><span style="display: flex; align-items: center; gap: 18px; margin-left: auto"><span style="font-size: 12px; font-weight: 700; letter-spacing: 0.1em; color: #2A0D06; background: {{accent2}}; padding: 7px 12px; border-radius: 999px">ZDARMA</span><span aria-hidden="true" class="c-chev" style="transform: rotate({{ rot0 }})">⌄</span></span></button></h3>
+<sc-if value="{{ o0 }}" hint-placeholder-val="{{ false }}">
+<div class="c-moddetail">
+<div style="display: flex; flex-direction: column; gap: 18px"><span style="font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: {{accent}}">Video manuál, check-list a nový pohled na věc</span><p style="font-size: 17px; line-height: 1.65; color: #D5EFEC">Vyzkoušej ochutnávku zdarma a zjisti, jestli ti to může něco dát a v něčem pomoct.</p></div>
+<div style="border-radius: 20px; padding: 26px; display: flex; flex-direction: column; gap: 16px; background: linear-gradient(160deg, rgba(45,226,203,0.14), rgba(255,255,255,0.02)); border: 1px solid rgba(94,234,212,0.25)"><span style="font-size: 12px; font-weight: 700; letter-spacing: 0.1em; color: {{accent}}">ZDARMA PO REGISTRACI</span><p style="font-size: 15px; line-height: 1.65">Ochutnávka z celého kurzu + úvodní data.</p><a href="#zdarma-c" class="c-btn" style="align-self: flex-start; background: {{accent}}; color: #04201F; text-decoration: none; font-weight: 700; font-size: 16px; padding: 15px 26px; border-radius: 999px; min-height: 50px; display: inline-flex; align-items: center">Získat zdarma</a></div>
+</div>
+</sc-if>
+</div>
+</div>
+
+<div class="c-reveal" style="position: relative">
+<span class="c-node" aria-hidden="true">1</span>
+<div class="c-glass" style="overflow: hidden;">
+<h3 style="margin: 0"><button type="button" class="c-modbtn" onClick="{{ tg1 }}" aria-expanded="{{ ex1 }}"><span style="display: flex; flex-direction: column; gap: 6px; min-width: 200px"><span style="font-size: 13px; font-weight: 600; letter-spacing: 0.04em; color: {{accent}}">Modul 1</span><span style="font-family: Sora, sans-serif; font-weight: 700; font-size: 24px; color: #FFFFFF">Produkt</span></span><span style="flex: 1 1 260px; font-size: 15px; line-height: 1.6; font-weight: 400">Odrazový můstek a základní stavební kámen pro všechny gastro podniky.</span><span style="display: flex; align-items: center; gap: 18px; margin-left: auto"><span style="font-size: 16px; font-weight: 700; color: #FFFFFF; white-space: nowrap"><s style="color: #6F9592; font-weight: 400; font-size: 14px">12 990 Kč</s>  7 990 Kč</span><span aria-hidden="true" class="c-chev" style="transform: rotate({{ rot1 }})">⌄</span></span></button></h3>
+<sc-if value="{{ o1 }}" hint-placeholder-val="{{ false }}">
+<div class="c-moddetail">
+<div style="display: flex; flex-direction: column; gap: 18px"><span style="font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: {{accent}}">Odrazový můstek a základní stavební kámen pro všechny gastro podniky</span><ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px"><li style="display: flex; gap: 12px; font-size: 16px; line-height: 1.55; color: #D5EFEC"><span aria-hidden="true" style="flex: none; width: 7px; height: 7px; margin-top: 9px; border-radius: 50%; background: {{accent}}; box-shadow: 0 0 8px {{accent}}"></span><span>Co je produkt, jak se tvoří a jak funguje nejlepší produkt?</span></li><li style="display: flex; gap: 12px; font-size: 16px; line-height: 1.55; color: #D5EFEC"><span aria-hidden="true" style="flex: none; width: 7px; height: 7px; margin-top: 9px; border-radius: 50%; background: {{accent}}; box-shadow: 0 0 8px {{accent}}"></span><span>Je důležité mít signature produkt? Jak se z průměru tvoří best seller?</span></li><li style="display: flex; gap: 12px; font-size: 16px; line-height: 1.55; color: #D5EFEC"><span aria-hidden="true" style="flex: none; width: 7px; height: 7px; margin-top: 9px; border-radius: 50%; background: {{accent}}; box-shadow: 0 0 8px {{accent}}"></span><span>Zapamatovatelnost jako klíč k návratnosti a udržitelnosti.</span></li><li style="display: flex; gap: 12px; font-size: 16px; line-height: 1.55; color: #D5EFEC"><span aria-hidden="true" style="flex: none; width: 7px; height: 7px; margin-top: 9px; border-radius: 50%; background: {{accent}}; box-shadow: 0 0 8px {{accent}}"></span><span>Smysluplné menu = skvělá zpětná vazba a zisk. Jak se vyhnout nesmyslům a jak najít „svatý grál“ tvého menu?</span></li><li style="display: flex; gap: 12px; font-size: 16px; line-height: 1.55; color: #D5EFEC"><span aria-hidden="true" style="flex: none; width: 7px; height: 7px; margin-top: 9px; border-radius: 50%; background: {{accent}}; box-shadow: 0 0 8px {{accent}}"></span><span>Food cost a marže aneb na čem se dá vydělat a co je do počtu? Jak se marže počítá a v čem dělá téměř každý chybu, která může stát i fusekle?</span></li><li style="display: flex; gap: 12px; font-size: 16px; line-height: 1.55; color: #D5EFEC"><span aria-hidden="true" style="flex: none; width: 7px; height: 7px; margin-top: 9px; border-radius: 50%; background: {{accent}}; box-shadow: 0 0 8px {{accent}}"></span><span>BONUS – PRODUKT, na který si nelze sáhnout, jako nehmotná přidaná hodnota</span></li></ul></div>
+<div style="border-radius: 20px; padding: 26px; display: flex; flex-direction: column; gap: 16px; background: linear-gradient(160deg, rgba(45,226,203,0.14), rgba(255,255,255,0.02)); border: 1px solid rgba(94,234,212,0.25)"><span style="font-size: 12px; font-weight: 700; letter-spacing: 0.1em; color: {{accent}}">ZÁKLADNÍ KÁMEN</span><span style="display: flex; align-items: baseline; gap: 12px"><s style="font-size: 16px; color: #6F9592">12 990 Kč</s><strong style="font-family: Sora, sans-serif; font-size: 34px; letter-spacing: -0.03em; color: #FFFFFF">7 990 Kč</strong></span><p style="font-size: 15px; line-height: 1.65">Kolem produktu se točí úplně vše. Podnik bez produktů by byl jen tělocvična. Je to základ a musí stát pevně. Tenhle modul nesmíš vynechat.</p><div style="display: flex; flex-direction: column; gap: 10px"><span style="font-size: 12px; font-weight: 700; letter-spacing: 0.1em; color: #8FB9B5">KLÍČOVÉ PRVKY</span><div style="display: flex; flex-wrap: wrap; gap: 8px"><span style="font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: #CFFAF3; border: 1px solid rgba(94,234,212,0.35); background: rgba(45,226,203,0.08); padding: 6px 11px; border-radius: 999px">FUNKČNÍ NÁSTROJE</span><span style="font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: #CFFAF3; border: 1px solid rgba(94,234,212,0.35); background: rgba(45,226,203,0.08); padding: 6px 11px; border-radius: 999px">INSPIRACE A SMĚR</span><span style="font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: #CFFAF3; border: 1px solid rgba(94,234,212,0.35); background: rgba(45,226,203,0.08); padding: 6px 11px; border-radius: 999px">SYSTÉM</span></div></div><a href="#" class="c-btn" style="align-self: flex-start; background: {{accent}}; color: #04201F; text-decoration: none; font-weight: 700; font-size: 16px; padding: 15px 26px; border-radius: 999px; min-height: 50px; display: inline-flex; align-items: center">Objednat</a></div>
+</div>
+</sc-if>
+</div>
+</div>
+
+<div class="c-reveal" style="position: relative">
+<span class="c-node" aria-hidden="true">2</span>
+<div class="c-glass" style="overflow: hidden;">
+<h3 style="margin: 0"><button type="button" class="c-modbtn" onClick="{{ tg2 }}" aria-expanded="{{ ex2 }}"><span style="display: flex; flex-direction: column; gap: 6px; min-width: 200px"><span style="font-size: 13px; font-weight: 600; letter-spacing: 0.04em; color: {{accent}}">Modul 2</span><span style="font-family: Sora, sans-serif; font-weight: 700; font-size: 24px; color: #FFFFFF">Provoz</span></span><span style="flex: 1 1 260px; font-size: 15px; line-height: 1.6; font-weight: 400">Po 1. modulu máš na čem stavět, teď je potřeba next level.</span><span style="display: flex; align-items: center; gap: 18px; margin-left: auto"><span style="font-size: 16px; font-weight: 700; color: #FFFFFF; white-space: nowrap"><s style="color: #6F9592; font-weight: 400; font-size: 14px">12 990 Kč</s>  7 990 Kč</span><span aria-hidden="true" class="c-chev" style="transform: rotate({{ rot2 }})">⌄</span></span></button></h3>
+<sc-if value="{{ o2 }}" hint-placeholder-val="{{ false }}">
+<div class="c-moddetail">
+<div style="display: flex; flex-direction: column; gap: 18px"><span style="font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: {{accent}}">Po 1. modulu máš na čem stavět, teď je potřeba next level</span><ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px"><li style="display: flex; gap: 12px; font-size: 16px; line-height: 1.55; color: #D5EFEC"><span aria-hidden="true" style="flex: none; width: 7px; height: 7px; margin-top: 9px; border-radius: 50%; background: {{accent}}; box-shadow: 0 0 8px {{accent}}"></span><span>Workflow jako hlavní urychlovač částic.</span></li><li style="display: flex; gap: 12px; font-size: 16px; line-height: 1.55; color: #D5EFEC"><span aria-hidden="true" style="flex: none; width: 7px; height: 7px; margin-top: 9px; border-radius: 50%; background: {{accent}}; box-shadow: 0 0 8px {{accent}}"></span><span>Jak si uspořádat bar od základu, abys tam nelítal jak brk na náledí?</span></li><li style="display: flex; gap: 12px; font-size: 16px; line-height: 1.55; color: #D5EFEC"><span aria-hidden="true" style="flex: none; width: 7px; height: 7px; margin-top: 9px; border-radius: 50%; background: {{accent}}; box-shadow: 0 0 8px {{accent}}"></span><span>Sklad – velký špatný každé kavárny. Jak s tím naložit?</span></li><li style="display: flex; gap: 12px; font-size: 16px; line-height: 1.55; color: #D5EFEC"><span aria-hidden="true" style="flex: none; width: 7px; height: 7px; margin-top: 9px; border-radius: 50%; background: {{accent}}; box-shadow: 0 0 8px {{accent}}"></span><span>Rychlost jako faktor zisku. Proč je rychlost důležitá a jak s tím souvisí profesionalita?</span></li><li style="display: flex; gap: 12px; font-size: 16px; line-height: 1.55; color: #D5EFEC"><span aria-hidden="true" style="flex: none; width: 7px; height: 7px; margin-top: 9px; border-radius: 50%; background: {{accent}}; box-shadow: 0 0 8px {{accent}}"></span><span>Plánování směn a provozní doba. Čeho je moc, toho je příliš.</span></li><li style="display: flex; gap: 12px; font-size: 16px; line-height: 1.55; color: #D5EFEC"><span aria-hidden="true" style="flex: none; width: 7px; height: 7px; margin-top: 9px; border-radius: 50%; background: {{accent}}; box-shadow: 0 0 8px {{accent}}"></span><span>Hlavní zdroje provozních problémů.</span></li><li style="display: flex; gap: 12px; font-size: 16px; line-height: 1.55; color: #D5EFEC"><span aria-hidden="true" style="flex: none; width: 7px; height: 7px; margin-top: 9px; border-radius: 50%; background: {{accent}}; box-shadow: 0 0 8px {{accent}}"></span><span>Jak se tvoří standardy a jak se zavádějí?</span></li><li style="display: flex; gap: 12px; font-size: 16px; line-height: 1.55; color: #D5EFEC"><span aria-hidden="true" style="flex: none; width: 7px; height: 7px; margin-top: 9px; border-radius: 50%; background: {{accent}}; box-shadow: 0 0 8px {{accent}}"></span><span>Stress killer – hlavně udrž paniku jako motto dne, co nefunguje?</span></li><li style="display: flex; gap: 12px; font-size: 16px; line-height: 1.55; color: #D5EFEC"><span aria-hidden="true" style="flex: none; width: 7px; height: 7px; margin-top: 9px; border-radius: 50%; background: {{accent}}; box-shadow: 0 0 8px {{accent}}"></span><span>Efektivita, co šetří peníze.</span></li><li style="display: flex; gap: 12px; font-size: 16px; line-height: 1.55; color: #D5EFEC"><span aria-hidden="true" style="flex: none; width: 7px; height: 7px; margin-top: 9px; border-radius: 50%; background: {{accent}}; box-shadow: 0 0 8px {{accent}}"></span><span>Jak a hlavně co plánovat? – Hýbat se směrem kupředu je nutnost.</span></li></ul></div>
+<div style="border-radius: 20px; padding: 26px; display: flex; flex-direction: column; gap: 16px; background: linear-gradient(160deg, rgba(45,226,203,0.14), rgba(255,255,255,0.02)); border: 1px solid rgba(94,234,212,0.25)"><span style="font-size: 12px; font-weight: 700; letter-spacing: 0.1em; color: {{accent}}">SMĚR K UDRŽITELNOSTI</span><span style="display: flex; align-items: baseline; gap: 12px"><s style="font-size: 16px; color: #6F9592">12 990 Kč</s><strong style="font-family: Sora, sans-serif; font-size: 34px; letter-spacing: -0.03em; color: #FFFFFF">7 990 Kč</strong></span><p style="font-size: 15px; line-height: 1.65">Každodenní provoz musí plynout jako voda v řece. Nechceš mít stresu plný podnik, ve kterým to jede jak na D1 v pátek odpoledne. Tohle je takový digitální provozní manažer tvého podniku.</p><div style="display: flex; flex-direction: column; gap: 10px"><span style="font-size: 12px; font-weight: 700; letter-spacing: 0.1em; color: #8FB9B5">KLÍČOVÉ PRVKY</span><div style="display: flex; flex-wrap: wrap; gap: 8px"><span style="font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: #CFFAF3; border: 1px solid rgba(94,234,212,0.35); background: rgba(45,226,203,0.08); padding: 6px 11px; border-radius: 999px">PLYNULOST PROVOZU</span><span style="font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: #CFFAF3; border: 1px solid rgba(94,234,212,0.35); background: rgba(45,226,203,0.08); padding: 6px 11px; border-radius: 999px">ODSTRAŇ STRESS FAKTORY</span><span style="font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: #CFFAF3; border: 1px solid rgba(94,234,212,0.35); background: rgba(45,226,203,0.08); padding: 6px 11px; border-radius: 999px">FUNKČNÍ PLÁNY</span></div></div><a href="#" class="c-btn" style="align-self: flex-start; background: {{accent}}; color: #04201F; text-decoration: none; font-weight: 700; font-size: 16px; padding: 15px 26px; border-radius: 999px; min-height: 50px; display: inline-flex; align-items: center">Objednat</a></div>
+</div>
+</sc-if>
+</div>
+</div>
+
+<div class="c-reveal" style="position: relative">
+<span class="c-node" aria-hidden="true">3</span>
+<div class="c-glass" style="overflow: hidden;">
+<h3 style="margin: 0"><button type="button" class="c-modbtn" onClick="{{ tg3 }}" aria-expanded="{{ ex3 }}"><span style="display: flex; flex-direction: column; gap: 6px; min-width: 200px"><span style="font-size: 13px; font-weight: 600; letter-spacing: 0.04em; color: {{accent}}">Modul 3</span><span style="font-family: Sora, sans-serif; font-weight: 700; font-size: 24px; color: #FFFFFF">Lidé</span></span><span style="flex: 1 1 260px; font-size: 15px; line-height: 1.6; font-weight: 400">Nový výchozí bod pro tebe. Pochopení zákazníka a výběr personálu nikdy nepřehlížej.</span><span style="display: flex; align-items: center; gap: 18px; margin-left: auto"><span style="font-size: 16px; font-weight: 700; color: #FFFFFF; white-space: nowrap"><s style="color: #6F9592; font-weight: 400; font-size: 14px">12 990 Kč</s>  7 990 Kč</span><span aria-hidden="true" class="c-chev" style="transform: rotate({{ rot3 }})">⌄</span></span></button></h3>
+<sc-if value="{{ o3 }}" hint-placeholder-val="{{ true }}">
+<div class="c-moddetail">
+<div style="display: flex; flex-direction: column; gap: 18px"><span style="font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: {{accent}}">Nový výchozí bod pro tebe. Pochopení zákazníka a výběr personálu nikdy nepřehlížej</span><ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px"><li style="display: flex; gap: 12px; font-size: 16px; line-height: 1.55; color: #D5EFEC"><span aria-hidden="true" style="flex: none; width: 7px; height: 7px; margin-top: 9px; border-radius: 50%; background: {{accent}}; box-shadow: 0 0 8px {{accent}}"></span><span>Kdo jsou ti, co ti vydělávají?</span></li><li style="display: flex; gap: 12px; font-size: 16px; line-height: 1.55; color: #D5EFEC"><span aria-hidden="true" style="flex: none; width: 7px; height: 7px; margin-top: 9px; border-radius: 50%; background: {{accent}}; box-shadow: 0 0 8px {{accent}}"></span><span>Proč lidi chodí do kavárny?</span></li><li style="display: flex; gap: 12px; font-size: 16px; line-height: 1.55; color: #D5EFEC"><span aria-hidden="true" style="flex: none; width: 7px; height: 7px; margin-top: 9px; border-radius: 50%; background: {{accent}}; box-shadow: 0 0 8px {{accent}}"></span><span>Jak zlepšit den člověku a sobě?</span></li><li style="display: flex; gap: 12px; font-size: 16px; line-height: 1.55; color: #D5EFEC"><span aria-hidden="true" style="flex: none; width: 7px; height: 7px; margin-top: 9px; border-radius: 50%; background: {{accent}}; box-shadow: 0 0 8px {{accent}}"></span><span>Úsměv a pochopení jako cesta k úspěchu.</span></li><li style="display: flex; gap: 12px; font-size: 16px; line-height: 1.55; color: #D5EFEC"><span aria-hidden="true" style="flex: none; width: 7px; height: 7px; margin-top: 9px; border-radius: 50%; background: {{accent}}; box-shadow: 0 0 8px {{accent}}"></span><span>Vřelý a přátelský pozdrav versus chladná anglická profesionalita.</span></li><li style="display: flex; gap: 12px; font-size: 16px; line-height: 1.55; color: #D5EFEC"><span aria-hidden="true" style="flex: none; width: 7px; height: 7px; margin-top: 9px; border-radius: 50%; background: {{accent}}; box-shadow: 0 0 8px {{accent}}"></span><span>Zážitková gastronomie, co může fungovat i v „Hospodě Na Růžku“ a není o „kostce ve skluzu“.</span></li><li style="display: flex; gap: 12px; font-size: 16px; line-height: 1.55; color: #D5EFEC"><span aria-hidden="true" style="flex: none; width: 7px; height: 7px; margin-top: 9px; border-radius: 50%; background: {{accent}}; box-shadow: 0 0 8px {{accent}}"></span><span>Týmový duch a individualita.</span></li></ul></div>
+<div style="border-radius: 20px; padding: 26px; display: flex; flex-direction: column; gap: 16px; background: linear-gradient(160deg, rgba(45,226,203,0.14), rgba(255,255,255,0.02)); border: 1px solid rgba(94,234,212,0.25)"><span style="font-size: 12px; font-weight: 700; letter-spacing: 0.1em; color: {{accent}}">NOVÝ VÝCHOZÍ BOD</span><span style="display: flex; align-items: baseline; gap: 12px"><s style="font-size: 16px; color: #6F9592">12 990 Kč</s><strong style="font-family: Sora, sans-serif; font-size: 34px; letter-spacing: -0.03em; color: #FFFFFF">7 990 Kč</strong></span><p style="font-size: 15px; line-height: 1.65">Teprve ve chvíli, kdy pochopíte svého zákazníka, začnete ho „milovat“. Teprve až pochopíte své zákazníky, zvládnete jim vybrat toho správného člověka. On je bude obsluhovat a hýčkat. Bez porozumění této věci si budete stále pokládat ty otázky, které zdánlivě nemají řešení.</p><div style="display: flex; flex-direction: column; gap: 10px"><span style="font-size: 12px; font-weight: 700; letter-spacing: 0.1em; color: #8FB9B5">KLÍČOVÉ PRVKY</span><div style="display: flex; flex-wrap: wrap; gap: 8px"><span style="font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: #CFFAF3; border: 1px solid rgba(94,234,212,0.35); background: rgba(45,226,203,0.08); padding: 6px 11px; border-radius: 999px">KOMUNIKAČNÍ NÁSTROJE</span><span style="font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: #CFFAF3; border: 1px solid rgba(94,234,212,0.35); background: rgba(45,226,203,0.08); padding: 6px 11px; border-radius: 999px">POROZUMĚNÍ ZÁKAZNÍKOVI</span><span style="font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: #CFFAF3; border: 1px solid rgba(94,234,212,0.35); background: rgba(45,226,203,0.08); padding: 6px 11px; border-radius: 999px">FRESH START</span></div></div><a href="#" class="c-btn" style="align-self: flex-start; background: {{accent}}; color: #04201F; text-decoration: none; font-weight: 700; font-size: 16px; padding: 15px 26px; border-radius: 999px; min-height: 50px; display: inline-flex; align-items: center">Objednat</a></div>
+</div>
+</sc-if>
+</div>
+</div>
+
+<div class="c-reveal" style="position: relative">
+<span class="c-node" aria-hidden="true">4</span>
+<div class="c-glass" style="overflow: hidden;">
+<h3 style="margin: 0"><button type="button" class="c-modbtn" onClick="{{ tg4 }}" aria-expanded="{{ ex4 }}"><span style="display: flex; flex-direction: column; gap: 6px; min-width: 200px"><span style="font-size: 13px; font-weight: 600; letter-spacing: 0.04em; color: {{accent}}">Modul 4</span><span style="font-family: Sora, sans-serif; font-weight: 700; font-size: 24px; color: #FFFFFF">Identita a brand</span></span><span style="flex: 1 1 260px; font-size: 15px; line-height: 1.6; font-weight: 400">Poslední krok k výjimečnosti. Získej „NEFÉR“ výhodu.</span><span style="display: flex; align-items: center; gap: 18px; margin-left: auto"><span style="font-size: 16px; font-weight: 700; color: #FFFFFF; white-space: nowrap"><s style="color: #6F9592; font-weight: 400; font-size: 14px">12 990 Kč</s>  7 990 Kč</span><span aria-hidden="true" class="c-chev" style="transform: rotate({{ rot4 }})">⌄</span></span></button></h3>
+<sc-if value="{{ o4 }}" hint-placeholder-val="{{ false }}">
+<div class="c-moddetail">
+<div style="display: flex; flex-direction: column; gap: 18px"><span style="font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: {{accent}}">Poslední krok k výjimečnosti</span><ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px"><li style="display: flex; gap: 12px; font-size: 16px; line-height: 1.55; color: #D5EFEC"><span aria-hidden="true" style="flex: none; width: 7px; height: 7px; margin-top: 9px; border-radius: 50%; background: {{accent}}; box-shadow: 0 0 8px {{accent}}"></span><span>Základní tvorba identity, aniž bys musel být marketingový specialista.</span></li><li style="display: flex; gap: 12px; font-size: 16px; line-height: 1.55; color: #D5EFEC"><span aria-hidden="true" style="flex: none; width: 7px; height: 7px; margin-top: 9px; border-radius: 50%; background: {{accent}}; box-shadow: 0 0 8px {{accent}}"></span><span>Jak se odlišit od průměru?</span></li><li style="display: flex; gap: 12px; font-size: 16px; line-height: 1.55; color: #D5EFEC"><span aria-hidden="true" style="flex: none; width: 7px; height: 7px; margin-top: 9px; border-radius: 50%; background: {{accent}}; box-shadow: 0 0 8px {{accent}}"></span><span>Zvýšení viditelnosti podniku.</span></li><li style="display: flex; gap: 12px; font-size: 16px; line-height: 1.55; color: #D5EFEC"><span aria-hidden="true" style="flex: none; width: 7px; height: 7px; margin-top: 9px; border-radius: 50%; background: {{accent}}; box-shadow: 0 0 8px {{accent}}"></span><span>Kde se bere duše podniku?</span></li><li style="display: flex; gap: 12px; font-size: 16px; line-height: 1.55; color: #D5EFEC"><span aria-hidden="true" style="flex: none; width: 7px; height: 7px; margin-top: 9px; border-radius: 50%; background: {{accent}}; box-shadow: 0 0 8px {{accent}}"></span><span>Každý nápad je geniální, ale proč některé nefungují?</span></li><li style="display: flex; gap: 12px; font-size: 16px; line-height: 1.55; color: #D5EFEC"><span aria-hidden="true" style="flex: none; width: 7px; height: 7px; margin-top: 9px; border-radius: 50%; background: {{accent}}; box-shadow: 0 0 8px {{accent}}"></span><span>Proč je správné načasování věc, o které je nutné přemýšlet?</span></li><li style="display: flex; gap: 12px; font-size: 16px; line-height: 1.55; color: #D5EFEC"><span aria-hidden="true" style="flex: none; width: 7px; height: 7px; margin-top: 9px; border-radius: 50%; background: {{accent}}; box-shadow: 0 0 8px {{accent}}"></span><span>Kdy má smysl offline reklama a kdy jen online?</span></li><li style="display: flex; gap: 12px; font-size: 16px; line-height: 1.55; color: #D5EFEC"><span aria-hidden="true" style="flex: none; width: 7px; height: 7px; margin-top: 9px; border-radius: 50%; background: {{accent}}; box-shadow: 0 0 8px {{accent}}"></span><span>Maloměsto vs. vesnice vs. velká města – všude to funguje jinak, otázka je jak?</span></li></ul></div>
+<div style="border-radius: 20px; padding: 26px; display: flex; flex-direction: column; gap: 16px; background: linear-gradient(160deg, rgba(45,226,203,0.14), rgba(255,255,255,0.02)); border: 1px solid rgba(94,234,212,0.25)"><span style="font-size: 12px; font-weight: 700; letter-spacing: 0.1em; color: {{accent}}">POSLEDNÍ KROK K VÝJIMEČNOSTI</span><span style="display: flex; align-items: baseline; gap: 12px"><s style="font-size: 16px; color: #6F9592">12 990 Kč</s><strong style="font-family: Sora, sans-serif; font-size: 34px; letter-spacing: -0.03em; color: #FFFFFF">7 990 Kč</strong></span><p style="font-size: 15px; line-height: 1.65">Získej „NEFÉR“ výhodu. Podnik musí prosperovat. Ne každý podnik se hodí do každého prostoru. Výběr místa úzce souvisí s identitou a brandem. Budování vlastního stylu, tvoření povědomí o vlastní značce a posouvání se směrem, který je nevyčerpatelný.</p><div style="display: flex; flex-direction: column; gap: 10px"><span style="font-size: 12px; font-weight: 700; letter-spacing: 0.1em; color: #8FB9B5">KLÍČOVÉ PRVKY</span><div style="display: flex; flex-wrap: wrap; gap: 8px"><span style="font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: #CFFAF3; border: 1px solid rgba(94,234,212,0.35); background: rgba(45,226,203,0.08); padding: 6px 11px; border-radius: 999px">CO JE IDENTITA</span><span style="font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: #CFFAF3; border: 1px solid rgba(94,234,212,0.35); background: rgba(45,226,203,0.08); padding: 6px 11px; border-radius: 999px">CO JE BRAND</span><span style="font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: #CFFAF3; border: 1px solid rgba(94,234,212,0.35); background: rgba(45,226,203,0.08); padding: 6px 11px; border-radius: 999px">BÝT VIDĚT</span></div></div><a href="#" class="c-btn" style="align-self: flex-start; background: {{accent}}; color: #04201F; text-decoration: none; font-weight: 700; font-size: 16px; padding: 15px 26px; border-radius: 999px; min-height: 50px; display: inline-flex; align-items: center">Objednat</a></div>
+</div>
+</sc-if>
+</div>
+</div>
+
+<div class="c-reveal" style="position: relative">
+<span class="c-node" aria-hidden="true">5</span>
+<div class="c-glass" style="overflow: hidden;">
+<h3 style="margin: 0"><button type="button" class="c-modbtn" onClick="{{ tg5 }}" aria-expanded="{{ ex5 }}"><span style="display: flex; flex-direction: column; gap: 6px; min-width: 200px"><span style="font-size: 13px; font-weight: 600; letter-spacing: 0.04em; color: {{accent}}">Modul 5</span><span style="font-family: Sora, sans-serif; font-weight: 700; font-size: 24px; color: #FFFFFF">Bonusový modul</span></span><span style="flex: 1 1 260px; font-size: 15px; line-height: 1.6; font-weight: 400">Jak si udržet zdravého ducha a neposrat se z toho.</span><span style="display: flex; align-items: center; gap: 18px; margin-left: auto"><span style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: #CFFAF3; border: 1px solid rgba(94,234,212,0.4); padding: 6px 11px; border-radius: 999px">JEN V ALL IN ONE</span><span aria-hidden="true" class="c-chev" style="transform: rotate({{ rot5 }})">⌄</span></span></button></h3>
+<sc-if value="{{ o5 }}" hint-placeholder-val="{{ false }}">
+<div class="c-moddetail">
+<div style="display: flex; flex-direction: column; gap: 18px"><span style="font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: {{accent}}">Jak si udržet zdravého ducha a neposrat se z toho</span><p style="font-size: 17px; line-height: 1.65; color: #D5EFEC">Celý byznys obvykle stojí na pár lidech. Buď je to majitel, nebo manažer, nebo ředitel nebo šéf a jeho nejlepší zaměstnanec. Je to hodně křehké a je potřeba držet se v dobré mentální pozici. K tomu také vede pár základních kroků. Není to o tom, že musíš meditovat na úpatí hory každý den, objímat stromy nebo si vytloukat mozek z hlavy kamenama. Každý máme nějaký ten způsob úniku od reality. V tomto modulu ti ukážu, jak této realitě čelit a neposrat se z toho!</p></div>
+<div style="border-radius: 20px; padding: 26px; display: flex; flex-direction: column; gap: 16px; background: linear-gradient(160deg, rgba(45,226,203,0.14), rgba(255,255,255,0.02)); border: 1px solid rgba(94,234,212,0.25)"><span style="font-size: 12px; font-weight: 700; letter-spacing: 0.1em; color: {{accent}}">JEN V BALÍČKU ALL IN ONE</span><p style="font-size: 15px; line-height: 1.65">Bonusový modul nejde koupit samostatně. Získáš ho jako součást celého programu Vladimír PRO.</p><a href="#" class="c-btn" style="align-self: flex-start; background: {{accent}}; color: #04201F; text-decoration: none; font-weight: 700; font-size: 16px; padding: 15px 26px; border-radius: 999px; min-height: 50px; display: inline-flex; align-items: center">Koupit celý program</a></div>
+</div>
+</sc-if>
+</div>
+</div>
+
+</div>
+
+<div class="c-reveal" style="margin-top: 40px; position: relative; border-radius: 28px; padding: clamp(28px, 4vw, 48px); overflow: hidden; background: linear-gradient(120deg, #0B6F67, #0E8C82 45%, #13A99A); box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), 0 50px 90px -40px rgba(45,226,203,0.6); display: flex; justify-content: space-between; align-items: center; gap: 28px; flex-wrap: wrap">
+<div aria-hidden="true" style="position: absolute; right: -80px; top: -120px; width: 380px; height: 380px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, rgba(255,255,255,0.45), rgba(255,255,255,0) 60%)"></div>
+<div style="position: relative; display: flex; flex-direction: column; gap: 10px; max-width: 660px">
+<span style="align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; color: #04201F; background: #FFFFFF; padding: 6px 12px; border-radius: 999px">NEJPRODÁVANĚJŠÍ</span>
+<span style="font-family: Sora, sans-serif; font-weight: 700; font-size: clamp(26px, 3vw, 36px); line-height: 1.1; color: #FFFFFF">Modul All in One – celý program Vladimír PRO</span>
+<span style="font-size: 16px; line-height: 1.6; color: #E6FFFB">Pořádný vítr do plachet a stabilní informace – tady máš vše. Všechny moduly 0–5.</span>
+<span style="font-size: 17px; color: #E6FFFB"><s style="color: #A9DCD6">51 960 Kč</s>   <strong style="font-family: Sora, sans-serif; color: #FFFFFF; font-size: 34px; letter-spacing: -0.03em">24 990 Kč</strong></span>
+</div>
+<a href="#" class="c-btn" style="position: relative; background: #FFFFFF; color: #04201F; text-decoration: none; font-weight: 700; font-size: 17px; padding: 18px 30px; border-radius: 999px; min-height: 54px; display: inline-flex; align-items: center">Koupit celý program</a>
+</div>
+</section>
+
+<section style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 72px 24px">
+<div class="c-reveal" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 56px; align-items: start">
+<div style="position: relative; perspective: 1400px">
+<div class="c-photo" style="aspect-ratio: 4 / 5; border-radius: 28px; transform: rotateY(12deg) rotateX(4deg); border: 1px solid rgba(94,234,212,0.3); box-shadow: -30px 50px 80px -30px rgba(0,0,0,0.7)">[Foto: Vladimír za barem, dobarvené do tyrkysové]</div>
+<div class="c-glass" style="position: absolute; right: -8px; bottom: 36px; padding: 18px 22px; display: flex; flex-direction: column; gap: 2px; background: rgba(4,26,28,0.82); backdrop-filter: blur(10px)"><span style="font-family: Sora, sans-serif; font-weight: 800; font-size: 30px; color: #FFFFFF">18 let</span><span style="font-size: 13px">v oboru</span></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 18px">
+<span style="font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: {{accent}}">Můj příběh</span>
+<h2 style="font-family: Sora, sans-serif; font-weight: 700; font-size: clamp(28px, 3.4vw, 40px); line-height: 1.12; letter-spacing: -0.03em; color: #FFFFFF">Když mi bylo 15 let, věděl jsem, že můj život bude spojený s gastronomií.</h2>
+<p style="font-size: 17px; line-height: 1.7">Od té doby jsem prošel cestu od člověka, který sklízí špinavé nádobí, přes číšníka, barmana, baristu, kuchaře, someliéra a provozovatele malého fast foodu až k vybudování vlastní značky.</p>
+<p style="font-size: 17px; line-height: 1.7">Dnes moje firma funguje více než 12 let, zaměstnává přes 30 lidí a zahrnuje výrobu sirupů, tři kavárny, vlastní pražírnu kávy, pekárnu s cukrárnou a další gastro aktivity.</p>
+<p style="font-size: 17px; line-height: 1.7">Za tu dobu jsem zjistil jednu důležitou věc. Uvařit skvělou kávu, upéct dobrý dort nebo vytvořit výjimečný produkt je krásné řemeslo. Skutečná výzva ale začíná ve chvíli, kdy je potřeba vše řídit, organizovat, počítat marže, vést lidi a zajistit, aby podnik nejen dobře vypadal, ale také skutečně vydělával.</p>
+<p style="font-size: 17px; line-height: 1.7">V tu chvíli se vysněná práce může snadno změnit ve stres a boj o přežití. I tím jsem si prošel.</p>
+<p style="font-family: Sora, sans-serif; font-weight: 700; font-size: 26px; line-height: 1.25; color: #FFFFFF">Vy nemusíte. Proto vznikl Vladimír PRO.</p>
+<p style="font-size: 16px; color: #8FB9B5; display: flex; gap: 12px; align-items: center"><span style="flex: none; width: 28px; height: 2px; background: {{accent}}"></span>Jak řekl Charles Bukowski: „Svět patří těm, co se neposerou.“</p>
+</div>
+</div>
+</section>
+
+<section aria-label="Reference" style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 72px 24px">
+<div class="c-reveal" style="display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; margin-bottom: 32px">
+<h2 style="font-family: Sora, sans-serif; font-weight: 700; font-size: clamp(30px, 4vw, 46px); line-height: 1.05; letter-spacing: -0.035em; color: #FFFFFF; max-width: 18ch">Co říkají zaměstnanci mých kaváren o systému</h2>
+<div style="display: flex; align-items: center; gap: 10px">
+<button type="button" onClick="{{ prev }}" aria-label="Předchozí reference" class="c-btn" style="width: 52px; height: 52px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.04); color: #FFFFFF; font-size: 20px; cursor: pointer">←</button>
+<span style="font-family: Sora, sans-serif; font-weight: 600; font-size: 15px; color: #E6FFFB; min-width: 48px; text-align: center">{{ counter }}</span>
+<button type="button" onClick="{{ next }}" aria-label="Další reference" class="c-btn" style="width: 52px; height: 52px; border-radius: 50%; border: 0; background: {{accent}}; color: #04201F; font-size: 20px; cursor: pointer">→</button>
+</div>
+</div>
+
+<sc-if value="{{ t0 }}" hint-placeholder-val="{{ true }}">
+<figure class="c-glass c-tgrid" style="padding: clamp(24px, 4vw, 48px)">
+<div class="c-photo" style="aspect-ratio: 1 / 1; border-radius: 24px; max-width: 360px; border: 1px solid rgba(94,234,212,0.3)">[Foto: Háňa]</div>
+<div style="display: flex; flex-direction: column; gap: 20px">
+<span aria-hidden="true" style="font-family: Sora, sans-serif; font-weight: 800; font-size: 72px; line-height: 0.5; color: {{accent}}">“</span>
+<blockquote class="c-tq" style="font-size: 20px; line-height: 1.65; color: #D5EFEC; -webkit-line-clamp: {{ lines }}">Beru to jako zaměstnanec firmy Produkty Vladimír, která je součástí kavárenského týmu, a zároveň jako pražič v naší pražírně No Brand Roastery. Ať už mluvím o produktech nebo přístupu k samotným zákazníkům. Vždy je vidět důraz na kvalitu. Velmi si vážím toho, že se u nás věci nedělají jen proto, že se musí, ale především proto, že nás baví a věříme jim. A když se něco dělá srdcem, je to vidět. Firma se neustále rozrůstá a přicházejí noví kolegové, přesto se nám daří udržovat přátelskou atmosféru, vzájemný respekt a týmového ducha. Právě to považuji za jeden z důvodů, proč se nám daří růst a proč jsem ráda, že mohu být součástí tohoto týmu.</blockquote>
+<button type="button" onClick="{{ toggle }}" style="align-self: flex-start; font: inherit; font-weight: 700; font-size: 15px; color: {{accent}}; background: none; border: 0; padding: 10px 0; min-height: 44px; cursor: pointer">{{ moreLabel }}</button>
+<figcaption style="display: flex; flex-direction: column"><span style="font-family: Sora, sans-serif; font-weight: 700; font-size: 20px; color: #FFFFFF">Háňa</span><span style="font-size: 15px">Baristka a pražič</span></figcaption>
+</div>
+</figure>
+</sc-if>
+<sc-if value="{{ t1 }}" hint-placeholder-val="{{ false }}">
+<figure class="c-glass c-tgrid" style="padding: clamp(24px, 4vw, 48px)">
+<div class="c-photo" style="aspect-ratio: 1 / 1; border-radius: 24px; max-width: 360px; border: 1px solid rgba(94,234,212,0.3)">[Foto: Adri]</div>
+<div style="display: flex; flex-direction: column; gap: 20px">
+<span aria-hidden="true" style="font-family: Sora, sans-serif; font-weight: 800; font-size: 72px; line-height: 0.5; color: {{accent}}">“</span>
+<blockquote class="c-tq" style="font-size: 20px; line-height: 1.65; color: #D5EFEC; -webkit-line-clamp: {{ lines }}">Na práci tady nejvíc oceňuji fungování celého provozu, člověk je vždy veden správným směrem a zároveň dostává podporu v tom, jak svou práci dělat co nejlépe. Velkou výhodou je možnost neustálého rozvoje a zlepšování, stejně jako předávání zkušeností mezi kolegy, což jsem v předchozí kavárně vůbec nezažila. Od prvního dne je každý zaměstnanec veden k týmové práci, a právě ta je podle mě klíčem k úspěšné a pohodové směně. Moc si vážím také prostoru pro vlastní nápady a fantazii, které nezůstávají jen „v hlavě“, ale často se promění v realitu a někdy dokonce v něco ještě lepšího. Celý provoz je flexibilní a umí se přizpůsobit různým situacím, což vytváří příjemné pracovní prostředí. A v neposlední řadě oceňuji konstruktivní kritiku, která člověka neshazuje, ale naopak motivuje posouvat se dál a růst.</blockquote>
+<button type="button" onClick="{{ toggle }}" style="align-self: flex-start; font: inherit; font-weight: 700; font-size: 15px; color: {{accent}}; background: none; border: 0; padding: 10px 0; min-height: 44px; cursor: pointer">{{ moreLabel }}</button>
+<figcaption style="display: flex; flex-direction: column"><span style="font-family: Sora, sans-serif; font-weight: 700; font-size: 20px; color: #FFFFFF">Adri</span><span style="font-size: 15px">Baristka</span></figcaption>
+</div>
+</figure>
+</sc-if>
+<sc-if value="{{ t2 }}" hint-placeholder-val="{{ false }}">
+<figure class="c-glass c-tgrid" style="padding: clamp(24px, 4vw, 48px)">
+<div class="c-photo" style="aspect-ratio: 1 / 1; border-radius: 24px; max-width: 360px; border: 1px solid rgba(94,234,212,0.3)">[Foto: Káťa]</div>
+<div style="display: flex; flex-direction: column; gap: 20px">
+<span aria-hidden="true" style="font-family: Sora, sans-serif; font-weight: 800; font-size: 72px; line-height: 0.5; color: {{accent}}">“</span>
+<blockquote class="c-tq" style="font-size: 20px; line-height: 1.65; color: #D5EFEC; -webkit-line-clamp: {{ lines }}">Při práci v kavárně jsem v sobě objevila obchodního ducha. Baví mě prodávat naše produkty, u kterých klademe vysoký důraz na kvalitu. Celkově se snažíme v ničem nedělat kompromisy, ať už je to péče o klienty nebo volba surovin. To je v souladu s mým vnitřním nastavením a přináší mi to profesní naplnění. S kolegy, kteří zajišťují podporu a zásobování kaváren, se mi velmi dobře spolupracuje. Myslím, že je to hlavně tím, že všichni následujeme společnou vizi a pracujeme na tom, aby naše vztahy byly funkční a přátelské. Největší rozdíl oproti předchozím zkušenostem vnímám v konstruktivní a přátelské komunikaci s vedením firmy, která je podle mě klíčová pro moji vlastní loajalitu a pracovní nasazení.</blockquote>
+<button type="button" onClick="{{ toggle }}" style="align-self: flex-start; font: inherit; font-weight: 700; font-size: 15px; color: {{accent}}; background: none; border: 0; padding: 10px 0; min-height: 44px; cursor: pointer">{{ moreLabel }}</button>
+<figcaption style="display: flex; flex-direction: column"><span style="font-family: Sora, sans-serif; font-weight: 700; font-size: 20px; color: #FFFFFF">Káťa</span><span style="font-size: 15px">Baristka</span></figcaption>
+</div>
+</figure>
+</sc-if>
+
+<div style="display: flex; justify-content: center; gap: 4px; margin-top: 18px">
+<sc-for list="{{ dots }}" as="d" hint-placeholder-count="3">
+<button type="button" onClick="{{ d.go }}" aria-label="{{ d.label }}" style="background: none; border: 0; padding: 17px 4px; cursor: pointer; display: inline-flex; align-items: center"><span style="display: block; height: 10px; border-radius: 99px; width: {{ d.w }}; background: {{ d.bg }}; transition: width 0.3s, background 0.3s"></span></button>
+</sc-for>
+</div>
+</section>
+
+<section style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 72px 24px 96px">
+<div class="c-reveal" style="position: relative; border-radius: 32px; overflow: hidden; padding: clamp(36px, 6vw, 88px); text-align: center; display: flex; flex-direction: column; align-items: center; gap: 22px; background: radial-gradient(700px 400px at 50% 0%, rgba(45,226,203,0.35), transparent 70%), #062A2B; border: 1px solid rgba(94,234,212,0.25); box-shadow: inset 0 1px 0 rgba(255,255,255,0.1)">
+<span style="font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: {{accent}}">Nevíš, jak začít?</span>
+<h2 style="font-family: Sora, sans-serif; font-weight: 800; font-size: clamp(38px, 6vw, 80px); line-height: 0.98; letter-spacing: -0.05em; color: #FFFFFF; max-width: 15ch">Začni hned, protože čas jsou peníze.</h2>
+<p style="font-size: 19px; line-height: 1.6; max-width: 46ch">Každou hodinu, kdy ve tvém podniku není systém, přicházíš o peníze. To je fakt.</p>
+<div style="display: flex; gap: 14px; flex-wrap: wrap; justify-content: center">
+<a href="#zdarma-c" class="c-btn" style="background: {{accent}}; color: #04201F; text-decoration: none; font-weight: 700; font-size: 17px; padding: 18px 30px; border-radius: 999px; min-height: 54px; display: inline-flex; align-items: center">Jdu do toho hned!</a>
+<a href="#" style="color: #FFFFFF; text-decoration: none; font-weight: 600; font-size: 17px; padding: 17px 28px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.3); min-height: 54px; display: inline-flex; align-items: center">Chci vědět víc</a>
+</div>
+</div>
+</section>
+
+<footer style="position: relative; z-index: 1; border-top: 1px solid rgba(255,255,255,0.08)">
+<div style="max-width: 1200px; margin: 0 auto; padding: 32px 24px; display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; font-size: 14px; color: #7FA9A5">
+<span>© 2026 inspiracevladimir.cz</span>
+<div style="display: flex; gap: 24px; flex-wrap: wrap">
+<a href="#" style="color: #7FA9A5">Obchodní podmínky</a>
+<a href="#" style="color: #7FA9A5">Ochrana osobních údajů</a>
+<a href="#" style="color: #7FA9A5">Kontakt</a>
+</div>
+</div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#2DE2CB","options":["#2DE2CB","#5EEAD4","#14B8A6"]},"accent2":{"editor":"color","default":"#FF7A59","options":["#FF7A59","#FFB347","#FF5C8A"]},"$preview":{"width":1440,"height":9000}}'>
+class Component extends DCLogic {
+constructor(props) {
+super(props);
+this.state = { ti: 0, open: false, mod: 3 };
+}
+renderVals() {
+const ti = this.state.ti;
+const open = this.state.open;
+const n = 3;
+const setVar = (el, k, v) => { if (el && el.style) el.style.setProperty(k, v); };
+const mod = this.state.mod;
+const mv = {};
+for (let i = 0; i < 6; i++) { const on = mod === i; mv['o' + i] = on; mv['ex' + i] = on ? 'true' : 'false'; mv['rot' + i] = on ? '180deg' : '0deg'; mv['tg' + i] = () => this.setState({ mod: on ? -1 : i }); }
+return {
+...mv,
+accent: this.props.accent ?? '#2DE2CB',
+accent2: this.props.accent2 ?? '#FF7A59',
+onMove: (e) => {
+const el = e.currentTarget;
+if (!el || !el.getBoundingClientRect) return;
+const r = el.getBoundingClientRect();
+setVar(el, '--mx', (e.clientX - r.left) + 'px');
+setVar(el, '--my', (e.clientY - r.top) + 'px');
+const w = window.innerWidth || 1, h = window.innerHeight || 1;
+const nx = e.clientX / w - 0.5, ny = e.clientY / h - 0.5;
+setVar(el, '--rx', (58 - ny * 16).toFixed(2) + 'deg');
+setVar(el, '--rz', (-36 + nx * 24).toFixed(2) + 'deg');
+},
+onLeave: (e) => {
+const el = e.currentTarget;
+setVar(el, '--rx', '58deg');
+setVar(el, '--rz', '-36deg');
+setVar(el, '--mx', '-999px');
+setVar(el, '--my', '-999px');
+},
+t0: ti === 0,
+t1: ti === 1,
+t2: ti === 2,
+prev: () => this.setState({ ti: (ti + n - 1) % n, open: false }),
+next: () => this.setState({ ti: (ti + 1) % n, open: false }),
+toggle: () => this.setState({ open: !open }),
+lines: open ? 'unset' : '6',
+moreLabel: open ? 'Sbalit' : 'Číst celé',
+counter: (ti + 1) + ' / ' + n,
+dots: [0, 1, 2].map((i) => ({
+go: () => this.setState({ ti: i, open: false }),
+w: i === ti ? '32px' : '10px',
+bg: i === ti ? '#2DE2CB' : 'rgba(255,255,255,0.25)',
+label: 'Reference ' + (i + 1)
+}))
+};
+}
+}
+</script>
+</body>
+</html>
