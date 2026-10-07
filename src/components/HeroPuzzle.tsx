@@ -10,12 +10,12 @@ const dilky = [
   { n: 3, nazev: "Lidé", z0: 68, z1: 208, opacity: 0.76 },
   { n: 2, nazev: "Provoz", z0: 102, z1: 312, opacity: 0.84 },
   { n: 1, nazev: "Produkt", z0: 136, z1: 416, opacity: 0.92 },
-  { n: 0, nazev: "Ochutnávka", z0: 176, z1: 540, opacity: 1 },
+  { n: 0, nazev: "reSTART", z0: 176, z1: 540, opacity: 1 },
 ];
 
 const balicek = [0, 1, 2, 3, 4, 5].map((n) => dilky.find((d) => d.n === n)!);
 
-export default function HeroPuzzle() {
+export default function HeroPuzzle({ nazvy = {} }: { nazvy?: Record<number, string> }) {
   const stage = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -101,7 +101,7 @@ export default function HeroPuzzle() {
                   style={d.n === 0 ? { borderColor: "rgba(255,255,255,0.6)" } : undefined}
                 >
                   <b>Modul {d.n}</b>
-                  <small>{d.nazev}</small>
+                  <small>{nazvy[d.n] ?? d.nazev}</small>
                   {d.n === 0 && (
                     <span className="badge-free" style={{ alignSelf: "flex-start", marginTop: 6 }}>
                       ZDARMA
@@ -128,7 +128,7 @@ export default function HeroPuzzle() {
               {d.n === 0 && <path d={PUZZLE_D} fill="url(#cpzglint)" />}
             </svg>
             <b className="display" style={{ position: "relative", fontWeight: 800, fontSize: 26 }}>Modul {d.n}</b>
-            <small style={{ position: "relative", fontWeight: 700, fontSize: 15, color: "#e6fffb" }}>{d.nazev}</small>
+            <small style={{ position: "relative", fontWeight: 700, fontSize: 15, color: "#e6fffb" }}>{nazvy[d.n] ?? d.nazev}</small>
             {d.n === 0 && (
               <span className="badge-free" style={{ position: "relative", marginTop: 6 }}>ZDARMA</span>
             )}

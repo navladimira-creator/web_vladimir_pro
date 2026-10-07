@@ -1,7 +1,7 @@
-import Link from "next/link";
 import type { Metadata } from "next";
 import PageHead from "@/components/PageHead";
 import Reveal from "@/components/Reveal";
+import { ConsultForm } from "@/components/SimpleForms";
 import { konzultace } from "@/content/moduly";
 
 export const metadata: Metadata = {
@@ -20,9 +20,9 @@ function Balicek({ b }: { b: typeof konzultace.online }) {
       <strong className="display" style={{ fontSize: 40, letterSpacing: "-0.03em" }}>{b.cena}</strong>
       <p className="display" style={{ fontWeight: 600, fontSize: 18, lineHeight: 1.35, color: "#e6fffb" }}>{b.shrnuti}</p>
       <p style={{ fontSize: 16, lineHeight: 1.7 }}>{b.text}</p>
-      <Link href="/kontakt" className="btn btn-primary" style={{ alignSelf: "flex-start", marginTop: "auto" }}>
+      <a href="#dotaznik" className="btn btn-primary" style={{ alignSelf: "flex-start", marginTop: "auto" }}>
         Objednat
-      </Link>
+      </a>
     </article>
   );
 }
@@ -36,15 +36,25 @@ export default function KonzultacePage() {
         ))}
       </PageHead>
 
-      <section className="wrap" style={{ paddingBottom: 96 }}>
+      <section className="wrap" style={{ paddingBottom: 48 }}>
         <Reveal className="grid items-stretch gap-6" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(min(420px, 100%), 1fr))" }}>
           <Balicek b={konzultace.online} />
           <Balicek b={konzultace.vPodniku} />
         </Reveal>
-        <Reveal className="mt-10">
-          <p style={{ fontSize: 16, color: "#8fb9b5" }}>
-            Máš otázky? <Link href="/kontakt">Napiš mi</Link>. Ochutnávku programu najdeš <Link href="/#zdarma">zdarma na úvodní stránce</Link>.
-          </p>
+      </section>
+
+      <section className="wrap" style={{ paddingTop: 24, paddingBottom: 96 }}>
+        <Reveal>
+          <div className="glass grid items-start gap-10" style={{ padding: "clamp(24px, 4vw, 48px)", gridTemplateColumns: "repeat(auto-fit, minmax(min(380px, 100%), 1fr))" }}>
+            <div className="flex flex-col gap-3.5">
+              <span className="eyebrow">Krátký dotazník</span>
+              <h2 className="h2" style={{ fontSize: "clamp(28px, 3.6vw, 44px)" }}>Napiš mi, co řešíš</h2>
+              <p className="lead" style={{ maxWidth: "40ch" }}>
+                Nejprve mi vyplníš krátký dotazník, tím ušetříme tvůj čas. Ozvu se ti a domluvíme další postup.
+              </p>
+            </div>
+            <ConsultForm />
+          </div>
         </Reveal>
       </section>
     </>

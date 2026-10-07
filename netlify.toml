@@ -2,6 +2,9 @@
   command = "npm run build"
   publish = ".next"
 
+[build.environment]
+  NODE_VERSION = "22"
+
 # Staré adresy z Miowebu (301). Na Netlify platí s lomítkem i bez něj.
 # /kontakt a /prihlaseni mají stejnou adresu i na novém webu.
 [[redirects]]

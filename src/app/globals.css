@@ -624,3 +624,160 @@ em, i, cite {
     animation: none;
   }
 }
+
+/* ---------- Moduly a ceny: záložky a panel ---------- */
+.mod-tabs {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 10px;
+}
+.mod-tab {
+  all: unset;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  padding: 16px 10px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  min-height: 150px;
+  min-width: 0;
+  transition: background 0.3s, border-color 0.3s, transform 0.3s;
+}
+.mod-tab:hover {
+  transform: translateY(-3px);
+}
+.mod-tab:focus-visible {
+  outline: 2px solid var(--accent-light);
+  outline-offset: 2px;
+}
+.mod-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: 32px;
+  padding: clamp(24px, 4vw, 44px);
+  animation: kin 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+@keyframes kin {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: none; }
+}
+@media (max-width: 980px) {
+  .mod-tabs { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 760px) {
+  .mod-tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .mod-panel { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ---------- Kniha, která zamrzá ---------- */
+.book-wrap {
+  --ice: 0;
+  --icicle: 0;
+  perspective: 1200px;
+  display: flex;
+  justify-content: center;
+  padding: 30px 0;
+}
+.book {
+  position: relative;
+  width: 250px;
+  height: 350px;
+  border-radius: 6px 14px 14px 6px;
+  transform: rotateY(-28deg) rotateX(6deg);
+  background: linear-gradient(135deg, #0e8c82, #064d47 70%);
+  box-shadow: inset 6px 0 0 rgba(0, 0, 0, 0.25), inset 10px 0 18px rgba(0, 0, 0, 0.25), 5px 5px 0 #e9e4d8,
+    9px 9px 0 #d8d1c2, 13px 13px 0 #c7bfae, 30px 40px 60px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 34px 26px 28px 34px;
+  animation: kbook 7s ease-in-out infinite;
+  filter: saturate(calc(1 - 0.45 * var(--ice))) hue-rotate(calc(12deg * var(--ice))) brightness(calc(1 + 0.08 * var(--ice)));
+}
+@keyframes kbook {
+  0%, 100% { transform: rotateY(-28deg) rotateX(6deg) translateY(0); }
+  50% { transform: rotateY(-22deg) rotateX(4deg) translateY(-10px); }
+}
+.book-ice {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(circle at 18% 22%, rgba(255, 255, 255, 0.9) 0 1.5px, transparent 2.5px) 0 0 / 22px 26px,
+    radial-gradient(circle at 70% 60%, rgba(255, 255, 255, 0.7) 0 1px, transparent 2px) 0 0 / 17px 19px,
+    linear-gradient(160deg, rgba(235, 252, 255, 0.75), rgba(190, 235, 250, 0.35) 45%, rgba(255, 255, 255, 0.6));
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.85), inset 0 0 40px rgba(220, 248, 255, 0.9);
+  opacity: calc(0.82 * var(--ice));
+}
+.book-icicles {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.95;
+}
+.book-icicles i {
+  position: absolute;
+  top: 0;
+  width: 12px;
+  margin-left: -6px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(200, 240, 255, 0.4));
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: top;
+  transform: scaleY(var(--icicle));
+}
+@media (max-width: 760px) {
+  .book { width: 200px; height: 280px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .book { animation: none; }
+  .mod-panel { animation: none; }
+}
+
+/* ---------- FAQ ---------- */
+.faq summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 22px 26px;
+  font-family: var(--font-sora), sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: #fff;
+  min-height: 44px;
+}
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+.faq-i {
+  flex: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(45, 226, 203, 0.14);
+  color: var(--accent-light);
+  font-size: 22px;
+  transition: transform 0.3s;
+}
+.faq[open] .faq-i {
+  transform: rotate(45deg);
+}
+
+/* Kotvy (#zdarma, #dotaznik) nesmí skončit pod horním menu */
+[id] {
+  scroll-margin-top: 110px;
+}

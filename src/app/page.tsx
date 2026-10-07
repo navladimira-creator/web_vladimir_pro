@@ -7,13 +7,18 @@ import ModulePath from "@/components/ModulePath";
 import AllInOneCard from "@/components/AllInOneCard";
 import Testimonials from "@/components/Testimonials";
 import { cisla, prinosy, pribeh } from "@/content/moduly";
+import { getModuly } from "@/lib/moduly";
 
 export const metadata = {
   title: { absolute: "Vladimír PRO – systém pro majitele kaváren a gastro podniků" },
   alternates: { canonical: "/" },
 };
 
-export default function Home() {
+export const revalidate = 60;
+
+export default async function Home() {
+  const moduly = await getModuly();
+  const nazvy = Object.fromEntries(moduly.map((m) => [m.n, m.nazev]));
   return (
     <>
       {/* 1. Hero */}
@@ -49,7 +54,7 @@ export default function Home() {
               </Link>
             </div>
           </div>
-          <HeroPuzzle />
+          <HeroPuzzle nazvy={nazvy} />
         </div>
 
         <Reveal className="mt-10 grid gap-3.5" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(min(200px, 100%), 1fr))" }}>
@@ -135,7 +140,7 @@ export default function Home() {
           </div>
           <Link href="/moduly" style={{ fontSize: 16, fontWeight: 600 }}>Všechny moduly a ceny →</Link>
         </Reveal>
-        <ModulePath />
+        <ModulePath moduly={moduly} />
         <div className="mt-10">
           <AllInOneCard />
         </div>

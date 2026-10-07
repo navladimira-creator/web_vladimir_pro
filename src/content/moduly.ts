@@ -1,136 +1,26 @@
-// Texty pro veřejné stránky. Zdroj: texty/jednotlive-moduly.md a design/uvod.dc.html.
+// Texty veřejných stránek mimo moduly. Zdroj: texty/jednotlive-moduly.md a design/*.dc.html.
 // Texty se přebírají doslovně, měnit se smějí jen překlepy.
-// Moduly členské sekce se NEBEROU odsud, ty jsou v databázi a spravují se v administraci.
+// Texty MODULŮ jsou v databázi (tabulka modules, spravují se v administraci).
+// Záložní kopie pro případ, že databáze není dostupná, je v moduly-data.json.
 
 export type Modul = {
+  slug: string;
   n: number;
   nazev: string;
   teaser: string;
   eyebrow: string;
-  odrazky?: string[];
+  odrazky: string[];
   dlouhyPopis?: string;
-  stitek?: string;
+  stitek: string;
   popis: string;
-  klicove?: string[];
+  klicove: string[];
+  souhrn?: string;
   cenaPuvodni?: string;
   cena?: string;
+  cenaCislo?: number;
   zdarma?: boolean;
   jenVBalicku?: boolean;
 };
-
-const CENA_PUVODNI = "12 990 Kč";
-const CENA = "7 990 Kč";
-
-export const moduly: Modul[] = [
-  {
-    n: 0,
-    nazev: "Ochutnávka",
-    teaser: "Ochutnávka z celého kurzu + úvodní data.",
-    eyebrow: "Video manuál, check-list a nový pohled na věc",
-    popis: "Vyzkoušej ochutnávku zdarma a zjisti, jestli ti to může něco dát a v něčem pomoct.",
-    stitek: "ZDARMA PO REGISTRACI",
-    zdarma: true,
-  },
-  {
-    n: 1,
-    nazev: "Produkt",
-    teaser: "Odrazový můstek a základní stavební kámen pro všechny gastro podniky.",
-    eyebrow: "Odrazový můstek a základní stavební kámen pro všechny gastro podniky",
-    odrazky: [
-      "Co je produkt, jak se tvoří a jak funguje nejlepší produkt?",
-      "Je důležité mít signature produkt? Jak se z průměru tvoří best seller?",
-      "Zapamatovatelnost jako klíč k návratnosti a udržitelnosti.",
-      "Smysluplné menu = skvělá zpětná vazba a zisk. Jak se vyhnout nesmyslům a jak najít „svatý grál“ tvého menu?",
-      "Food cost a marže aneb na čem se dá vydělat a co je do počtu? Jak se marže počítá a v čem dělá téměř každý chybu, která může stát i fusekle?",
-      "BONUS – PRODUKT, na který si nelze sáhnout, jako nehmotná přidaná hodnota",
-    ],
-    stitek: "ZÁKLADNÍ KÁMEN",
-    popis:
-      "Kolem produktu se točí úplně vše. Podnik bez produktů by byl jen tělocvična. Je to základ a musí stát pevně. Tenhle modul nesmíš vynechat.",
-    klicove: ["FUNKČNÍ NÁSTROJE", "INSPIRACE A SMĚR", "SYSTÉM"],
-    cenaPuvodni: CENA_PUVODNI,
-    cena: CENA,
-  },
-  {
-    n: 2,
-    nazev: "Provoz",
-    teaser: "Po 1. modulu máš na čem stavět, teď je potřeba next level.",
-    eyebrow: "Po 1. modulu máš na čem stavět, teď je potřeba next level",
-    odrazky: [
-      "Workflow jako hlavní urychlovač částic.",
-      "Jak si uspořádat bar od základu, abys tam nelítal jak brk na náledí?",
-      "Sklad – velký špatný každé kavárny. Jak s tím naložit?",
-      "Rychlost jako faktor zisku. Proč je rychlost důležitá a jak s tím souvisí profesionalita?",
-      "Plánování směn a provozní doba. Čeho je moc, toho je příliš.",
-      "Hlavní zdroje provozních problémů.",
-      "Jak se tvoří standardy a jak se zavádějí?",
-      "Stress killer – hlavně udrž paniku jako motto dne, co nefunguje?",
-      "Efektivita, co šetří peníze.",
-      "Jak a hlavně co plánovat? – Hýbat se směrem kupředu je nutnost.",
-    ],
-    stitek: "SMĚR K UDRŽITELNOSTI",
-    popis:
-      "Každodenní provoz musí plynout jako voda v řece. Nechceš mít stresu plný podnik, ve kterém to jede jak na D1 v pátek odpoledne. Tohle je takový digitální provozní manažer tvého podniku.",
-    klicove: ["PLYNULOST PROVOZU", "ODSTRAŇ STRESS FAKTORY", "FUNKČNÍ PLÁNY"],
-    cenaPuvodni: CENA_PUVODNI,
-    cena: CENA,
-  },
-  {
-    n: 3,
-    nazev: "Lidé",
-    teaser: "Nový výchozí bod pro tebe. Pochopení zákazníka a výběr personálu nikdy nepřehlížej.",
-    eyebrow: "Nový výchozí bod pro tebe. Pochopení zákazníka a výběr personálu nikdy nepřehlížej",
-    odrazky: [
-      "Kdo jsou ti, co ti vydělávají?",
-      "Proč lidi chodí do kavárny?",
-      "Jak zlepšit den člověku a sobě?",
-      "Úsměv a pochopení jako cesta k úspěchu.",
-      "Vřelý a přátelský pozdrav versus chladná anglická profesionalita.",
-      "Zážitková gastronomie, co může fungovat i v „Hospodě Na Růžku“ a není o „kostce ve skluzu“.",
-      "Týmový duch a individualita.",
-    ],
-    stitek: "NOVÝ VÝCHOZÍ BOD",
-    popis:
-      "Teprve ve chvíli, kdy pochopíte svého zákazníka, začnete ho „milovat“. Teprve až pochopíte své zákazníky, zvládnete jim vybrat toho správného člověka. On je bude obsluhovat a hýčkat. Bez porozumění této věci si budete stále pokládat ty otázky, které zdánlivě nemají řešení.",
-    klicove: ["KOMUNIKAČNÍ NÁSTROJE", "POROZUMĚNÍ ZÁKAZNÍKOVI", "FRESH START"],
-    cenaPuvodni: CENA_PUVODNI,
-    cena: CENA,
-  },
-  {
-    n: 4,
-    nazev: "Identita a brand",
-    teaser: "Poslední krok k výjimečnosti. Získej „NEFÉR“ výhodu.",
-    eyebrow: "Poslední krok k výjimečnosti",
-    odrazky: [
-      "Základní tvorba identity, aniž bys musel být marketingový specialista.",
-      "Jak se odlišit od průměru?",
-      "Zvýšení viditelnosti podniku.",
-      "Kde se bere duše podniku?",
-      "Každý nápad je geniální, ale proč některé nefungují?",
-      "Proč je správné načasování věc, o které je nutné přemýšlet?",
-      "Kdy má smysl offline reklama a kdy jen online?",
-      "Maloměsto vs. vesnice vs. velká města – všude to funguje jinak, otázka je jak?",
-    ],
-    stitek: "POSLEDNÍ KROK K VÝJIMEČNOSTI",
-    popis:
-      "Získej „NEFÉR“ výhodu. Podnik musí prosperovat. Ne každý podnik se hodí do každého prostoru. Výběr místa úzce souvisí s identitou a brandem. Budování vlastního stylu, tvoření povědomí o vlastní značce a posouvání se směrem, který je nevyčerpatelný.",
-    klicove: ["CO JE IDENTITA", "CO JE BRAND", "BÝT VIDĚT"],
-    cenaPuvodni: CENA_PUVODNI,
-    cena: CENA,
-  },
-  {
-    n: 5,
-    nazev: "Bonusový modul",
-    teaser: "Jak si udržet zdravého ducha a neposrat se z toho.",
-    eyebrow: "Jak si udržet zdravého ducha a neposrat se z toho",
-    dlouhyPopis:
-      "Celý byznys obvykle stojí na pár lidech. Buď je to majitel, nebo manažer, nebo ředitel nebo šéf a jeho nejlepší zaměstnanec. Je to hodně křehké a je potřeba držet se v dobré mentální pozici. K tomu také vede pár základních kroků. Není to o tom, že musíš meditovat na úpatí hory každý den, objímat stromy nebo si vytloukat mozek z hlavy kamenama. Každý máme nějaký ten způsob úniku od reality. V tomto modulu ti ukážu, jak této realitě čelit a neposrat se z toho!",
-    stitek: "JEN V BALÍČKU ALL IN ONE",
-    popis:
-      "Bonusový modul nejde koupit samostatně. Získáš ho jako součást celého programu Vladimír PRO.",
-    jenVBalicku: true,
-  },
-];
 
 export const allInOne = {
   nazev: "Modul All in One – celý program Vladimír PRO",
@@ -138,7 +28,7 @@ export const allInOne = {
   popisKratky: "Pořádný vítr do plachet a stabilní informace – tady máš vše. Všechny moduly 0–5.",
   kartaNadpis: "VŠE CO POTŘEBUJEŠ",
   kartaPopis:
-    "Pořádný vítr do plachet a stabilní informace – tady máš vše. 18 let pozorování funkčních i nefunkčních konceptů, 18 let praxe, know how, budování brandu a budování systému na jednom místě.",
+    "Pořádný vítr do plachet a stabilní informace – tady máš vše. 18 let pozorování funkčních i nefunkčních konceptů, 18 let praxe, know-how, budování brandu a budování systému na jednom místě.",
   cenaPuvodni: "51 960 Kč",
   cena: "24 990 Kč",
   tlacitko: "Koupit celý program",
@@ -172,30 +62,54 @@ export const prinosy = [
 
 export const naucis = [
   {
-    nadpis: "SMĚR",
-    text: "Jak nabrat ten správný. Rozlišit důležité věci od zbytečných. Utvrdíš se a nebo vytvoříš svůj názor postavený na funkčních informacích. Přestaneš si pokládat otázky coby? a kdyby?",
+    nadpis: "Směr",
+    text: "Jak nabrat ten správný. Rozlišit důležité věci od zbytečných. Utvrdíš se, a nebo vytvoříš svůj názor postavený na funkčních informacích. Přestaneš si pokládat otázky „coby?“ a „kdyby?“.",
   },
   {
-    nadpis: "OVLÁDAT ČAS",
-    text: "Čas je relativní a čas jsou peníze. Je dobré tedy neztrácet čas. Ukážu ti důležitější věc a to jak čas získat. To je totiž klíč. Chceš aby tvůj den měl 28 hodin a tvůj podnik makal jak kdyby byl otevřený non-stop? Jde to!",
+    nadpis: "Ovládat čas",
+    text: "Čas je relativní a čas jsou peníze. Je dobré tedy neztrácet čas. Ukážu ti důležitější věc, a to, jak čas získat. To je totiž klíč. Chceš, aby tvůj den měl 28 hodin a tvůj podnik makal, jako kdyby byl otevřený non-stop? Jde to!",
   },
   {
-    nadpis: "OPTIMALIZOVAT",
-    text: "I když si myslíš že šetříš a možná jedeš v zero waste módu tak optimalizovaní výdajů je jeden z klíčů. Mít přehled o každé koruně je to oč tu běží.",
+    nadpis: "Optimalizovat",
+    text: "I když si myslíš, že šetříš, a možná jedeš v zero waste módu, tak optimalizování výdajů je jeden z klíčů. Mít přehled o každé koruně je to, oč tu běží.",
   },
   {
-    nadpis: "TVOŘIT",
-    text: "Říká se že cesta je cíl. V tomto případě ano. Až když vytvoříš dokonalý brunch, dokonalé kafe, dokonalou limonádu, dokonalé cokoliv - budeš chtít víc. Neustálé tvoření věcí je nejlepší obrana proti úpadku.",
+    nadpis: "Tvořit",
+    text: "Říká se, že cesta je cíl. V tomto případě ano. Až když vytvoříš dokonalý brunch, dokonalé kafe, dokonalou limonádu, dokonalé cokoliv – budeš chtít víc. Neustálé tvoření věcí je nejlepší obrana proti úpadku.",
   },
   {
-    nadpis: "PRODAT",
-    text: "Upsell, upsell, upsell. Prodávej své produkty tak, aby z toho měli lidé radost. Vztah s hostem je samostatná disciplína. Bez toho to nejde a většina z nás v sobě prostě nemá Horsta z teleshopingu. Můžeš si osvojit to jak z kafe a dortu udělat návštěvu za 1000,-",
+    nadpis: "Prodat",
+    text: "Upsell, upsell, upsell. Prodávej své produkty tak, aby z toho měli lidé radost. Vztah s hostem je samostatná disciplína. Bez toho to nejde a většina z nás v sobě prostě nemá Horsta z teleshoppingu. Můžeš si osvojit, jak z kafe a dortu udělat návštěvu za 1000,-.",
   },
   {
-    nadpis: "POZNAT LIDI",
-    text: "Neskutečně hodnotná super schopnost. Jak odhadnout zákazníka? Ještě větší super schopnost - jak odhadnout zaměstnance? Poznat kdo je Áčkový hráč a koho si do týmu nebrat. To je asi 80% úspěchu.",
+    nadpis: "Poznat lidi",
+    text: "Neskutečně hodnotná superschopnost. Jak odhadnout zákazníka? Ještě větší superschopnost – jak odhadnout zaměstnance? Poznat, kdo je áčkový hráč a koho si do týmu nebrat. To je asi 80 % úspěchu.",
   },
 ];
+
+export const faq = [
+  {
+    otazka: "Jak dlouho mám k modulům přístup?",
+    odpoved: "Jednotlivé moduly jsou na rok. Balíček All in One je navždy, a nebo do armagedonu.",
+  },
+  { otazka: "Jak probíhá platba?", odpoved: "Jednorázově přes platební bránu." },
+  { otazka: "Dostanu fakturu?", odpoved: "Jasná věc." },
+  {
+    otazka: "Můžu začít jedním modulem a zbytek dokoupit později?",
+    odpoved:
+      "Ano, ale prodraží se to. Proto reSTART grátis. Je to sice mikro modul oproti těm ostatním, ale ať si to umíš představit.",
+  },
+];
+
+export const knihaUvod = {
+  nadpis: "Jak se neutopit v gastru",
+  autor: "Vladimír Macoun",
+  text: "Díky bohu jsem knížku nebo e-book nenapsal. Postavil jsem ti systém, který tě dostane z „Bermudského gastro trojúhelníku“.",
+  ukazuNadpis: "Ukážu ti, jak na to",
+  ukazuUvod: "Není ani zdaleka tak důležité, jakou myšlenku jsi měl/a na začátku, protože každá myšlenka je skvělá… na začátku.",
+  ukazuUseknuty:
+    "Pravděpodobně ti chybělo nebo chybí jenom o trochu více know-how nebo o trochu víc zkušeností. Hodně podniků, které dnes prosperují, ani neví, proč tomu tak je. To je právě ta nejtěžší disciplína. Definovat to, co je úspěšné a co funguje. Občas se povede, že si někdo něco otevře, stojí při něm všichni svatí a podnik začne šlapat…",
+};
 
 export const pribeh = {
   nadpis: "Když mi bylo 15 let, věděl jsem, že můj život bude spojený s gastronomií.",
@@ -228,22 +142,24 @@ export const reference = [
 ];
 
 export const konzultace = {
+  uvodKratky:
+    "Soukromé konzultace doporučuji až poté, co dokončíš celý program Vladimír PRO. Může se však stát, že tvůj podnik nebo byznys plán je velmi specifický, třeba jako první kavárna Elona Mlaska na Marsu. Pak osobní setkání nebo online konzultace dává smysl.",
   uvod: [
-    "Soukromé konzultace doporučuji až poté co dokončíš celý program Vladimír PRO. Možná to máš jinak, ale moje zkušenost je ta, že když chci aby mi v životě něco fungovalo, tak o tom první musím mít alespoň základní informace. Poté co projdeš všechny moduly tak jsem si téměř jistý, že už další konzultace a rady potřebovat nebudeš, je tam opravdu vše :-).",
-    "Může se však stát, že tvůj podnik nebo byznys plát je velmi specifický, třeba jako první kavárna Elona Mlaska na Marsu. Pak osobní setkání nebo online konzultace dává smysl.",
-    "Jak ušetříš další peníze? Projdi si celý program Vladimír PRO. Stane se mimo jiné i to, že začneme mluvit „řečí stejného kmene“. Tím, že si budeme více rozumět se stane to, že případná konzultace bude plynout jak voda v řece a to s maximálním výsledkem a minimálním úsilím. Sjet se dá každá řeka, některá na kajaku, některá na raftu, jiná zase spíš v ponorce a některá zase v offroadu.",
-    "V rámci základního pochopení se, způsobíš to, že šetříme čas, nervy a peníze (ty tvoje)",
+    "Soukromé konzultace doporučuji až poté, co dokončíš celý program Vladimír PRO. Možná to máš jinak, ale moje zkušenost je ta, že když chci, aby mi v životě něco fungovalo, tak o tom první musím mít alespoň základní informace. Poté, co projdeš všechny moduly, tak jsem si téměř jistý, že už další konzultace a rady potřebovat nebudeš, je tam opravdu vše :-).",
+    "Může se však stát, že tvůj podnik nebo byznys plán je velmi specifický, třeba jako první kavárna Elona Mlaska na Marsu. Pak osobní setkání nebo online konzultace dává smysl.",
+    "Jak ušetříš další peníze? Projdi si celý program Vladimír PRO. Stane se mimo jiné i to, že začneme mluvit „řečí stejného kmene“. Tím, že si budeme více rozumět, se stane to, že případná konzultace bude plynout jak voda v řece, a to s maximálním výsledkem a minimálním úsilím. Sjet se dá každá řeka, některá na kajaku, některá na raftu, jiná zase spíš v ponorce a některá zase v offroadu.",
+    "V rámci základního pochopení způsobíš to, že šetříme čas, nervy a peníze (ty tvoje).",
   ],
   online: {
     nazev: "Online konzultace",
     cena: "14 900 Kč",
     shrnuti: "4 online hodiny + 1 hodina na představení projektu zdarma",
-    text: "Tento balíček hodin slouží k tomu, aby jsme přes online hovor rozebrali tvůj podnik do šroubku. Nejprve mi vyplníš krátký dotazník, tím ušetříme tvůj čas a následně na tom začneme makat. Předem se domluvíme co má být výsledkem těchto sezení a tam to budeme tlačit hlava nehlava.",
+    text: "Tento balíček hodin slouží k tomu, abychom přes online hovor rozebrali tvůj podnik do šroubku. Nejprve mi vyplníš krátký dotazník, tím ušetříme tvůj čas, a následně na tom začneme makat. Předem se domluvíme, co má být výsledkem těchto sezení, a tam to budeme tlačit hlava nehlava.",
   },
   vPodniku: {
     nazev: "Konzultace ve tvém podniku",
     cena: "55 000 Kč",
     shrnuti: "8 hodin strávených ve tvém podniku + 2 hodiny na představení + zpracování vyhodnocení",
-    text: "V rámci tohoto balíčku získáš, mystery shopping analýzu, následný support přímo na místě. Analýzu procesů, analýzu ekonomických standardů, průzkum veřejného mínění a povědomí o tvém podniku v dané lokalitě. Na jeden den ti dám know how svého týmu, dorazíme ve třech, převrátíme to u tebe vzhůru nohama a budeme kouzlit. Do 3 dnů od návštěvy dostaneš kompletní výstupy které spolu online probereme a vyhodnotíme.",
+    text: "V rámci tohoto balíčku získáš mystery shopping analýzu, následný support přímo na místě, analýzu procesů, analýzu ekonomických standardů, průzkum veřejného mínění a povědomí o tvém podniku v dané lokalitě. Na jeden den ti dám know-how svého týmu, dorazíme ve třech, převrátíme to u tebe vzhůru nohama a budeme kouzlit. Do 3 dnů od návštěvy dostaneš kompletní výstupy, které spolu online probereme a vyhodnotíme.",
   },
 };

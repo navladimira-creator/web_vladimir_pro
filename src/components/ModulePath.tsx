@@ -1,12 +1,12 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { moduly } from "@/content/moduly";
+import type { Modul } from "@/content/moduly";
 import ModuleDetail from "./ModuleDetail";
 import Reveal from "./Reveal";
 
 // Cesta modulů 0 → 5: kliknutím se modul rozbalí, svítící čára se při posouvání „nabíjí“.
-export default function ModulePath() {
+export default function ModulePath({ moduly }: { moduly: Modul[] }) {
   const [open, setOpen] = useState(-1);
   const path = useRef<HTMLDivElement>(null);
 

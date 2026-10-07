@@ -7,7 +7,7 @@ export default function ModuleDetail({ m }: { m: Modul }) {
     <div className="moddetail">
       <div className="flex flex-col gap-[18px]">
         <span className="eyebrow">{m.eyebrow}</span>
-        {m.odrazky && (
+        {m.odrazky.length > 0 && (
           <ul className="m-0 flex list-none flex-col gap-3 p-0">
             {m.odrazky.map((o) => (
               <li key={o} className="bullet">
@@ -18,6 +18,11 @@ export default function ModuleDetail({ m }: { m: Modul }) {
         )}
         {m.dlouhyPopis && <p style={{ fontSize: 17, lineHeight: 1.65, color: "#d5efec" }}>{m.dlouhyPopis}</p>}
         {m.zdarma && <p style={{ fontSize: 17, lineHeight: 1.65, color: "#d5efec" }}>{m.popis}</p>}
+        {m.souhrn && (
+          <p style={{ fontSize: 15, lineHeight: 1.6 }}>
+            <strong style={{ color: "#fff" }}>V modulu najdeš:</strong> {m.souhrn}
+          </p>
+        )}
       </div>
 
       <div className="offer">
@@ -28,8 +33,8 @@ export default function ModuleDetail({ m }: { m: Modul }) {
             <strong className="display" style={{ fontSize: 34, letterSpacing: "-0.03em" }}>{m.cena}</strong>
           </span>
         )}
-        <p style={{ fontSize: 15, lineHeight: 1.65 }}>{m.zdarma ? "Ochutnávka z celého kurzu + úvodní data." : m.popis}</p>
-        {m.klicove && (
+        <p style={{ fontSize: 15, lineHeight: 1.65 }}>{m.zdarma ? m.teaser : m.popis}</p>
+        {m.klicove.length > 0 && (
           <div className="flex flex-col gap-2.5">
             <span style={{ fontSize: 12, fontWeight: 700, letterSpacing: "0.1em", color: "#8fb9b5" }}>KLÍČOVÉ PRVKY</span>
             <div className="flex flex-wrap gap-2">
