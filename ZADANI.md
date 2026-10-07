@@ -70,14 +70,15 @@ Současný web je nepřehledný. Novou strukturu chci jednodušší:
 
 **Hlavní menu:** Úvod · Moduly a ceny · Konzultace · O mně · Kontakt · tlačítko **Přihlásit**
 
-### Úvodní stránka – pořadí sekcí (podle návrhu na plátně, směr A)
-1. **Hero:** „Pokus – omyl / Nejčastější způsob vedení a budování podniku", úvodní odstavec, tlačítko „Vyzkoušet systém Vladimír PRO". Vedle čísla: 18 let v oboru, 12 let budování brandu, 3 kavárny s vlastní pražírnou, 1 pekařská a cukrářská výroba, 30+ zaměstnanců.
+### Úvodní stránka – pořadí sekcí (podle návrhu `design/uvod.dc.html`, směr C)
+1. **Hero:** „Pokus – omyl / Nejčastější způsob vedení a budování podniku", úvodní odstavec, tlačítko „Vyzkoušet systém Vladimír PRO". Vpravo 3D puzzle z 6 dílků (Modul 0–5), které se při posouvání rozloží a ukáže cedulky s názvy modulů. Pod tím čísla: 18 let v oboru, 12 let budování brandu, 3 kavárny s vlastní pražírnou, 1 pekařská a cukrářská výroba, 30+ zaměstnanců (načítají se od nuly).
 2. **Modul 0 zdarma:** „Video manuál, check-list a nový pohled na věc" + formulář (jméno, e-mail, souhlas se zpracováním údajů).
-3. **Je to pro mě vhodné?** Úvodní odstavec + tři přínosy (Vytvoříš stabilní kotevní body / Nastavíš správný kurz / Odemkneš nový potenciál) s plnými texty ze současného webu.
-4. **Systém z praxe – moduly:** karty M0–M5 s ceníkem a pruh All in One, odkaz na `/moduly`.
-5. **Můj příběh:** celý text ze současného webu včetně citátu.
-6. **Co říkají zaměstnanci mých kaváren o systému:** reference Háňa, Adri, Káťa.
-7. **Nevíš, jak začít?** „Začni hned, protože čas jsou peníze." + tlačítka „Jdu do toho hned!" a „Chci vědět víc".
+3. **Je to pro mě vhodné?** Úvodní odstavec + tři přínosy (Vytvoříš stabilní kotevní body / Nastavíš správný kurz / Odemkneš nový potenciál).
+4. **Velký citát přes celou šířku na fotce:** „Kavárna není v první řadě o kafi a ani o 16ti hodinové otevírací době!"
+5. **Systém z praxe – cesta modulů:** Modul 0 → 5 pod sebou propojené svítící čárou. **Kliknutím se modul rozbalí** (všechny body, nabídková karta, klíčové prvky, cena, tlačítko). Na začátku jsou všechny sbalené. Pod tím karta All in One.
+6. **Můj příběh:** celý text včetně citátu.
+7. **Reference:** karusel – Háňa, Adri, Káťa, jedna naráz, s fotkou a tlačítkem „Číst celé".
+8. **Nevíš, jak začít?** „Začni hned, protože čas jsou peníze." + tlačítka „Jdu do toho hned!" a „Chci vědět víc".
 
 Stránka `/moduly` přebírá doslovně texty ze stránky `inspiracevladimir.cz/jednotlive-moduly/` (úvod „Systém z praxe", „Co se v systému Vladimír PRO naučíš?", podrobné body každého modulu, klíčové prvky, text ke konzultacím).
 
@@ -154,14 +155,20 @@ Přístup k obsahu se vždy kontroluje **na serveru i v databázi (RLS)**, ne je
 
 ## 8. Vzhled
 
-**Vybraný směr: „A – Provozní manuál".** Návrh úvodní stránky a nástěnky členské sekce je na plátně: https://claude.ai/artifact/XShQ7s7TD4rtiTeFS3Xxxv (artboardy „Směr A – Provozní manuál" a „Členská sekce – nástěnka"). Řiď se jím co nejpřesněji. Pokud k plátnu nemáš přístup, řekni mi a pošlu ti z něj podklady.
+**Vybraný směr: „C – Hloubka"** (tmavý, prémiový, s 3D prvky). Závazné návrhy jsou ve složce `design/`:
+- `uvod.dc.html` – úvodní stránka (včetně rozbalovacích modulů a karuselu referencí)
+- `clenska-nastenka.dc.html` – nástěnka členské sekce
+- `clenska-detail-modulu.dc.html` – detail modulu (videa, postup, materiály)
 
-- Písma (Google Fonts): **Bricolage Grotesque** (nadpisy, čísla, tučné) + **Proza Libre** (běžný text). Obě podporují češtinu.
-- Barvy: **#0A4040** (text a tmavé plochy), **#0E6E6E** (hlavní tlačítka), **#20B2AA** (akcenty, čísla modulů), **#E0F4F4** (světlé sekce), **#F5F8F7** (pozadí stránky), **#C9DEDB** / **#9FC3C0** (linky a rámečky).
-- Styl: ostré hrany (bez zaoblení), tenké linky, číslované sekce, výrazná typografie. Působí jako profesionální příručka.
-- Mobil na prvním místě. Hodně majitelů kaváren se bude dívat z telefonu.
-- Maximálně jedna hlavní výzva na sekci. Žádný „Mioweb" vzhled: přeplácané bloky, odpočty a nekonečné stránky.
-- Celý web v češtině, včetně e-mailů s přihlašovacím odkazem (upravit šablonu v Supabase).
+Jsou to HTML soubory návrhového nástroje: převezmi z nich rozložení, barvy, písma, texty, tvary (puzzle dílek je SVG cesta v souboru) i animace. Interaktivita je v bloku `class Component` na konci souboru. Složka `design/archiv-smer-A/` je stará verze – **nepoužívej ji**.
+
+- **Písma (Google Fonts):** **Sora** (nadpisy, čísla) + **Manrope** (běžný text). Žádná kurzíva.
+- **Barvy:** pozadí **#041A1C** (téměř černo-tyrkysová) s jemnou tyrkysovou září a zrnem, hlavní tyrkysová **#2DE2CB**, světlá **#5EEAD4**, tmavší **#0E8C82**, text **#B7D6D3**, nadpisy bílé. **Korálová #FF7A59 jen jako „šperk"** na třech místech: tečka u loga, štítky ZDARMA a odlesk na dílku Modul 0.
+- **Prvky:** skleněné karty (průsvitné, jemný okraj, při najetí myší svítí), tlačítka s plně zaoblenými rohy, puzzle dílky jako symbol systému (6 dílků = 6 modulů).
+- **Pohyb:** puzzle reaguje na pohyb myši, rozkládá se při posouvání, sekce se plynule vynořují, čísla se načítají, svítící čára u cesty modulů se nabíjí, horní menu se při posouvání zmenší, za kurzorem jde jemná záře. Vše musí fungovat i v Safari (v návrhu jsou některé efekty jen pro Chrome – udělej je univerzálně) a respektovat nastavení „omezit pohyb".
+- **Mobil:** místo 3D puzzle balíček karet, kterými se listuje prstem. Vše ostatní pod sebou. Mobil je prioritní.
+- **Fotky:** místa jsou připravená ([Foto: …]); fotky dodá majitel, na webu dostanou jemný tyrkysový nádech.
+- Maximálně jedna hlavní výzva na sekci. Celý web v češtině, včetně e-mailů s přihlašovacím odkazem.
 
 **Texty:** používej texty ze současného webu **doslovně** (opravit lze jen překlepy), ne převyprávěné. Nástroje pro načtení webu často vrací jen shrnutí, proto texty převezmi z plátna nebo si o ně řekni.
 

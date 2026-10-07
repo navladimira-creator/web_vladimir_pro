@@ -59,6 +59,6 @@ Typy materiálů (skupiny v členské sekci): **Skripta · Manuály · Checklist
 ---
 
 ## Poznámky pro stavbu
-- **Test s hotovými odpověďmi** (Modul 3) je klíč k testu pro baristy. Zeptej se majitele, jestli má být vidět hned, nebo až po dokončení modulu.
+- **Test s hotovými odpověďmi** (Modul 3) je klíč k testu pro baristy – **je vidět hned** vedle testu (rozhodnutí majitele).
 - Tabulky (XLSX) se stahují jako soubory. Případné online verze kalkulaček řešíme až v dalších fázích.
 - Postup modulu se počítá z videí (označení „Hotovo“).
