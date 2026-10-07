@@ -5,7 +5,9 @@ Doslovný přepis současné stránky (stav k 1. 10. 2026). Používej tyto text
 **Odchylky od současného webu, které platí (rozhodnutí majitele):**
 - Modul 4 (Identita a brand) stojí **7 990 Kč** (na webu je chybně 5 990 Kč).
 - Konzultace v podniku: **8 hodin v podniku + 2 hodiny na představení + zpracování vyhodnocení** (na webu je chybně 10 hodin).
-- All in One obsahuje **všechny moduly 0–5** (nadpis „4 MODULY" už neplatí). Bonusový modul 5 jde koupit jen v balíčku All in One. Popis modulu 5: „Jak si udržet zdravého ducha a neposrat se z toho."
+- All in One obsahuje **všechny moduly 0–5** (nadpis „4 MODULY" už neplatí). Bonusový modul 5 jde koupit jen v balíčku All in One. Krátký popis modulu 5: „Jak si udržet zdravého ducha a neposrat se z toho.“
+- Dlouhý popis modulu 5 (po rozbalení): „Celý byznys obvykle stojí na pár lidech. Buď je to majitel, nebo manažer, nebo ředitel nebo šéf a jeho nejlepší zaměstnanec. Je to hodně křehké a je potřeba držet se v dobré mentální pozici. K tomu také vede pár základních kroků. Není to o tom, že musíš meditovat na úpatí hory každý den, objímat stromy nebo si vytloukat mozek z hlavy kamenama. Každý máme nějaký ten způsob úniku od reality. V tomto modulu ti ukážu, jak této realitě čelit a neposrat se z toho!“
+- Majitel je v oboru **18 let** (na současném webu je chybně 17 let).
 - Modul 0 (zdarma): ochutnávka z celého kurzu + úvodní data.
 
 ---
@@ -23,7 +25,7 @@ Pomáhám kavárnám zvýšit útratu hostů, zlepšit marže a nastavit provoz 
 Budoucím majitelům kaváren pomáhám vyhnout se chybám, které často stojí statisíce až miliony korun.
 
 **Čísla:**
-- 17 let – v oboru
+- 18 let – v oboru
 - 12 let – budování brandu
 - 1 – pekařská a cukrářská výroba
 - 3 – kavárny s vlastní pražírnou
@@ -87,7 +89,7 @@ Není to koučink, není to mentoring a není to ani forma krizového management
 — Steve Jobs
 
 **Karta:** VŠE CO POTŘEBUJEŠ · ~~51.960,-~~ **24.990,-** · štítek NEJPRODÁVANĚJŠÍ
-Pořádný vítr do plachet a stabilní informace - tady máš vše. 17 let pozorování funkčních i nefunkčních konceptů, 17 let praxe, know how, budování brandu a budování systému na jednom místě.
+Pořádný vítr do plachet a stabilní informace - tady máš vše. 18 let pozorování funkčních i nefunkčních konceptů, 18 let praxe, know how, budování brandu a budování systému na jednom místě.
 Tlačítko: Objednat
 
 ---

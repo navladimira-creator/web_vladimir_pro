@@ -71,7 +71,7 @@ Současný web je nepřehledný. Novou strukturu chci jednodušší:
 **Hlavní menu:** Úvod · Moduly a ceny · Konzultace · O mně · Kontakt · tlačítko **Přihlásit**
 
 ### Úvodní stránka – pořadí sekcí (podle návrhu na plátně, směr A)
-1. **Hero:** „Pokus – omyl / Nejčastější způsob vedení a budování podniku", úvodní odstavec, tlačítko „Vyzkoušet systém Vladimír PRO". Vedle čísla: 17 let v oboru, 12 let budování brandu, 3 kavárny s vlastní pražírnou, 1 pekařská a cukrářská výroba, 30+ zaměstnanců.
+1. **Hero:** „Pokus – omyl / Nejčastější způsob vedení a budování podniku", úvodní odstavec, tlačítko „Vyzkoušet systém Vladimír PRO". Vedle čísla: 18 let v oboru, 12 let budování brandu, 3 kavárny s vlastní pražírnou, 1 pekařská a cukrářská výroba, 30+ zaměstnanců.
 2. **Modul 0 zdarma:** „Video manuál, check-list a nový pohled na věc" + formulář (jméno, e-mail, souhlas se zpracováním údajů).
 3. **Je to pro mě vhodné?** Úvodní odstavec + tři přínosy (Vytvoříš stabilní kotevní body / Nastavíš správný kurz / Odemkneš nový potenciál) s plnými texty ze současného webu.
 4. **Systém z praxe – moduly:** karty M0–M5 s ceníkem a pruh All in One, odkaz na `/moduly`.
