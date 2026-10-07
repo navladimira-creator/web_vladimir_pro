@@ -80,7 +80,7 @@ Současný web je nepřehledný. Novou strukturu chci jednodušší:
 7. **Reference:** karusel – Háňa, Adri, Káťa, jedna naráz, s fotkou a tlačítkem „Číst celé".
 8. **Nevíš, jak začít?** „Začni hned, protože čas jsou peníze." + tlačítka „Jdu do toho hned!" a „Chci vědět víc".
 
-Stránka `/moduly` přebírá doslovně texty ze stránky `inspiracevladimir.cz/jednotlive-moduly/` (úvod „Systém z praxe", „Co se v systému Vladimír PRO naučíš?", podrobné body každého modulu, klíčové prvky, text ke konzultacím).
+Stránka `/moduly` se staví podle návrhu `design/moduly-a-ceny.dc.html` (texty jsou v návrhu, vycházejí ze stránky `inspiracevladimir.cz/jednotlive-moduly/`). Text „Ukážu ti, jak na to“ je na stránce záměrně useknutý s výzvou „Chceš si to dočíst? Celý text najdeš v Modulu 0 – reSTART“ → registrace zdarma. Celý text proto patří do obsahu reSTARTu. Původně: (úvod „Systém z praxe", „Co se v systému Vladimír PRO naučíš?", podrobné body každého modulu, klíčové prvky, text ke konzultacím).
 
 ### Členská sekce (jen pro přihlášené)
 | Stránka | Adresa | Obsah |
@@ -107,7 +107,7 @@ Moduly nesmí být napevno v kódu. Modul 7, 8 nebo 10 chci přidat jen přes ad
 
 | # | Modul | Přístup | Zobrazená cena |
 |---|---|---|---|
-| 0 | **Ochutnávka zdarma**: ukázky z celého kurzu + úvodní data | Zdarma po registraci | 0 Kč |
+| 0 | **reSTART** (zdarma): ochutnávka z celého kurzu + úvodní data | Zdarma po registraci | 0 Kč |
 | 1 | Produkt | Placený | 7 990 Kč |
 | 2 | Provoz | Placený | 7 990 Kč |
 | 3 | Lidé | Placený | 7 990 Kč |
@@ -135,7 +135,7 @@ Ostatní texty ke konzultacím převezmi ze stránky `inspiracevladimir.cz/jedno
 - `modules` – id, slug, název, popis, obrázek, pořadí, zdarma (ano/ne), cena v Kč, publikováno
 - `lessons` – id, modul, název, popis, Bunny video ID, pořadí
 - `materials` – id, modul, typ (`skripta`, `manual`, `checklist`, `tabulka`, `ukoly_test`, `dokument`), název, cesta k souboru, pořadí
-- `module_access` – uživatel, modul, zdroj (`free`, `manual`, `import`, později `stripe`), datum přidělení, případně datum vypršení
+- `module_access` – uživatel, modul, zdroj (`free`, `manual`, `import`, později `stripe`), datum přidělení, datum vypršení. **Pravidla přístupu:** jednotlivě koupený modul = přístup na **1 rok** od nákupu; balíček **All in One = navždy** (bez vypršení); reSTART (zdarma) = navždy. Po vypršení se modul na nástěnce zobrazí jako zamčený s možností prodloužit. Při ručním přidělení v adminu jde datum vypršení nastavit.
 - `lesson_progress` – uživatel, lekce, dokončeno kdy
 - `bundles` + `bundle_modules` – balíčky (All in One), připraveno pro Stripe
 
@@ -159,6 +159,9 @@ Přístup k obsahu se vždy kontroluje **na serveru i v databázi (RLS)**, ne je
 - `uvod.dc.html` – úvodní stránka (včetně rozbalovacích modulů a karuselu referencí)
 - `clenska-nastenka.dc.html` – nástěnka členské sekce
 - `clenska-detail-modulu.dc.html` – detail modulu (videa, postup, materiály)
+- `registrace-dekujeme.dc.html` – stránka hned po odeslání registračního formuláře („zkontroluj e-mail“, poslat znovu)
+- `moduly-a-ceny.dc.html` – stránka Moduly a ceny (3D kniha, která při posouvání zamrzne, záložky modulů, All in One s úsporou, FAQ)
+- `registrace-vitej.dc.html` – první přihlášení po kliknutí na odkaz v e-mailu (animace zapadnutí dílku, Modul 0 odemčen, co dál)
 
 Jsou to HTML soubory návrhového nástroje: převezmi z nich rozložení, barvy, písma, texty, tvary (puzzle dílek je SVG cesta v souboru) i animace. Interaktivita je v bloku `class Component` na konci souboru. Složka `design/archiv-smer-A/` je stará verze – **nepoužívej ji**.
 

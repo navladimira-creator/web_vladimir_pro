@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<title>Děkujeme – zkontroluj e-mail</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#041A1C}
+*{box-sizing:border-box}
+a{color:#5EEAD4}a:hover{color:#FFFFFF}
+h1,h2,h3,p,figure{margin:0;text-wrap:pretty}
+.k-glass{background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.018));border:1px solid rgba(255,255,255,.11);border-radius:24px;box-shadow:inset 0 1px 0 rgba(255,255,255,.09),0 40px 70px -30px rgba(0,0,0,.7);transition:border-color .4s,box-shadow .4s,transform .45s cubic-bezier(.2,.7,.2,1)}
+.k-glass:hover{border-color:rgba(94,234,212,.45)}
+.k-lift:hover{transform:translateY(-4px);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 0 40px -8px rgba(45,226,203,.35),0 40px 70px -30px rgba(0,0,0,.7)}
+.k-btn{transition:transform .2s,box-shadow .2s}
+.k-btn:hover{transform:translateY(-2px);box-shadow:0 18px 40px -12px rgba(45,226,203,.7)}
+.k-pz{display:block;overflow:visible}
+.k-bar{height:8px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden}
+.k-bar>span{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#14B8A6,#5EEAD4);box-shadow:0 0 14px rgba(45,226,203,.7)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@keyframes kfloat{0%,100%{transform:translateY(0) rotate(-8deg)}50%{transform:translateY(-14px) rotate(-5deg)}}
+@keyframes kglint{0%,100%{opacity:.55}50%{opacity:1}}
+@keyframes kpulse{0%{transform:scale(.8);opacity:.7}100%{transform:scale(1.6);opacity:0}}
+.k-float{animation:kfloat 6s ease-in-out infinite}
+.k-pulse{position:absolute;inset:18%;border-radius:50%;border:2px solid rgba(45,226,203,.5);animation:kpulse 2.8s ease-out infinite}
+.k-step{display:grid;grid-template-columns:52px minmax(0,1fr);gap:16px;align-items:start}
+.k-stepn{width:52px;height:52px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-family:Sora,sans-serif;font-weight:700;color:#04201F;background:linear-gradient(145deg,#7FF5E6,#13A99A);box-shadow:inset 0 -4px 0 rgba(0,0,0,.18),0 12px 24px -8px rgba(45,226,203,.6)}
+</style>
+</helmet>
+<div style="position: relative; font-family: Manrope, 'Segoe UI', sans-serif; color: #B7D6D3; background: radial-gradient(rgba(255,255,255,0.028) 1px, transparent 1px) 0 0 / 3px 3px, radial-gradient(1000px 600px at 90% -10%, rgba(45,226,203,0.16), transparent 60%), radial-gradient(800px 600px at -10% 60%, rgba(14,140,130,0.12), transparent 60%), #041A1C; min-height: 100vh; overflow: hidden">
+<svg aria-hidden="true" width="0" height="0" style="position: absolute; width: 0; height: 0"><defs><linearGradient id="kon" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7FF5E6"></stop><stop offset="0.55" stop-color="#2DE2CB"></stop><stop offset="1" stop-color="#0E8C82"></stop></linearGradient><linearGradient id="koff" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0.10"></stop><stop offset="1" stop-color="#FFFFFF" stop-opacity="0.02"></stop></linearGradient></defs></svg>
+<header style="position: sticky; top: 0; z-index: 20; padding: 16px 24px">
+<div style="max-width: 1200px; margin: 0 auto; padding: 12px 14px 12px 22px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; background: rgba(4,26,28,0.62); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.09); border-radius: 999px">
+<a href="#" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #FFFFFF; font-family: Sora, sans-serif; font-weight: 700; font-size: 18px"><span style="width: 10px; height: 10px; border-radius: 50%; background: #FF7A59; box-shadow: 0 0 16px #FF7A59"></span>Vladimír PRO</a>
+<nav aria-label="Hlavní menu" style="display: flex; align-items: center; gap: 26px; flex-wrap: wrap; font-size: 15px; font-weight: 500">
+<a href="#" style="text-decoration: none; color: #B7D6D3">Moduly a ceny</a>
+<a href="#" style="text-decoration: none; color: #B7D6D3">Konzultace</a>
+<a href="#" style="text-decoration: none; color: #B7D6D3">O mně</a>
+<a href="#" style="text-decoration: none; color: #B7D6D3">Kontakt</a>
+<a href="#" class="k-btn" style="text-decoration: none; color: #04201F; background: #2DE2CB; border-radius: 999px; padding: 11px 20px; min-height: 44px; display: inline-flex; align-items: center; font-weight: 700">Přihlásit</a>
+</nav>
+</div>
+</header>
+<main style="max-width: 1100px; margin: 0 auto; padding: 48px 24px 96px; display: flex; flex-direction: column; gap: 40px">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 40px; align-items: center">
+<div style="display: flex; flex-direction: column; gap: 22px">
+<span style="align-self: flex-start; display: inline-flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #CFFAF3; padding: 8px 14px; border-radius: 999px; border: 1px solid rgba(94,234,212,0.3); background: rgba(45,226,203,0.08)"><span style="width: 7px; height: 7px; border-radius: 50%; background: #2DE2CB; box-shadow: 0 0 10px #2DE2CB"></span>Registrace proběhla</span>
+<h1 style="font-family: Sora, sans-serif; font-weight: 800; font-size: clamp(44px, 6.4vw, 84px); line-height: 0.95; letter-spacing: -0.05em; color: #FFFFFF">Díky, [jméno]!<br><span style="background: linear-gradient(180deg, #FFFFFF 10%, #2DE2CB 120%); -webkit-background-clip: text; background-clip: text; color: transparent">Tvůj první dílek je na cestě.</span></h1>
+<p style="font-size: 19px; line-height: 1.6; max-width: 40ch">Poslali jsme ti e-mail s odkazem na <strong style="color: #FFFFFF">[e-mail@adresa.cz]</strong>. Jedním kliknutím se přihlásíš a odemkneš si Modul 0 – reSTART, ochutnávku z celého kurzu.</p>
+</div>
+<div aria-hidden="true" style="position: relative; display: flex; align-items: center; justify-content: center; min-height: 380px">
+<span class="k-pulse"></span><span class="k-pulse" style="animation-delay: 1.4s"></span>
+<div class="k-float" style="position: relative"><svg class="k-pz" width="300" height="300" viewBox="0 0 320 320" aria-hidden="true" style="filter: drop-shadow(0 0 14px rgba(45,226,203,0.45));"><path d="M64 44 L130 44 C138 44 142 34 134 26 C122 14 133 3 148 3 C163 3 174 14 162 26 C154 34 158 44 166 44 L256 44 A20 20 0 0 1 276 64 L276 156.9 C276 164.5 285.5 168.3 293.1 160.7 C304.5 149.3 314.9 159.8 314.9 174 C314.9 188.2 304.5 198.7 293.1 187.3 C285.5 179.7 276 183.5 276 191.1 L276 256 A20 20 0 0 1 256 276 L186.9 276 C178.5 276 174.3 265.5 182.7 257.1 C195.3 244.5 183.8 232.9 168 232.9 C152.2 232.9 140.7 244.5 153.3 257.1 C161.7 265.5 157.5 276 149.1 276 L64 276 A20 20 0 0 1 44 256 L44 154.2 C44 147 53 143.4 60.2 150.6 C71 161.4 80.9 151.5 80.9 138 C80.9 124.5 71 114.6 60.2 125.4 C53 132.6 44 129 44 121.8 L44 64 A20 20 0 0 1 64 44 Z" fill="url(#kon)" stroke="rgba(255,255,255,0.6)" stroke-width="4"></path><text x="160" y="186" text-anchor="middle" font-family="Sora, sans-serif" font-weight="800" font-size="104" fill="#04201F">0</text></svg><span aria-hidden="true" style="position: absolute; right: 22%; top: 20%; width: 12px; height: 12px; border-radius: 50%; background: #FF7A59; box-shadow: 0 0 20px 6px #FF7A59; animation: kglint 3s ease-in-out infinite"></span></div>
+<span style="position: absolute; bottom: 18px; font-size: 13px; font-weight: 800; letter-spacing: 0.1em; color: #2A0D06; background: #FF7A59; padding: 7px 12px; border-radius: 999px">reSTART · ZDARMA</span>
+</div>
+</div>
+
+<section class="k-glass" style="padding: clamp(24px, 4vw, 44px); display: flex; flex-direction: column; gap: 26px">
+<h2 style="font-family: Sora, sans-serif; font-weight: 700; font-size: clamp(24px, 3vw, 34px); letter-spacing: -0.03em; color: #FFFFFF">Co teď?</h2>
+<ol style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 24px">
+<li class="k-step"><span class="k-stepn">1</span><span style="display: flex; flex-direction: column; gap: 6px"><strong style="font-family: Sora, sans-serif; font-size: 19px; color: #FFFFFF">Otevři e-mail</strong><span style="font-size: 15px; line-height: 1.6">Hledej zprávu od Vladimír PRO s předmětem „[Předmět e-mailu]“.</span></span></li>
+<li class="k-step"><span class="k-stepn">2</span><span style="display: flex; flex-direction: column; gap: 6px"><strong style="font-family: Sora, sans-serif; font-size: 19px; color: #FFFFFF">Klikni na „Přihlásit se“</strong><span style="font-size: 15px; line-height: 1.6">Žádné heslo nepotřebuješ. Odkaz platí [1 hodinu].</span></span></li>
+<li class="k-step"><span class="k-stepn">3</span><span style="display: flex; flex-direction: column; gap: 6px"><strong style="font-family: Sora, sans-serif; font-size: 19px; color: #FFFFFF">Začni reSTARTem</strong><span style="font-size: 15px; line-height: 1.6">Čeká tě úvodní video, checklist a manuál.</span></span></li>
+</ol>
+</section>
+
+<section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr)); gap: 18px">
+<div class="k-glass" style="padding: 28px; display: flex; flex-direction: column; gap: 14px">
+<h2 style="font-family: Sora, sans-serif; font-weight: 700; font-size: 20px; color: #FFFFFF">E-mail nepřišel?</h2>
+<p style="font-size: 15px; line-height: 1.65">Počkej minutku a mrkni i do složek <strong style="color: #E6FFFB">Hromadné</strong>, <strong style="color: #E6FFFB">Promo akce</strong> nebo <strong style="color: #E6FFFB">Spam</strong>. Pokud tam není, pošleme ho znovu.</p>
+<div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center">
+<button type="button" onClick="{{ resend }}" class="k-btn" style="font: inherit; font-weight: 700; font-size: 15px; border-radius: 999px; padding: 13px 22px; min-height: 48px; cursor: pointer; border: 1px solid {{ rsBorder }}; background: {{ rsBg }}; color: {{ rsColor }}">{{ rsLabel }}</button>
+<a href="#" style="font-weight: 600; font-size: 15px; padding: 12px 0; min-height: 44px; display: inline-flex; align-items: center">Zadal jsem špatný e-mail</a>
+</div>
+</div>
+<div class="k-glass" style="padding: 28px; display: flex; flex-direction: column; gap: 14px; background: rgba(255,255,255,0.02)">
+<h2 style="font-family: Sora, sans-serif; font-weight: 700; font-size: 20px; color: #FFFFFF">Mezitím se podívej, co tě čeká</h2>
+<p style="font-size: 15px; line-height: 1.65">Šest dílků, jeden systém. Od produktu přes provoz a lidi až po značku.</p>
+<div style="display: flex; gap: 6px; align-items: center"><svg class="k-pz" width="48" height="48" viewBox="0 0 320 320" aria-hidden="true" style="filter: drop-shadow(0 0 14px rgba(45,226,203,0.45));"><path d="M64 44 L130 44 C138 44 142 34 134 26 C122 14 133 3 148 3 C163 3 174 14 162 26 C154 34 158 44 166 44 L256 44 A20 20 0 0 1 276 64 L276 156.9 C276 164.5 285.5 168.3 293.1 160.7 C304.5 149.3 314.9 159.8 314.9 174 C314.9 188.2 304.5 198.7 293.1 187.3 C285.5 179.7 276 183.5 276 191.1 L276 256 A20 20 0 0 1 256 276 L186.9 276 C178.5 276 174.3 265.5 182.7 257.1 C195.3 244.5 183.8 232.9 168 232.9 C152.2 232.9 140.7 244.5 153.3 257.1 C161.7 265.5 157.5 276 149.1 276 L64 276 A20 20 0 0 1 44 256 L44 154.2 C44 147 53 143.4 60.2 150.6 C71 161.4 80.9 151.5 80.9 138 C80.9 124.5 71 114.6 60.2 125.4 C53 132.6 44 129 44 121.8 L44 64 A20 20 0 0 1 64 44 Z" fill="url(#kon)" stroke="rgba(255,255,255,0.6)" stroke-width="4"></path><text x="160" y="186" text-anchor="middle" font-family="Sora, sans-serif" font-weight="800" font-size="104" fill="#04201F">0</text></svg><svg class="k-pz" width="48" height="48" viewBox="0 0 320 320" aria-hidden="true" style=""><path d="M64 44 L130 44 C138 44 142 34 134 26 C122 14 133 3 148 3 C163 3 174 14 162 26 C154 34 158 44 166 44 L256 44 A20 20 0 0 1 276 64 L276 156.9 C276 164.5 285.5 168.3 293.1 160.7 C304.5 149.3 314.9 159.8 314.9 174 C314.9 188.2 304.5 198.7 293.1 187.3 C285.5 179.7 276 183.5 276 191.1 L276 256 A20 20 0 0 1 256 276 L186.9 276 C178.5 276 174.3 265.5 182.7 257.1 C195.3 244.5 183.8 232.9 168 232.9 C152.2 232.9 140.7 244.5 153.3 257.1 C161.7 265.5 157.5 276 149.1 276 L64 276 A20 20 0 0 1 44 256 L44 154.2 C44 147 53 143.4 60.2 150.6 C71 161.4 80.9 151.5 80.9 138 C80.9 124.5 71 114.6 60.2 125.4 C53 132.6 44 129 44 121.8 L44 64 A20 20 0 0 1 64 44 Z" fill="url(#koff)" stroke="rgba(94,234,212,0.35)" stroke-width="4"></path><text x="160" y="186" text-anchor="middle" font-family="Sora, sans-serif" font-weight="800" font-size="104" fill="rgba(207,250,243,0.55)">1</text></svg><svg class="k-pz" width="48" height="48" viewBox="0 0 320 320" aria-hidden="true" style=""><path d="M64 44 L130 44 C138 44 142 34 134 26 C122 14 133 3 148 3 C163 3 174 14 162 26 C154 34 158 44 166 44 L256 44 A20 20 0 0 1 276 64 L276 156.9 C276 164.5 285.5 168.3 293.1 160.7 C304.5 149.3 314.9 159.8 314.9 174 C314.9 188.2 304.5 198.7 293.1 187.3 C285.5 179.7 276 183.5 276 191.1 L276 256 A20 20 0 0 1 256 276 L186.9 276 C178.5 276 174.3 265.5 182.7 257.1 C195.3 244.5 183.8 232.9 168 232.9 C152.2 232.9 140.7 244.5 153.3 257.1 C161.7 265.5 157.5 276 149.1 276 L64 276 A20 20 0 0 1 44 256 L44 154.2 C44 147 53 143.4 60.2 150.6 C71 161.4 80.9 151.5 80.9 138 C80.9 124.5 71 114.6 60.2 125.4 C53 132.6 44 129 44 121.8 L44 64 A20 20 0 0 1 64 44 Z" fill="url(#koff)" stroke="rgba(94,234,212,0.35)" stroke-width="4"></path><text x="160" y="186" text-anchor="middle" font-family="Sora, sans-serif" font-weight="800" font-size="104" fill="rgba(207,250,243,0.55)">2</text></svg><svg class="k-pz" width="48" height="48" viewBox="0 0 320 320" aria-hidden="true" style=""><path d="M64 44 L130 44 C138 44 142 34 134 26 C122 14 133 3 148 3 C163 3 174 14 162 26 C154 34 158 44 166 44 L256 44 A20 20 0 0 1 276 64 L276 156.9 C276 164.5 285.5 168.3 293.1 160.7 C304.5 149.3 314.9 159.8 314.9 174 C314.9 188.2 304.5 198.7 293.1 187.3 C285.5 179.7 276 183.5 276 191.1 L276 256 A20 20 0 0 1 256 276 L186.9 276 C178.5 276 174.3 265.5 182.7 257.1 C195.3 244.5 183.8 232.9 168 232.9 C152.2 232.9 140.7 244.5 153.3 257.1 C161.7 265.5 157.5 276 149.1 276 L64 276 A20 20 0 0 1 44 256 L44 154.2 C44 147 53 143.4 60.2 150.6 C71 161.4 80.9 151.5 80.9 138 C80.9 124.5 71 114.6 60.2 125.4 C53 132.6 44 129 44 121.8 L44 64 A20 20 0 0 1 64 44 Z" fill="url(#koff)" stroke="rgba(94,234,212,0.35)" stroke-width="4"></path><text x="160" y="186" text-anchor="middle" font-family="Sora, sans-serif" font-weight="800" font-size="104" fill="rgba(207,250,243,0.55)">3</text></svg><svg class="k-pz" width="48" height="48" viewBox="0 0 320 320" aria-hidden="true" style=""><path d="M64 44 L130 44 C138 44 142 34 134 26 C122 14 133 3 148 3 C163 3 174 14 162 26 C154 34 158 44 166 44 L256 44 A20 20 0 0 1 276 64 L276 156.9 C276 164.5 285.5 168.3 293.1 160.7 C304.5 149.3 314.9 159.8 314.9 174 C314.9 188.2 304.5 198.7 293.1 187.3 C285.5 179.7 276 183.5 276 191.1 L276 256 A20 20 0 0 1 256 276 L186.9 276 C178.5 276 174.3 265.5 182.7 257.1 C195.3 244.5 183.8 232.9 168 232.9 C152.2 232.9 140.7 244.5 153.3 257.1 C161.7 265.5 157.5 276 149.1 276 L64 276 A20 20 0 0 1 44 256 L44 154.2 C44 147 53 143.4 60.2 150.6 C71 161.4 80.9 151.5 80.9 138 C80.9 124.5 71 114.6 60.2 125.4 C53 132.6 44 129 44 121.8 L44 64 A20 20 0 0 1 64 44 Z" fill="url(#koff)" stroke="rgba(94,234,212,0.35)" stroke-width="4"></path><text x="160" y="186" text-anchor="middle" font-family="Sora, sans-serif" font-weight="800" font-size="104" fill="rgba(207,250,243,0.55)">4</text></svg><svg class="k-pz" width="48" height="48" viewBox="0 0 320 320" aria-hidden="true" style=""><path d="M64 44 L130 44 C138 44 142 34 134 26 C122 14 133 3 148 3 C163 3 174 14 162 26 C154 34 158 44 166 44 L256 44 A20 20 0 0 1 276 64 L276 156.9 C276 164.5 285.5 168.3 293.1 160.7 C304.5 149.3 314.9 159.8 314.9 174 C314.9 188.2 304.5 198.7 293.1 187.3 C285.5 179.7 276 183.5 276 191.1 L276 256 A20 20 0 0 1 256 276 L186.9 276 C178.5 276 174.3 265.5 182.7 257.1 C195.3 244.5 183.8 232.9 168 232.9 C152.2 232.9 140.7 244.5 153.3 257.1 C161.7 265.5 157.5 276 149.1 276 L64 276 A20 20 0 0 1 44 256 L44 154.2 C44 147 53 143.4 60.2 150.6 C71 161.4 80.9 151.5 80.9 138 C80.9 124.5 71 114.6 60.2 125.4 C53 132.6 44 129 44 121.8 L44 64 A20 20 0 0 1 64 44 Z" fill="url(#koff)" stroke="rgba(94,234,212,0.35)" stroke-width="4"></path><text x="160" y="186" text-anchor="middle" font-family="Sora, sans-serif" font-weight="800" font-size="104" fill="rgba(207,250,243,0.55)">5</text></svg></div>
+<a href="#" style="font-weight: 700; font-size: 15px; padding: 10px 0; min-height: 44px; display: inline-flex; align-items: center">Prohlédnout moduly →</a>
+</div>
+</section>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1500}}'>
+class Component extends DCLogic {
+constructor(props) { super(props); this.state = { sent: false }; }
+renderVals() {
+const sent = this.state.sent;
+return {
+resend: () => this.setState({ sent: true }),
+rsLabel: sent ? '✓ Odesláno znovu' : 'Poslat e-mail znovu',
+rsBg: sent ? 'rgba(45,226,203,0.14)' : '#2DE2CB',
+rsColor: sent ? '#5EEAD4' : '#04201F',
+rsBorder: sent ? 'rgba(94,234,212,0.5)' : '#2DE2CB'
+};
+}
+}
+</script>
+</body>
+</html>
