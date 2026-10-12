@@ -33,7 +33,20 @@ Soubory ze `supabase/migrations/` se spouštějí **po řadě** v Supabase → S
 
 5. `0005_uvodni_text_jen_pro_cleny.sql` – opravuje 0004: členský text „Ukážu ti, jak na to“ je v chráněné tabulce `module_members_content`, ne ve veřejně čitelné tabulce modulů.
 
+6. `0006_registrace_a_ochrana.sql` – registrace (profil, souhlas s marketingem, přístup k reSTARTu), zpřísněné funkce, tabulka pro omezení počtu odeslání.
+
 Hotové migrace se nikdy neupravují, změny jdou do nové (`0004_…`).
+
+## Přihlašování a registrace
+- Přihlášení jen odkazem z e-mailu (magic link). Odkaz vede na `/auth/confirm`, kde se přihlášení dokončí kliknutím na tlačítko. Odkaz se tak nespálí ochranou schránky, která odkazy předem otevírá.
+- Ochrana v třech vrstvách: `src/proxy.ts` (vrátnice) → `src/lib/auth.ts` (kontrola na serveru u každé stránky a akce) → pravidla RLS v databázi.
+- Formuláře chrání skryté pole, Cloudflare Turnstile a omezení počtu odeslání (tabulka `rate_limits`, funkce `rate_limit_hit`).
+- Kontakt se do Ecomailu zapíše až po ověření e-mailu a jen se souhlasem s novinkami (`src/lib/ecomail.ts`).
+- E-mailové šablony pro Supabase jsou v `supabase/emails/` (vložit do Authentication → Email Templates, a to „Magic Link“ a „Confirm signup“).
+- Supabase → Authentication → URL Configuration: **Site URL** = adresa webu. Platnost odkazu (Email OTP Expiration) 3600 s.
+
+## Testy
+`npm run test:unit` (rychlé kontroly), `npm run test:e2e` (prohlížeč, běží proti sestavenému webu, před tím `npm run build`). GitHub Actions je pouští při každé změně.
 
 ## E-maily z formulářů (Resend)
 Proměnné `RESEND_API_KEY`, `MAIL_FROM`, `CONTACT_TO_EMAIL` (viz `.env.example`). Bez nich formulář odpoví, že odesílání není nastavené.

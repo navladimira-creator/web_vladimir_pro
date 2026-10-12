@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Sora, Manrope } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 import CursorGlow from "@/components/CursorGlow";
 
 const sora = Sora({
@@ -43,9 +41,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="cs" className={`${sora.variable} ${manrope.variable}`}>
       <body>
         <CursorGlow />
-        <Header />
-        <main>{children}</main>
-        <Footer />
+        {children}
       </body>
     </html>
   );

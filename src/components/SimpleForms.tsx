@@ -1,28 +1,38 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useActionState, useEffect, useRef, useState } from "react";
+import { prihlasit, type Stav as StavAkce } from "@/app/(web)/registrace/actions";
+import Turnstile from "./Turnstile";
 
 const label = { fontSize: 14, fontWeight: 600, color: "#e6fffb" } as const;
 
-// Přihlašovací formulář. Odeslání odkazu e-mailem (magic link) se napojí v milníku 3.
+// Přihlašovací formulář: pošle odkaz z e-mailu. Odpověď je vždy stejná, aby se nedalo zjistit, kdo je registrovaný.
 export function LoginForm() {
-  const [info, setInfo] = useState("");
+  const [stav, akce, caka] = useActionState(prihlasit, { ok: false } as StavAkce);
+  if (stav.ok) {
+    return (
+      <p role="status" style={{ fontSize: 17, lineHeight: 1.6, color: "#7ff0e2" }}>
+        Pokud je tento e-mail registrovaný, poslali jsme na něj přihlašovací odkaz. Zkontroluj i složku Hromadné nebo Spam.
+      </p>
+    );
+  }
   return (
-    <form
-      className="flex flex-col gap-4"
-      onSubmit={(e) => {
-        e.preventDefault();
-        setInfo("Přihlašování se zapne v dalším kroku vývoje. Zatím se nic neodesílá.");
-      }}
-    >
+    <form action={akce} className="flex flex-col gap-4">
+      <div aria-hidden="true" style={{ position: "absolute", left: "-9999px", height: 0, overflow: "hidden" }}>
+        <label>
+          Web
+          <input name="web" type="text" tabIndex={-1} autoComplete="off" />
+        </label>
+      </div>
       <div className="flex flex-col gap-2">
         <label htmlFor="l-email" style={label}>E-mail</label>
-        <input id="l-email" name="email" type="email" autoComplete="email" className="input" required />
+        <input id="l-email" name="email" type="email" autoComplete="email" className="input" required maxLength={200} />
       </div>
-      <button type="submit" className="btn btn-primary" style={{ justifyContent: "center", minHeight: 54 }}>
-        Poslat přihlašovací odkaz
+      <Turnstile resetSignal={stav} />
+      <button type="submit" disabled={caka} className="btn btn-primary" style={{ justifyContent: "center", minHeight: 54 }}>
+        {caka ? "Odesílám…" : "Poslat přihlašovací odkaz"}
       </button>
-      {info && <p role="status" style={{ fontSize: 14, color: "#7ff0e2" }}>{info}</p>}
+      {stav.chyba && <p role="alert" style={{ fontSize: 15, color: "#ffb4a2" }}>{stav.chyba}</p>}
     </form>
   );
 }
@@ -104,6 +114,7 @@ export function ContactForm() {
         <input id="k-souhlas" name="souhlas" type="checkbox" required style={{ width: 20, height: 20, margin: "2px 0 0", accentColor: "#2de2cb" }} />
         <label htmlFor="k-souhlas" style={{ fontSize: 14, lineHeight: 1.5 }}>Souhlasím se zpracováním osobních údajů.</label>
       </div>
+      <Turnstile resetSignal={stav} />
       <button type="submit" disabled={stav.druh === "odesilam"} className="btn btn-primary" style={{ justifyContent: "center", minHeight: 54 }}>
         Odeslat
       </button>
@@ -149,6 +160,7 @@ export function ConsultForm({ vychoziForma = "online" }: { vychoziForma?: "onlin
         <input id="d-souhlas" name="souhlas" type="checkbox" required style={{ width: 20, height: 20, margin: "2px 0 0", accentColor: "#2de2cb" }} />
         <label htmlFor="d-souhlas" style={{ fontSize: 14, lineHeight: 1.5 }}>Souhlasím se zpracováním osobních údajů.</label>
       </div>
+      <Turnstile resetSignal={stav} />
       <button type="submit" disabled={stav.druh === "odesilam"} className="btn btn-primary" style={{ justifyContent: "center", minHeight: 54 }}>
         Odeslat dotazník
       </button>

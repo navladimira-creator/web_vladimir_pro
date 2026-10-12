@@ -10,13 +10,20 @@ export const metadata: Metadata = {
   robots: { index: false },
 };
 
-export default function PrihlaseniPage() {
+export default async function PrihlaseniPage({ searchParams }: PageProps<"/prihlaseni">) {
+  const p = await searchParams;
+  const chybaOdkaz = p.chyba === "odkaz";
   return (
     <>
       <PageHead stitek="Členská sekce" nadpis="Přihlášení">
         <p className="lead" style={{ maxWidth: "46ch" }}>
           Zadej svůj e-mail. Pošleme ti odkaz, po jehož otevření se přihlásíš. Žádné heslo nepotřebuješ.
         </p>
+        {chybaOdkaz && (
+          <p role="alert" style={{ fontSize: 16, color: "#ffb4a2", maxWidth: "46ch" }}>
+            Odkaz už není platný (je jednorázový a platí krátce). Pošli si prosím nový.
+          </p>
+        )}
       </PageHead>
       <section className="wrap" style={{ paddingTop: 24, paddingBottom: 96 }}>
         <Reveal>
