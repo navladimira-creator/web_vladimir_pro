@@ -31,6 +31,8 @@ Soubory ze `supabase/migrations/` se spouštějí **po řadě** v Supabase → S
 3. `0003_vychozi_obsah.sql` – výchozí videa a materiály podle `texty/obsah-modulu.md` (pracovní názvy, bez souborů a Bunny ID).
 4. `0004_restart_texty_pristup.sql` – Modul 0 se jmenuje reSTART (adresa `restart`), texty modulů v databázi, veřejné čtení publikovaných modulů, délka přístupu (`access_months`: jednotlivý modul 12 měsíců, reSTART a All in One navždy = prázdné).
 
+5. `0005_uvodni_text_jen_pro_cleny.sql` – opravuje 0004: členský text „Ukážu ti, jak na to“ je v chráněné tabulce `module_members_content`, ne ve veřejně čitelné tabulce modulů.
+
 Hotové migrace se nikdy neupravují, změny jdou do nové (`0004_…`).
 
 ## E-maily z formulářů (Resend)
