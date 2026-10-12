@@ -1,0 +1,33 @@
+name: Migrace označit jako provedené
+
+# Jednorázově: migrace, které už byly spuštěny ručně v SQL Editoru, se zapíšou do historie,
+# aby je automatika nespouštěla znovu. Spouští se ručně: Actions → Run workflow.
+on:
+  workflow_dispatch:
+    inputs:
+      verze:
+        description: "Čísla migrací oddělená mezerou"
+        default: "0001 0002 0003 0004 0005 0006"
+
+jobs:
+  oznacit:
+    runs-on: ubuntu-latest
+    env:
+      SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+      SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
+      SUPABASE_PROJECT_ID: ${{ secrets.SUPABASE_PROJECT_ID }}
+      VERZE: ${{ inputs.verze }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: supabase/setup-cli@v1
+        with:
+          version: latest
+      - name: Kontrola vstupu
+        run: |
+          if ! [[ "$VERZE" =~ ^[0-9]+( [0-9]+)*$ ]]; then echo "Neplatný seznam verzí"; exit 1; fi
+      - name: Propojení s projektem
+        run: supabase link --project-ref "$SUPABASE_PROJECT_ID"
+      - name: Zapsání do historie
+        run: supabase migration repair --status applied $VERZE
+      - name: Stav po zápisu
+        run: supabase migration list

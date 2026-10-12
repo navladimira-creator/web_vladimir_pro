@@ -35,6 +35,12 @@ Soubory ze `supabase/migrations/` se spouštějí **po řadě** v Supabase → S
 
 6. `0006_registrace_a_ochrana.sql` – registrace (profil, souhlas s marketingem, přístup k reSTARTu), zpřísněné funkce, tabulka pro omezení počtu odeslání.
 
+### Automatické spouštění migrací (GitHub Actions)
+- Po sloučení změn do `main` workflow „Databázové migrace“ jen vypíše, které migrace by se spustily.
+- Skutečné spuštění: GitHub → Actions → Databázové migrace → Run workflow → akce „spustit“. Tím majitel migraci schvaluje.
+- Jednorázově po zapnutí: workflow „Migrace označit jako provedené“ zapíše ručně spuštěné migrace do historie.
+- Tajné údaje (GitHub → Settings → Secrets and variables → Actions): `SUPABASE_ACCESS_TOKEN`, `SUPABASE_PROJECT_ID`, `SUPABASE_DB_PASSWORD`.
+
 Hotové migrace se nikdy neupravují, změny jdou do nové (`0004_…`).
 
 ## Přihlašování a registrace
