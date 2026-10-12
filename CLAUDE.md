@@ -9,3 +9,4 @@
 - Po každém milníku se zastav, ukaž výsledek a řekni, jak si ho může sám vyzkoušet.
 - Když v zadání něco chybí nebo si odporuje, zeptej se, nedomýšlej.
 - Klíče a hesla nikdy nepiš do kódu, jen do proměnných prostředí.
+- Bezpečnost: závazný je `BEZPECNOST.md`. U každého milníku uveď, které jeho body se týkají a v jakém jsou stavu.
