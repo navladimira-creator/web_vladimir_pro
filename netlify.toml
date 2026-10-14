@@ -1,5 +1,8 @@
 [build]
   command = "npm run build"
+  # Složka s hotovým webem. Přebíjí hodnotu uloženou v nastavení Netlify (tam byl kořen projektu,
+  # což doplněk pro Next.js odmítne).
+  publish = ".next"
   # Návrhy od Dependabotu (větve dependabot/*) se na Netlify nesestavují, šetří to kredity.
   # Ukončení 0 = sestavení přeskočit, jinak se sestaví.
   ignore = "case \"$HEAD\" in dependabot/*) exit 0;; *) exit 1;; esac"
