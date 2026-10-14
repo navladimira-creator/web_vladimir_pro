@@ -1,0 +1,2 @@
+# Minimální nastavení pro Supabase CLI (spouštění migrací z GitHubu).
+project_id = "web-vladimir-pro"

@@ -1,0 +1,42 @@
+name: Databázové migrace
+
+# Po sloučení změn do main: jen ukáže, které migrace by se spustily (nic nemění).
+# Skutečné spuštění: GitHub → Actions → Databázové migrace → Run workflow → akce „spustit“.
+on:
+  push:
+    branches: [main]
+    paths: ["supabase/migrations/**"]
+  workflow_dispatch:
+    inputs:
+      akce:
+        description: "jen-ukazat = jen vypíše, co by se spustilo; spustit = migrace opravdu proběhnou"
+        type: choice
+        options: [jen-ukazat, spustit]
+        default: jen-ukazat
+
+concurrency:
+  group: migrace
+  cancel-in-progress: false
+
+jobs:
+  migrace:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: supabase/setup-cli@v1
+        with:
+          version: latest
+      - name: Sestavení adresy databáze
+        env:
+          HESLO: ${{ secrets.SUPABASE_DB_PASSWORD }}
+          PROJEKT: ${{ secrets.SUPABASE_PROJECT_ID }}
+          HOST: ${{ secrets.SUPABASE_DB_HOST }}
+        run: |
+          KOD=$(python3 -c 'import os,urllib.parse; print(urllib.parse.quote(os.environ["HESLO"], safe=""))')
+          echo "::add-mask::$KOD"
+          echo "DB_URL=postgresql://postgres.${PROJEKT}:${KOD}@${HOST}:5432/postgres" >> "$GITHUB_ENV"
+      - name: Co by se spustilo (nic se nemění)
+        run: supabase db push --dry-run --db-url "$DB_URL"
+      - name: Spuštění migrací
+        if: github.event_name == 'workflow_dispatch' && inputs.akce == 'spustit'
+        run: supabase db push --db-url "$DB_URL"

@@ -1,0 +1,37 @@
+name: Migrace označit jako provedené
+
+# Jednorázově: migrace, které už byly spuštěny ručně v SQL Editoru, se zapíšou do historie,
+# aby je automatika nespouštěla znovu. Spouští se ručně: Actions → Run workflow.
+on:
+  workflow_dispatch:
+    inputs:
+      verze:
+        description: "Čísla migrací oddělená mezerou"
+        default: "0001 0002 0003 0004 0005 0006"
+
+jobs:
+  oznacit:
+    runs-on: ubuntu-latest
+    env:
+      VERZE: ${{ inputs.verze }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: supabase/setup-cli@v1
+        with:
+          version: latest
+      - name: Kontrola vstupu
+        run: |
+          if ! [[ "$VERZE" =~ ^[0-9]+( [0-9]+)*$ ]]; then echo "Neplatný seznam verzí"; exit 1; fi
+      - name: Sestavení adresy databáze
+        env:
+          HESLO: ${{ secrets.SUPABASE_DB_PASSWORD }}
+          PROJEKT: ${{ secrets.SUPABASE_PROJECT_ID }}
+          HOST: ${{ secrets.SUPABASE_DB_HOST }}
+        run: |
+          KOD=$(python3 -c 'import os,urllib.parse; print(urllib.parse.quote(os.environ["HESLO"], safe=""))')
+          echo "::add-mask::$KOD"
+          echo "DB_URL=postgresql://postgres.${PROJEKT}:${KOD}@${HOST}:5432/postgres" >> "$GITHUB_ENV"
+      - name: Zapsání do historie
+        run: supabase migration repair --status applied $VERZE --db-url "$DB_URL"
+      - name: Stav po zápisu
+        run: supabase migration list --db-url "$DB_URL"
