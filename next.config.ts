@@ -20,6 +20,9 @@ const hlavicky = [
 ];
 
 const nextConfig: NextConfig = {
+  // Pracovní mezipaměť sestavení by obsahovala hodnoty klíčů; Netlify ji pak (právem) označí jako únik.
+  // Na výsledný web to nemá vliv, jen sestavení může být o něco pomalejší.
+  experimental: { turbopackFileSystemCacheForBuild: false },
   async headers() {
     return [{ source: "/:path*", headers: hlavicky }];
   },
