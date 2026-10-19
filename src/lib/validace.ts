@@ -5,12 +5,7 @@ const email = z.string().trim().toLowerCase().max(200).pipe(z.email());
 const jmeno = z.string().trim().min(1).max(100);
 const potvrzeno = z.literal("on");
 
-export const registraceSchema = z.object({
-  jmeno,
-  email,
-  souhlas: potvrzeno,
-  marketing: z.literal("on").optional(),
-});
+export const registraceSchema = z.object({ jmeno, email });
 
 export const prihlaseniSchema = z.object({ email });
 

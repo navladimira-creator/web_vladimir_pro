@@ -3,6 +3,7 @@
 import { headers } from "next/headers";
 import { createClient } from "@/lib/supabase/server";
 import { klientIp, overTurnstile, povolenoOdeslani } from "@/lib/ochrana";
+import { ZNENI_OZNAMENI } from "@/lib/oznameni";
 import { emailSchema, prihlaseniSchema, registraceSchema } from "@/lib/validace";
 
 export type Stav = { ok: boolean; chyba?: string };
@@ -15,8 +16,8 @@ const text = (fd: FormData, k: string) => {
   return typeof v === "string" ? v : undefined;
 };
 
-// Registrace z úvodní stránky: pošle e-mail s odkazem. Profil, přístup k reSTARTu a souhlas s marketingem
-// uloží databáze (trigger handle_new_user), do Ecomailu se kontakt dostane až po ověření e-mailu.
+// Registrace z úvodní stránky: pošle e-mail s odkazem. Profil, přístup k reSTARTu a základ pro zasílání novinek
+// (oprávněný zájem + verze oznámení) uloží databáze (trigger handle_new_user), do Ecomailu se kontakt dostane až po ověření e-mailu.
 export async function registrovat(_prev: Stav, fd: FormData): Promise<Stav> {
   // Skrytá past na roboty: tvářit se, že vše proběhlo
   if ((text(fd, "web") ?? "") !== "") return { ok: true };
@@ -27,10 +28,8 @@ export async function registrovat(_prev: Stav, fd: FormData): Promise<Stav> {
   const parsed = registraceSchema.safeParse({
     jmeno: text(fd, "jmeno"),
     email: text(fd, "email"),
-    souhlas: text(fd, "souhlas"),
-    marketing: text(fd, "marketing") === "on" ? "on" : undefined,
   });
-  if (!parsed.success) return { ok: false, chyba: "Vyplň prosím jméno, platný e-mail a souhlas se zpracováním údajů." };
+  if (!parsed.success) return { ok: false, chyba: "Vyplň prosím jméno a platný e-mail." };
   const d = parsed.data;
 
   if (!(await overTurnstile(fd.get("cf-turnstile-response"), ip))) {
@@ -45,7 +44,7 @@ export async function registrovat(_prev: Stav, fd: FormData): Promise<Stav> {
     email: d.email,
     options: {
       shouldCreateUser: true,
-      data: { full_name: d.jmeno, marketing_consent: d.marketing === "on" ? "true" : "false" },
+      data: { full_name: d.jmeno, marketing_basis: "opravneny-zajem", marketing_text_version: ZNENI_OZNAMENI },
     },
   });
   if (error) {
