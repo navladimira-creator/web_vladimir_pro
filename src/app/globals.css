@@ -794,3 +794,18 @@ em, i, cite {
 @media (prefers-reduced-motion: reduce) {
   .snap-in { animation: none; }
 }
+
+/* ---------- Členská sekce: ukazatel průběhu ---------- */
+.k-bar {
+  height: 8px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+.k-bar > span {
+  display: block;
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, #14b8a6, #5eead4);
+  box-shadow: 0 0 14px rgba(45, 226, 203, 0.7);
+}
